@@ -16,28 +16,16 @@ export const fontSize = {
   xxl: "4rem",
   xxxl: "6rem",
 };
-
+//755D81
 export const colors = {
-  hero: {
-    dark: "#234258",
-    light: "#8DC8DA",
-  },
-  primary: {
-    dark: "#277948",
-    light: "#F2E466",
-  },
-  secondary: {
-    dark: "#412779",
-    light: "#EC9B9B",
-  },
-  tertiary: {
-    dark: "#792727",
-    light: "#F2BA66",
-  },
-  quaternary: {
-    dark: "#1C2937",
-    light: "#86e195",
-  },
+  purplePrimary: "#331541",
+  purpleSecondary: "#755D81",
+  purpleTertiary: "#B69CC7",
+
+  orangeMenu: "#E67E22",
+  blueMenu: "#3498DA",
+  greenMenu: "#1ABB9C",
+  purpleMenu: "#9B59B6",
 };
 
 export const layout = {
