@@ -7,6 +7,7 @@ export const fontWeight = {
 };
 
 export const fontSize = {
+  xxxs: "1.2rem",
   xxs: "1.4rem",
   xs: "1.6rem",
   s: "2rem",
