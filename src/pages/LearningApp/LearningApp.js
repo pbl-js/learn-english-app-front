@@ -1,13 +1,23 @@
 import React from "react";
-import Navigation from "components/Navigation/Navigation";
+import { Switch, Route } from "react-router-dom";
+import routes from "routes/routes";
+
+import NavigationLayout from "layouts/Navigation/NavigationLayout";
+import Topics from "pages/Topics/Topics";
+import Dojo from "pages/Dojo/Dojo";
+import Collection from "pages/Collection/Collection";
+import Profile from "pages/Profile/Profile";
 
 const LearningApp = () => {
   return (
-    <div>
-      <Navigation />
-      <h1>App</h1>
-      <h1>App</h1>
-    </div>
+    <NavigationLayout>
+      <Switch>
+        <Route exact path={routes.app} component={Topics} />
+        <Route path={routes.dojo} component={Dojo} />
+        <Route exact path={routes.collection} component={Collection} />
+        <Route path={routes.profile} component={Profile} />
+      </Switch>
+    </NavigationLayout>
   );
 };
 

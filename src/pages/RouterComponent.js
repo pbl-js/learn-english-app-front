@@ -8,18 +8,6 @@ import LearningApp from "pages/LearningApp/LearningApp";
 const RouterComponent = () => {
   return (
     <BrowserRouter>
-      <nav>
-        <ul>
-          <li>
-            <Link to={routes.home}>LandingPage</Link>
-          </li>
-
-          <li>
-            <Link to={routes.app}>App</Link>
-          </li>
-        </ul>
-      </nav>
-
       <Switch>
         <Route exact path={routes.home} component={LandingPage} />
         <Route path={routes.app} component={LearningApp} />
