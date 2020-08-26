@@ -1,5 +1,5 @@
 import React from "react";
-import routes from "routes/routes";
+import routes from "router/routes";
 
 import { ReactComponent as Star } from "assets/star.svg";
 import { ReactComponent as Grid } from "assets/grid.svg";

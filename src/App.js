@@ -1,7 +1,7 @@
 import React from "react";
 import GlobalStyle from "theme/GlobalStyle";
 
-import Router from "pages/RouterComponent";
+import Router from "router/MainRouter";
 
 function App() {
   return (
