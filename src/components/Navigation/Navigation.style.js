@@ -5,6 +5,7 @@ import breakPoints from "theme/breakPoints";
 
 export const StyledNav = styled.nav`
   position: fixed;
+  z-index: 999;
   display: flex;
   flex-direction: row;
   align-items: center;

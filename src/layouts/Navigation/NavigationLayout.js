@@ -1,13 +1,48 @@
-import React from "react";
+import React, { useEffect, useContext, useRef } from "react";
+import { gsap } from "gsap";
+import { colors } from "theme/theme";
+
+import { BackgroundContext } from "context/BackgroundContext";
 
 import Navigation from "components/Navigation/Navigation";
+import GradientBackground from "components/GradientBackground/GradientBackground";
 import { StyledMain } from "./NavigationLayout.style";
 
+const changeBackgroundWithDelay = (ref, gradient) => {
+  gsap.set(ref, {
+    backgroundImage: gradient,
+    delay: 1,
+  });
+};
+
 const NavigationLayout = ({ children }) => {
+  const { theme } = useContext(BackgroundContext);
+  let backgroundRef = useRef(null);
+
+  useEffect(() => {
+    switch (theme) {
+      case "orange":
+        return changeBackgroundWithDelay(backgroundRef, colors.orangeGradient);
+      case "blue":
+        return changeBackgroundWithDelay(backgroundRef, colors.blueGradient);
+      case "green":
+        return changeBackgroundWithDelay(backgroundRef, colors.greenGradient);
+      case "purple":
+        return changeBackgroundWithDelay(backgroundRef, colors.purpleGradient);
+      default:
+        return changeBackgroundWithDelay(backgroundRef, colors.purpleGradient);
+    }
+  }, [theme]);
+
   return (
     <>
       <Navigation />
       <StyledMain>{children}</StyledMain>
+      <GradientBackground
+        index={0}
+        color={theme}
+        ref={(el) => (backgroundRef = el)}
+      />
     </>
   );
 };

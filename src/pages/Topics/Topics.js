@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { gsap } from "gsap";
 
 const Topics = () => {
@@ -10,6 +10,7 @@ const Topics = () => {
       delay: 0.8,
       ease: "power3.out",
       y: 64,
+      opacity: 0,
       stagger: {
         amount: 0.15,
       },
@@ -17,10 +18,10 @@ const Topics = () => {
   }, [line1, line2]);
 
   return (
-    <div>
+    <>
       <h1 ref={(el) => (line1 = el)}>Topics</h1>
       <h1 ref={(el) => (line2 = el)}>Topics</h1>
-    </div>
+    </>
   );
 };
 

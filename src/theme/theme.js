@@ -27,6 +27,11 @@ export const colors = {
   blueMenu: "#3498DA",
   greenMenu: "#1ABB9C",
   purpleMenu: "#9B59B6",
+
+  orangeGradient: "linear-gradient(135deg, #b54798, #e67625)",
+  blueGradient: "linear-gradient(135deg, #4353b3, #38207f)",
+  greenGradient: "linear-gradient(135deg, #45a77e, #02929b)",
+  purpleGradient: "linear-gradient(135deg, #803a9e, #4d1360)",
 };
 
 export const layout = {

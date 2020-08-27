@@ -23,7 +23,7 @@ const Navigation = () => {
       </StyledLogo>
 
       <InnerWrapper>
-        <StyledNavLink color="orange" exact to={routes.app}>
+        <StyledNavLink color="orange" exact to={routes.topics}>
           <Grid />
           <p>Topics</p>
         </StyledNavLink>
