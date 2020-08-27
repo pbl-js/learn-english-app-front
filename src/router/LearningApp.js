@@ -1,10 +1,9 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
-import { gsap } from "gsap";
 import routes from "router/routes";
 
 import BackgroundContextProvider from "context/BackgroundContext";
+import FadeInOutLayout from "layouts/FadeInOut/FadeInOutLayout";
 
 import GradientBackground from "components/GradientBackground/GradientBackground";
 import NavigationLayout from "layouts/Navigation/NavigationLayout";
@@ -30,27 +29,6 @@ const routesList = [
   },
 ];
 
-const onExit = (node) => {
-  gsap.to(node, {
-    duration: 0.5,
-    opacity: 0,
-  });
-};
-
-const onEnter = (node) => {
-  gsap.fromTo(
-    node,
-    {
-      opacity: 0,
-    },
-    {
-      opacity: 1,
-      delay: 0.5,
-      duration: 0.5,
-    }
-  );
-};
-
 const LearningApp = () => {
   return (
     <BackgroundContextProvider>
@@ -58,17 +36,11 @@ const LearningApp = () => {
         {routesList.map(({ path, name, color, Component }) => (
           <Route key={name} path={path} exact>
             {({ match }) => (
-              <CSSTransition
-                in={match != null}
-                timeout={1000}
-                unmountOnExit
-                onExit={onExit}
-                onEnter={onEnter}
-              >
+              <FadeInOutLayout match={match}>
                 <GradientBackground color={color} index={1}>
                   <Component />
                 </GradientBackground>
-              </CSSTransition>
+              </FadeInOutLayout>
             )}
           </Route>
         ))}
