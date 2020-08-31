@@ -20,7 +20,7 @@ const BackgroundContextProvider = (props) => {
       case routes.profile:
         return setTheme("purple");
       default:
-        return setTheme("purple");
+        return setTheme("blue");
     }
   }, [location]);
 

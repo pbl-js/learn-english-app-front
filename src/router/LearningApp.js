@@ -1,9 +1,10 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import routes from "router/routes";
 
 import BackgroundContextProvider from "context/BackgroundContext";
 import FadeInOutLayout from "layouts/FadeInOut/FadeInOutLayout";
+import GradientLayout from "layouts/GradientLayout/GradientLayout";
 
 import GradientBackground from "components/GradientBackground/GradientBackground";
 import NavigationLayout from "layouts/Navigation/NavigationLayout";
@@ -32,19 +33,24 @@ const routesList = [
 const LearningApp = () => {
   return (
     <BackgroundContextProvider>
-      <NavigationLayout>
-        {routesList.map(({ path, name, color, Component }) => (
-          <Route key={name} path={path} exact>
-            {({ match }) => (
-              <FadeInOutLayout match={match}>
-                <GradientBackground color={color} index={1}>
-                  <Component />
-                </GradientBackground>
-              </FadeInOutLayout>
-            )}
+      <GradientLayout>
+        <NavigationLayout>
+          <Route exact path="/app">
+            <Redirect to="/app/topics" />
           </Route>
-        ))}
-      </NavigationLayout>
+          {routesList.map(({ path, name, color, Component }) => (
+            <Route key={name} path={path} exact>
+              {({ match }) => (
+                <FadeInOutLayout match={match}>
+                  <GradientBackground color={color} index={1}>
+                    <Component />
+                  </GradientBackground>
+                </FadeInOutLayout>
+              )}
+            </Route>
+          ))}
+        </NavigationLayout>
+      </GradientLayout>
     </BackgroundContextProvider>
   );
 };

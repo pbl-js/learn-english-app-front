@@ -18,7 +18,7 @@ import {
 const Navigation = () => {
   return (
     <StyledNav>
-      <StyledLogo to="/app">
+      <StyledLogo to="/">
         <Logo />
       </StyledLogo>
 
