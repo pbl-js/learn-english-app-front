@@ -15,9 +15,9 @@ import {
   StyledLogout,
 } from "./Navigation.style";
 
-const Navigation = () => {
+const Navigation = ({ visable }) => {
   return (
-    <StyledNav>
+    <StyledNav visable={visable}>
       <StyledLogo to="/">
         <Logo />
       </StyledLogo>

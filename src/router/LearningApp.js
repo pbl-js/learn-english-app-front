@@ -12,6 +12,7 @@ import Topics from "pages/Topics/Topics";
 import Dojo from "pages/Dojo/Dojo";
 import Collection from "pages/Collection/Collection";
 import Profile from "pages/Profile/Profile";
+import Game from "pages/Game/Game";
 
 const routesList = [
   { path: routes.topics, name: "Topics", color: "orange", Component: Topics },
@@ -28,6 +29,12 @@ const routesList = [
     color: "purple",
     Component: Profile,
   },
+  {
+    path: routes.game,
+    name: "Game",
+    color: "green",
+    Component: Game,
+  },
 ];
 
 const LearningApp = () => {
@@ -38,6 +45,7 @@ const LearningApp = () => {
           <Route exact path="/app">
             <Redirect to="/app/topics" />
           </Route>
+
           {routesList.map(({ path, name, color, Component }) => (
             <Route key={name} path={path} exact>
               {({ match }) => (

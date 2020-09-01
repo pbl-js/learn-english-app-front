@@ -5,4 +5,5 @@ export default {
   dojo: "/app/dojo",
   collection: "/app/collection",
   profile: "/app/profile",
+  game: "/app/game",
 };

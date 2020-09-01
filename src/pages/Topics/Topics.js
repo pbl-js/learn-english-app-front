@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useContext } from "react";
+import { Link } from "react-router-dom";
+import routes from "router/routes";
+
 import { gsap } from "gsap";
 import { animations } from "theme/theme";
 
@@ -22,6 +25,7 @@ const Topics = () => {
     <>
       <h1 ref={(el) => (line1 = el)}>Topics</h1>
       <h1 ref={(el) => (line2 = el)}>Topics</h1>
+      <Link to={routes.game}>Graj</Link>
     </>
   );
 };

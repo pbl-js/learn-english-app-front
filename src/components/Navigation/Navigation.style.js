@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
-import { colors, fontSize } from "theme/theme";
-import breakPoints from "theme/breakPoints";
+import { colors, fontSize, breakPoints } from "theme/theme";
 
 export const StyledNav = styled.nav`
   position: fixed;
@@ -10,8 +9,9 @@ export const StyledNav = styled.nav`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  bottom: 0;
+  bottom: ${({ visable }) => (visable ? 0 : "-70px")};
   left: 0;
+  transition: bottom 0.5s;
   width: 100vw;
   height: 70px;
   padding: 25px;
@@ -22,6 +22,7 @@ export const StyledNav = styled.nav`
     width: 150px;
     height: 100vh;
     top: 0;
+    bottom: auto;
   }
 `;
 
