@@ -5,9 +5,13 @@ import routes from "router/routes";
 import { gsap } from "gsap";
 import { animations } from "theme/theme";
 
+import useData from "./Topics.fetch";
+
 const Topics = () => {
   let line1 = useRef(null);
   let line2 = useRef(null);
+
+  const { data, loading } = useData();
 
   useEffect(() => {
     gsap.from([line1, line2], 0.5, {
