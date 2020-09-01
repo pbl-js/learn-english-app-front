@@ -42,3 +42,7 @@ export const layout = {
     desktop: "100px",
   },
 };
+
+export const animations = {
+  appRouteTransition: 0.5,
+};

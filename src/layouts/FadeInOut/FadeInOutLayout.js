@@ -1,10 +1,11 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
 import { gsap } from "gsap";
+import { animations } from "theme/theme";
 
 const onExit = (node) => {
   gsap.to(node, {
-    duration: 0.5,
+    duration: animations.appRouteTransition / 2,
     opacity: 0,
   });
 };
@@ -17,8 +18,8 @@ const onEnter = (node) => {
     },
     {
       opacity: 1,
-      delay: 0.5,
-      duration: 0.5,
+      delay: animations.appRouteTransition / 2,
+      duration: animations.appRouteTransition / 2,
     }
   );
 };

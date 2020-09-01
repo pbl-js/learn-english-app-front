@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { gsap } from "gsap";
+import { animations } from "theme/theme";
 
 const Topics = () => {
   let line1 = useRef(null);
   let line2 = useRef(null);
 
   useEffect(() => {
-    gsap.from([line1, line2], 0.8, {
-      delay: 0.8,
+    gsap.from([line1, line2], 0.5, {
+      delay: animations.appRouteTransition,
       ease: "power3.out",
       y: 64,
       opacity: 0,

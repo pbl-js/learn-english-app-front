@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useRef } from "react";
 import { gsap } from "gsap";
-import { colors } from "theme/theme";
+import { colors, animations } from "theme/theme";
 
 import { BackgroundContext } from "context/BackgroundContext";
 
@@ -9,7 +9,7 @@ import GradientBackground from "components/GradientBackground/GradientBackground
 const changeBackgroundWithDelay = (ref, gradient) => {
   gsap.set(ref, {
     backgroundImage: gradient,
-    delay: 1,
+    delay: animations.appRouteTransition,
   });
 };
 
