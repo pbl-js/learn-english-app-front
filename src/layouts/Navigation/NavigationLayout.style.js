@@ -11,3 +11,5 @@ export const StyledMain = styled.main`
     width: calc(100% - 150px);
   }
 `;
+
+export const Header = styled.header``;

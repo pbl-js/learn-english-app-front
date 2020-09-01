@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 import routes from "router/routes";
 
+import useCurrentSite from "hooks/useCurrentSite";
+
 import Navigation from "components/Navigation/Navigation";
-import { StyledMain } from "./NavigationLayout.style";
+import { StyledMain, Header } from "./NavigationLayout.style";
 
 const NavigationLayout = ({ children }) => {
-  const [visable, setVisable] = useState(true);
-
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname === routes.game) {
-      setVisable(false);
-    } else {
-      setVisable(true);
-    }
-  }, [location]);
-
+  const visable = useCurrentSite(routes.game);
+  console.log("visable");
   return (
     <>
       <Navigation visable={visable} />
-      <StyledMain>{children}</StyledMain>
+      <StyledMain>
+        <Header></Header>
+        {children}
+      </StyledMain>
     </>
   );
 };
