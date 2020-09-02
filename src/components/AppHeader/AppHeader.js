@@ -2,9 +2,9 @@ import React from "react";
 import { MainWrapper, Title, Timer, TotalWords } from "./AppHeader.style";
 import { ReactComponent as Clock } from "assets/timer.svg";
 
-const AppHeader = () => {
+const AppHeader = ({ visable }) => {
   return (
-    <MainWrapper>
+    <MainWrapper visable={visable}>
       <TotalWords>312 Words</TotalWords>
       <Title>topics</Title>
       <Timer>

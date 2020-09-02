@@ -4,7 +4,7 @@ import routes from "router/routes";
 import useCurrentSite from "hooks/useCurrentSite";
 
 import Navigation from "components/Navigation/Navigation";
-import Header from "components/AppHeader/AppHeader";
+import AppHeader from "components/AppHeader/AppHeader";
 import { StyledMain } from "./NavigationLayout.style";
 
 const NavigationLayout = ({ children }) => {
@@ -13,8 +13,8 @@ const NavigationLayout = ({ children }) => {
   return (
     <>
       <Navigation visable={visable} />
-      <StyledMain>
-        <Header />
+      <StyledMain visable={visable}>
+        <AppHeader visable={visable} />
         {children}
       </StyledMain>
     </>

@@ -22,6 +22,8 @@ export const StyledNav = styled.nav`
     width: 150px;
     height: 100vh;
     top: 0;
+    transition: left 0.5s;
+    left: ${({ visable }) => (visable ? 0 : "-150px")};
     bottom: auto;
   }
 `;

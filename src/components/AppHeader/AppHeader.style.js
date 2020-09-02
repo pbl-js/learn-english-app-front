@@ -17,8 +17,9 @@ export const MainWrapper = styled.div`
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), transparent);
 
   @media ${breakPoints.tablet} {
-    left: 150px;
-    width: calc(100% - 150px);
+    left: ${({ visable }) => (visable ? "150px" : 0)};
+    width: ${({ visable }) => (visable ? "calc(100% - 150px)" : "calc(100%)")};
+    transition: 0.5s;
     padding: 0 ${layout.mainPadding.desktop};
   }
 `;
