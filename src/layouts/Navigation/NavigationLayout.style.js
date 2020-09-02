@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { breakPoints } from "theme/theme";
+import { breakPoints, depth } from "theme/theme";
 
 export const StyledMain = styled.main`
   position: relative;
-  z-index: 1;
+  z-index: ${depth.lowest};
   width: 100%;
 
   @media ${breakPoints.tablet} {
@@ -11,5 +11,3 @@ export const StyledMain = styled.main`
     width: calc(100% - 150px);
   }
 `;
-
-export const Header = styled.header``;

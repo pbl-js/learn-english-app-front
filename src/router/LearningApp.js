@@ -50,7 +50,11 @@ const LearningApp = () => {
             <Route key={name} path={path} exact>
               {({ match }) => (
                 <FadeInOutLayout match={match}>
-                  <GradientBackground color={color} index={1}>
+                  <GradientBackground
+                    color={color}
+                    index={1}
+                    style={{ paddingTop: "70px" }}
+                  >
                     <Component />
                   </GradientBackground>
                 </FadeInOutLayout>

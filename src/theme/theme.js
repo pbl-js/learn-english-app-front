@@ -35,11 +35,9 @@ export const colors = {
 };
 
 export const layout = {
-  maxWidth: "1200px",
   mainPadding: {
-    mobile: "20px",
-    tablet: "50px",
-    desktop: "100px",
+    tablet: "20px",
+    desktop: "50px",
   },
 };
 
@@ -55,4 +53,13 @@ export const breakPoints = {
   laptop: `(min-width: 1024px)`,
   laptopL: `(min-width: 1400px)`,
   desktop: `(min-width: 2560px)`,
+};
+
+export const depth = {
+  highest: 9999,
+  higher: 300,
+  high: 200,
+  low: 100,
+  lower: 50,
+  lowest: 10,
 };

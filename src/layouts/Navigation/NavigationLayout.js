@@ -4,16 +4,17 @@ import routes from "router/routes";
 import useCurrentSite from "hooks/useCurrentSite";
 
 import Navigation from "components/Navigation/Navigation";
-import { StyledMain, Header } from "./NavigationLayout.style";
+import Header from "components/AppHeader/AppHeader";
+import { StyledMain } from "./NavigationLayout.style";
 
 const NavigationLayout = ({ children }) => {
   const visable = useCurrentSite(routes.game);
-  console.log("visable");
+
   return (
     <>
       <Navigation visable={visable} />
       <StyledMain>
-        <Header></Header>
+        <Header />
         {children}
       </StyledMain>
     </>
