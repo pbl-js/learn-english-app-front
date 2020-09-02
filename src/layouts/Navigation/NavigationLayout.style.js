@@ -7,6 +7,7 @@ export const StyledMain = styled.main`
 
   @media ${breakPoints.tablet} {
     margin-left: ${({ visable }) => (visable ? "150px" : 0)};
+    width: ${({ visable }) => (visable ? "calc(100% - 150px)" : "calc(100%)")};
     transition: 0.5s;
   }
 `;

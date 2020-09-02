@@ -5,6 +5,7 @@ import { layout, breakPoints } from "theme/theme";
 import GradientBackground from "components/GradientBackground/GradientBackground";
 
 const MainWrapper = styled(GradientBackground)`
+  width: 100%;
   padding: 70px ${layout.mainPadding.tablet} 0 ${layout.mainPadding.tablet};
 
   @media ${breakPoints} {

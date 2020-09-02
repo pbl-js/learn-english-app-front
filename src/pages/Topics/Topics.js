@@ -1,35 +1,96 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import routes from "router/routes";
 
-import { gsap } from "gsap";
-import { animations } from "theme/theme";
-
 import useData from "./Topics.fetch";
+import { MainWrapper } from "./Topics.style";
+import SectionSlider from "components/SectionSlider/SectionSlider";
+import TopicItem from "components/TopicItem/TopicItem";
+
+const fakeData = [
+  {
+    title: "Jedzenie i picie",
+    color: "orange",
+    topics: [
+      {
+        title: "Jedzenie",
+      },
+      {
+        title: "Jedzenie (Ciąg dalszy)",
+      },
+      {
+        title: "Napoje",
+      },
+      {
+        title: "Owoce",
+      },
+      {
+        title: "Warzywa",
+      },
+    ],
+  },
+  {
+    title: "Jedzenie i picie",
+    color: "red",
+    topics: [
+      {
+        title: "Jedzenie",
+      },
+      {
+        title: "Jedzenie (Ciąg dalszy)",
+      },
+      {
+        title: "Napoje",
+      },
+      {
+        title: "Owoce",
+      },
+      {
+        title: "Warzywa",
+      },
+    ],
+  },
+  {
+    title: "Jedzenie i picie",
+    color: "purple",
+    topics: [
+      {
+        title: "Jedzenie",
+      },
+      {
+        title: "Jedzenie (Ciąg dalszy)",
+      },
+      {
+        title: "Napoje",
+      },
+      {
+        title: "Owoce",
+      },
+      {
+        title: "Warzywa",
+      },
+    ],
+  },
+];
 
 const Topics = () => {
-  let line1 = useRef(null);
-  let line2 = useRef(null);
-
   const { data, loading } = useData();
-
-  useEffect(() => {
-    gsap.from([line1, line2], 0.5, {
-      delay: animations.appRouteTransition,
-      ease: "power3.out",
-      y: 64,
-      opacity: 0,
-      stagger: {
-        amount: 0.15,
-      },
-    });
-  }, [line1, line2]);
 
   return (
     <>
-      <h1 ref={(el) => (line1 = el)}>Topics</h1>
-      <h1 ref={(el) => (line2 = el)}>Topics</h1>
-      <Link to={routes.game}>Graj</Link>
+      <MainWrapper>
+        {fakeData.map((section) => (
+          <SectionSlider title={section.title}>
+            {section.topics.map((topic) => (
+              <TopicItem
+                to={routes.game}
+                title={topic.title}
+                color={section.color}
+              />
+            ))}
+          </SectionSlider>
+        ))}
+      </MainWrapper>
     </>
   );
 };
