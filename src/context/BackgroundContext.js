@@ -19,6 +19,8 @@ const BackgroundContextProvider = (props) => {
         return setTheme("green");
       case routes.profile:
         return setTheme("purple");
+      case routes.game:
+        return setTheme("green");
       default:
         return setTheme("blue");
     }

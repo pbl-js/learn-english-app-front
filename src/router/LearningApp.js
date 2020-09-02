@@ -6,7 +6,7 @@ import BackgroundContextProvider from "context/BackgroundContext";
 import FadeInOutLayout from "layouts/FadeInOut/FadeInOutLayout";
 import GradientLayout from "layouts/GradientLayout/GradientLayout";
 
-import GradientBackground from "components/GradientBackground/GradientBackground";
+import AppPageLayout from "layouts/AppPageLayout/AppPageLayout";
 import NavigationLayout from "layouts/Navigation/NavigationLayout";
 import Topics from "pages/Topics/Topics";
 import Dojo from "pages/Dojo/Dojo";
@@ -50,13 +50,9 @@ const LearningApp = () => {
             <Route key={name} path={path} exact>
               {({ match }) => (
                 <FadeInOutLayout match={match}>
-                  <GradientBackground
-                    color={color}
-                    index={1}
-                    style={{ paddingTop: "70px" }}
-                  >
+                  <AppPageLayout color={color}>
                     <Component />
-                  </GradientBackground>
+                  </AppPageLayout>
                 </FadeInOutLayout>
               )}
             </Route>
