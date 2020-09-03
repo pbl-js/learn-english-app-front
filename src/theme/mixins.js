@@ -14,6 +14,13 @@ export const flexRowCenter = css`
   justify-content: center;
 `;
 
+export const flexColumnCenter = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const normalText = css`
   font-size: ${fontSize.xs};
   font-weight: ${fontWeight.semiBold};

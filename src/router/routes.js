@@ -1,5 +1,6 @@
 export default {
   home: "/",
+  auth: "/auth",
   app: "/app",
   topics: "/app/topics",
   dojo: "/app/dojo",
