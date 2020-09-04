@@ -14,7 +14,7 @@ const Auth = () => {
       <ModalWrapper>
         <AuthHeader authType={authType} setAuthType={setAuthType} />
 
-        <Form>{authType === "register" ? <Register /> : <Login />}</Form>
+        {authType === "register" ? <Register /> : <Login />}
       </ModalWrapper>
     </GradientWrapper>
   );

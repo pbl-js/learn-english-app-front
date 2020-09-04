@@ -2,7 +2,7 @@ import React from "react";
 
 const Register = () => {
   return (
-    <>
+    <form>
       <div>
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="Podaj adres email" />
@@ -18,7 +18,7 @@ const Register = () => {
         <input type="email" id="email" placeholder="Podaj hasło" />
       </div>
       <button>Zarejestruj</button>
-    </>
+    </form>
   );
 };
 
