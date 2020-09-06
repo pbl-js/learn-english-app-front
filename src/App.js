@@ -5,12 +5,15 @@ import { ApolloProvider } from "@apollo/client";
 import client from "apollo/client";
 
 import Router from "router/MainRouter";
+import { AuthProvider } from "context/AuthContext";
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <GlobalStyle />
-      <Router />
+      <AuthProvider>
+        <GlobalStyle />
+        <Router />
+      </AuthProvider>
     </ApolloProvider>
   );
 }

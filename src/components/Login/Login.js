@@ -1,5 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
+import { useLazyQuery, gql } from "@apollo/client";
+import { useHistory } from "react-router-dom";
+
+import { AuthContext } from "context/AuthContext";
+import routes from "router/routes";
+
+const LOGIN = gql`
+  query Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      userId
+    }
+  }
+`;
 
 const initialValues = {
   email: "",
@@ -20,21 +34,31 @@ const validate = (values) => {
   return errors;
 };
 
-const onSubmit = (values) => {
-  console.log(values);
-};
-
 const Login = () => {
+  const context = useContext(AuthContext);
+  const history = useHistory();
+  const onSubmit = (values) => {
+    loginUser();
+  };
+
   const formik = useFormik({
     initialValues,
     onSubmit,
     validate,
   });
 
+  const [loginUser, { loading, data }] = useLazyQuery(LOGIN, {
+    variables: { email: formik.values.email, password: formik.values.password },
+    onCompleted: () => {
+      context.login(data.login);
+      history.push(routes.topics);
+    },
+  });
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
@@ -49,7 +73,7 @@ const Login = () => {
       </div>
 
       <div>
-        <label for="password">Hasło</label>
+        <label htmlFor="password">Hasło</label>
         <input
           type="password"
           id="password"
@@ -63,7 +87,7 @@ const Login = () => {
         )}
       </div>
 
-      <button>Zaloguj</button>
+      <button type="submit">Zaloguj</button>
     </form>
   );
 };

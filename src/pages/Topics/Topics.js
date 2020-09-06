@@ -76,6 +76,8 @@ const fakeData = [
 const Topics = () => {
   const { data, loading } = useData();
 
+  console.log(data);
+
   return (
     <>
       <MainWrapper>

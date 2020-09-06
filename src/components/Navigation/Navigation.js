@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import routes from "router/routes";
+import { AuthContext } from "context/AuthContext";
 
 import { ReactComponent as Star } from "assets/star.svg";
 import { ReactComponent as Grid } from "assets/grid.svg";
@@ -16,6 +17,8 @@ import {
 } from "./Navigation.style";
 
 const Navigation = ({ visable }) => {
+  const { logout } = useContext(AuthContext);
+
   return (
     <StyledNav visable={visable}>
       <StyledLogo to="/">
@@ -44,7 +47,7 @@ const Navigation = ({ visable }) => {
         </StyledNavLink>
       </InnerWrapper>
 
-      <StyledLogout to="/">
+      <StyledLogout to="/" onClick={() => logout()}>
         <Logout />
       </StyledLogout>
     </StyledNav>
