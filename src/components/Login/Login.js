@@ -37,7 +37,8 @@ const validate = (values) => {
 const Login = () => {
   const context = useContext(AuthContext);
   const history = useHistory();
-  const onSubmit = (values) => {
+
+  const onSubmit = () => {
     loginUser();
   };
 
@@ -52,6 +53,9 @@ const Login = () => {
     onCompleted: () => {
       context.login(data.login);
       history.push(routes.topics);
+    },
+    onError: (error) => {
+      console.log("errpr", error.graphQLErrors);
     },
   });
 
@@ -87,7 +91,7 @@ const Login = () => {
         )}
       </div>
 
-      <button type="submit">Zaloguj</button>
+      <button type="submit">{loading ? "Logowanie..." : "Zaloguj"}</button>
     </form>
   );
 };
