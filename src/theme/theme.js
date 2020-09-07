@@ -10,7 +10,7 @@ export const fontSize = {
   xxxs: "1.2rem",
   xxs: "1.4rem",
   xs: "1.6rem",
-  s: "2rem",
+  s: "1.8rem",
   m: "2.5rem",
   l: "3rem",
   xl: "3.5rem",
@@ -27,6 +27,7 @@ export const colors = {
   blueMenu: "#3498DA",
   greenMenu: "#1ABB9C",
   purpleMenu: "#9B59B6",
+  yellow: "#fee06a",
 
   purpleAuthDark: "#221447",
   purpleAuthMedium: "#321B5C",
