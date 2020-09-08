@@ -3,9 +3,10 @@ import routes from "router/routes";
 
 import useCurrentSite from "hooks/useCurrentSite";
 
-import { StyledMain } from "./AppLayout.style";
+import { StyledMain } from "./NavigationLayout.style";
 import Navigation from "components/Navigation/Navigation";
 import AppHeader from "components/AppHeader/AppHeader";
+
 import ProtectedLayout from "layouts/ProtectedLayout/ProtectedLayout";
 
 const NavigationLayout = ({ children }) => {

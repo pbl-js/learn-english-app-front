@@ -34,7 +34,7 @@ const GradientLayout = ({ children }) => {
 
   return (
     <>
-      <div style={{ zIndex: 1, position: "relative" }}>{children}</div>
+      <div style={{ zIndex: 1 }}>{children}</div>
 
       <GradientBackground
         index={0}

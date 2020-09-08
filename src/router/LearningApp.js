@@ -7,7 +7,7 @@ import FadeInOutLayout from "layouts/FadeInOut/FadeInOutLayout";
 import GradientLayout from "layouts/GradientLayout/GradientLayout";
 
 import AppPageLayout from "layouts/AppPageLayout/AppPageLayout";
-import NavigationLayout from "layouts/AppLayout/AppLayout";
+import NavigationLayout from "layouts/NavigationLayout/NavigationLayout";
 import Topics from "pages/Topics/Topics";
 import Dojo from "pages/Dojo/Dojo";
 import Collection from "pages/Collection/Collection";
