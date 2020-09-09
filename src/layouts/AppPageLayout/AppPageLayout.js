@@ -43,21 +43,14 @@ const MainWrapper = styled(GradientBackground)`
   }
 `;
 
-const InnerWrapper = styled.div`
-  @media ${breakPoints.tablet} {
-    transition: all ${animations.appRouteTransition + "s"};
-    height: 100%;
-    margin-left: ${({ visable }) => (visable ? "150px" : 0)};
-    width: ${({ visable }) => (visable ? "calc(100% - 150px)" : "calc(100%)")};
-  }
-`;
-
 const AppPageLayout = ({ children, color }) => {
   const visable = useCurrentSite(routes.game);
 
   return (
     <MainWrapper color={color} index={1} visable={visable}>
-      <InnerWrapper visable={visable}>{children}</InnerWrapper>
+      {/* <InnerWrapper visable={visable}> */}
+      {children}
+      {/* </InnerWrapper> */}
     </MainWrapper>
   );
 };
