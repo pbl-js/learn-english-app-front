@@ -28,7 +28,7 @@ const FadeInOutLayout = ({ children, match }) => {
   return (
     <CSSTransition
       in={match != null}
-      timeout={1000}
+      timeout={animations.appRouteTransition * 1000}
       unmountOnExit
       onExit={onExit}
       onEnter={onEnter}

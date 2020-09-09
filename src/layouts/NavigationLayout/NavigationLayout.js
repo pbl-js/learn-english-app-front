@@ -15,7 +15,7 @@ const NavigationLayout = ({ children }) => {
   return (
     <ProtectedLayout>
       <Navigation visable={visable} />
-      <StyledMain visable={visable}>
+      <StyledMain>
         <AppHeader visable={visable} />
         {children}
       </StyledMain>

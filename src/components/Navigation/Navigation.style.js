@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
-import { colors, fontSize, breakPoints } from "theme/theme";
+import { colors, fontSize, breakPoints, animations } from "theme/theme";
 
 export const StyledNav = styled.nav`
   position: fixed;
@@ -11,7 +11,7 @@ export const StyledNav = styled.nav`
   justify-content: center;
   bottom: ${({ visable }) => (visable ? 0 : "-70px")};
   left: 0;
-  transition: bottom 0.5s;
+  transition: bottom ${animations.appRouteTransition + "s"};
   width: 100vw;
   height: 70px;
   padding: 25px;
@@ -22,7 +22,7 @@ export const StyledNav = styled.nav`
     width: 150px;
     height: 100vh;
     top: 0;
-    transition: left 0.5s;
+    transition: left ${animations.appRouteTransition + "s"};
     left: ${({ visable }) => (visable ? 0 : "-150px")};
     bottom: auto;
   }

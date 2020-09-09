@@ -10,6 +10,8 @@ export default styled.div`
   min-height: 100vh;
   background-image: ${({ color }) => {
     switch (color) {
+      case "colorful":
+        return colors.colorfulGradient;
       case "orange":
         return colors.orangeGradient;
       case "blue":

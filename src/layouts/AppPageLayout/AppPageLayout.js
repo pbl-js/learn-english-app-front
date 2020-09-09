@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { layout, breakPoints } from "theme/theme";
 import useCurrentSite from "hooks/useCurrentSite";
 import routes from "router/routes";
+import { animations } from "theme/theme";
 
 import GradientBackground from "components/GradientBackground/GradientBackground";
 
@@ -43,13 +44,14 @@ const MainWrapper = styled(GradientBackground)`
 `;
 
 const InnerWrapper = styled.div`
-  padding: 70px ${layout.mainPadding.tablet} 0 ${layout.mainPadding.tablet};
+  transition: all ${animations.appRouteTransition + "s"};
+  padding: 70px ${layout.mainPadding.tablet} 70px ${layout.mainPadding.tablet};
 
   @media ${breakPoints.tablet} {
+    height: 100%;
     margin-left: ${({ visable }) => (visable ? "150px" : 0)};
     padding: 70px ${layout.mainPadding.desktop} 0 ${layout.mainPadding.desktop};
     width: ${({ visable }) => (visable ? "calc(100% - 150px)" : "calc(100%)")};
-    transition: all 0.5s;
   }
 `;
 

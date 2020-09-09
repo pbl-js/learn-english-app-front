@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakPoints, depth, layout } from "theme/theme";
+import { breakPoints, depth, layout, animations } from "theme/theme";
 import { mediumUppercaseText, normalText, flexRowCenter } from "theme/mixins";
 
 export const MainWrapper = styled.div`
@@ -19,7 +19,7 @@ export const MainWrapper = styled.div`
   @media ${breakPoints.tablet} {
     left: ${({ visable }) => (visable ? "150px" : 0)};
     width: ${({ visable }) => (visable ? "calc(100% - 150px)" : "calc(100%)")};
-    transition: 0.5s;
+    transition: ${animations.appRouteTransition + "s"};
     padding: 0 ${layout.mainPadding.desktop};
   }
 `;

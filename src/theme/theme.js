@@ -38,6 +38,8 @@ export const colors = {
   blueGradient: "linear-gradient(135deg, #4353b3, #38207f)",
   greenGradient: "linear-gradient(135deg, #45a77e, #02929b)",
   purpleGradient: "linear-gradient(135deg, #803a9e, #4d1360)",
+  colorfulGradient:
+    "linear-gradient(180deg,#b54798,#e67625,#4353b3,#38207f,#45a77e,#02929b,#803a9e,#4d1360)",
 };
 
 export const layout = {
@@ -48,7 +50,7 @@ export const layout = {
 };
 
 export const animations = {
-  appRouteTransition: 0.5,
+  appRouteTransition: 0.8,
 };
 
 export const breakPoints = {
