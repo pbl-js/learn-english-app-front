@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { layout, breakPoints, animations, colors } from "theme/theme";
-import useCurrentSite from "hooks/useCurrentSite";
-import routes from "router/routes";
+import { layout, breakPoints, colors } from "theme/theme";
 
 const TopicsWrappper = styled.div`
   position: relative;
@@ -18,19 +16,13 @@ const MainWrapper = styled.div`
   @media ${breakPoints.tablet} {
     height: 100%;
     padding: 70px ${layout.mainPadding.desktop} 0 ${layout.mainPadding.desktop};
-
-    margin-left: ${({ visable }) => (visable ? "150px" : 0)};
-    width: ${({ visable }) => (visable ? "calc(100% - 150px)" : "calc(100%)")};
   }
 `;
 
 const PageLayout = ({ children, isTopics }) => {
-  const visable = useCurrentSite(routes.game);
-  const isTopicsSite = useCurrentSite(routes.topics);
-
   if (isTopics) {
     return (
-      <TopicsWrappper colorful={true} visable={visable}>
+      <TopicsWrappper colorful={true}>
         <MainWrapper>{children}</MainWrapper>
       </TopicsWrappper>
     );

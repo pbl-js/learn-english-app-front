@@ -6,7 +6,7 @@ import { animations, layout, breakPoints } from "theme/theme";
 import useCurrentSite from "hooks/useCurrentSite";
 import routes from "router/routes";
 
-import AppPageLayout from "layouts/AppPageLayout/AppPageLayout";
+import AppPageLayout from "layouts/ScrollLayout/ScrollLayout";
 
 const onExit = (node) => {
   gsap.to(node, {
@@ -31,6 +31,7 @@ const onEnter = (node) => {
 
 const InnerWrapper = styled.div`
   position: relative;
+
   @media ${breakPoints.tablet} {
     transition: all ${animations.appRouteTransition + "s"};
     height: 100%;

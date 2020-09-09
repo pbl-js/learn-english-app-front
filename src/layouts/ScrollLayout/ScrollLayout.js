@@ -1,33 +1,29 @@
 import React from "react";
-import styled from "styled-components";
-import { layout, breakPoints } from "theme/theme";
+import styled, { css } from "styled-components";
+import { breakPoints, colors } from "theme/theme";
 import useCurrentSite from "hooks/useCurrentSite";
 import routes from "router/routes";
-import { animations, colors } from "theme/theme";
 
 import GradientBackground from "components/GradientBackground/GradientBackground";
 
 const MainWrapper = styled(GradientBackground)`
-  position: absolute;
   overflow-y: auto;
-  width: 100%;
-  height: 100%;
 
-  /* width */
   ::-webkit-scrollbar {
     display: none;
+    width: ${({ isTopic }) => (isTopic ? "14px" : "10px")};
+    background-color: ${({ isTopic }) =>
+      isTopic ? colors.purplePrimary : "transparent"};
   }
 
-  /* Handle */
   ::-webkit-scrollbar-thumb {
-    /* background: rgba(0, 0, 0, 0.5); */
-    background-color: ${colors.orangeMenu};
-    width: 10px;
+    background-color: ${({ isTopic }) =>
+      isTopic ? colors.orangeMenu : "rgba(0, 0, 0, 0.5)"};
     border-radius: 100px;
-    border: 4px solid ${colors.purplePrimary};
+    border: 4px solid
+      ${({ isTopic }) => (isTopic ? colors.purplePrimary : "transparent")};
   }
 
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background-color: ${colors.orangeMenu};
   }
@@ -36,21 +32,17 @@ const MainWrapper = styled(GradientBackground)`
     overflow-y: scroll;
 
     ::-webkit-scrollbar {
-      width: 14px;
-      background-color: ${colors.purplePrimary};
       display: block;
     }
   }
 `;
 
 const AppPageLayout = ({ children, color }) => {
-  const visable = useCurrentSite(routes.game);
+  const isTopics = useCurrentSite(routes.topics);
 
   return (
-    <MainWrapper color={color} index={1} visable={visable}>
-      {/* <InnerWrapper visable={visable}> */}
+    <MainWrapper color={color} index={1} isTopic={!isTopics}>
       {children}
-      {/* </InnerWrapper> */}
     </MainWrapper>
   );
 };
