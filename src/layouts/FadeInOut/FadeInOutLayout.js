@@ -3,6 +3,8 @@ import { CSSTransition } from "react-transition-group";
 import { gsap } from "gsap";
 import { animations } from "theme/theme";
 
+import AppPageLayout from "layouts/AppPageLayout/AppPageLayout";
+
 const onExit = (node) => {
   gsap.to(node, {
     duration: animations.appRouteTransition / 2,
@@ -24,7 +26,7 @@ const onEnter = (node) => {
   );
 };
 
-const FadeInOutLayout = ({ children, match }) => {
+const FadeInOutLayout = ({ children, match, color }) => {
   return (
     <CSSTransition
       in={match != null}
@@ -33,7 +35,7 @@ const FadeInOutLayout = ({ children, match }) => {
       onExit={onExit}
       onEnter={onEnter}
     >
-      {children}
+      <AppPageLayout color={color}>{children}</AppPageLayout>
     </CSSTransition>
   );
 };

@@ -5,8 +5,8 @@ import routes from "router/routes";
 import BackgroundContextProvider from "context/BackgroundContext";
 import FadeInOutLayout from "layouts/FadeInOut/FadeInOutLayout";
 import GradientLayout from "layouts/GradientLayout/GradientLayout";
+import PageLayout from "layouts/PageLayout/PageLayout";
 
-import AppPageLayout from "layouts/AppPageLayout/AppPageLayout";
 import NavigationLayout from "layouts/NavigationLayout/NavigationLayout";
 import Topics from "pages/Topics/Topics";
 import Dojo from "pages/Dojo/Dojo";
@@ -49,10 +49,10 @@ const LearningApp = () => {
           {routesList.map(({ path, name, color, Component }) => (
             <Route key={name} path={path} exact>
               {({ match }) => (
-                <FadeInOutLayout match={match}>
-                  <AppPageLayout color={color}>
+                <FadeInOutLayout match={match} color={color}>
+                  <PageLayout isTopics={name === "Topics"}>
                     <Component />
-                  </AppPageLayout>
+                  </PageLayout>
                 </FadeInOutLayout>
               )}
             </Route>

@@ -50,7 +50,7 @@ export const layout = {
 };
 
 export const animations = {
-  appRouteTransition: 0.8,
+  appRouteTransition: 2,
 };
 
 export const breakPoints = {
