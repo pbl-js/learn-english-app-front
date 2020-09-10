@@ -18,7 +18,7 @@ export const LinkWrapper = styled(Link)`
   color: white;
   font-weight: ${fontWeight.medium};
   font-size: ${fontSize.s};
-  background-color: ${({ color }) => {
+  /* background-color: ${({ color }) => {
     if (color === "orange") {
       return "#e67e22";
     } else if (color === "red") {
@@ -42,7 +42,8 @@ export const LinkWrapper = styled(Link)`
     } else if (color === "green4") {
       return "#2CCC70";
     }
-  }};
+  }}; */
+  background-color: ${({ color }) => color};
 
   &::before {
     content: "";

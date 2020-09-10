@@ -1,6 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 
 const Collection = () => {
+  console.log("Collection");
   return (
     <div style={{ height: "200vh" }}>
       <h1>Collection</h1>
@@ -9,4 +10,4 @@ const Collection = () => {
   );
 };
 
-export default Collection;
+export default memo(Collection);

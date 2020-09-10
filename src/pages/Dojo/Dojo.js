@@ -1,7 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 
 const Dojo = (props) => {
+  console.log("Dojo");
   return (
     <>
       <h1>Dojo</h1>
@@ -11,4 +12,4 @@ const Dojo = (props) => {
   );
 };
 
-export default Dojo;
+export default memo(Dojo);

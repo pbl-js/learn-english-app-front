@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import routes from "router/routes";
 
@@ -12,4 +12,4 @@ const Game = (props) => {
   );
 };
 
-export default Game;
+export default memo(Game);

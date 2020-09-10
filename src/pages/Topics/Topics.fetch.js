@@ -18,7 +18,12 @@ export const TOPICS = gql`
       img
       totalWords
       section {
+        title
         _id
+        color
+      }
+      progress {
+        status
       }
     }
   }
@@ -47,7 +52,7 @@ export default function () {
 
       return { ...section, topics };
     });
-
+  console.log(topicsError);
   const loading = topicsLoading || sectionsLoading;
 
   return { data, loading, error: { sectionsError, topicsError } };
