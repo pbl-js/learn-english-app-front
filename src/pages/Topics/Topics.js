@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import routes from "router/routes";
 
 import useData from "./Topics.fetch";
-import { MainWrapper } from "./Topics.style";
+import { MainWrapper, LastTopicWrapper } from "./Topics.style";
 import SectionSlider from "components/SectionSlider/SectionSlider";
 import TopicItem from "components/TopicItem/TopicItem";
 
@@ -11,6 +11,10 @@ const Topics = () => {
 
   return (
     <MainWrapper>
+      <LastTopicWrapper>
+        <h1>Warzywa Ciąg dalszy</h1>
+      </LastTopicWrapper>
+
       {data &&
         data.map((section) => (
           <SectionSlider key={section.title} title={section.title}>

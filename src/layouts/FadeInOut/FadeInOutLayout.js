@@ -6,7 +6,7 @@ import { animations, layout, breakPoints } from "theme/theme";
 import useCurrentSite from "hooks/useCurrentSite";
 import routes from "router/routes";
 
-import AppPageLayout from "layouts/ScrollLayout/ScrollLayout";
+import ScrollLayout from "layouts/ScrollLayout/ScrollLayout";
 
 const onExit = (node) => {
   gsap.to(node, {
@@ -52,7 +52,7 @@ const FadeInOutLayout = ({ children, match, color }) => {
         onExit={onExit}
         onEnter={onEnter}
       >
-        <AppPageLayout color={color}>{children}</AppPageLayout>
+        <ScrollLayout color={color}>{children}</ScrollLayout>
       </CSSTransition>
     </InnerWrapper>
   );

@@ -7,3 +7,8 @@ export const MainWrapper = styled.div`
   width: 100%;
   min-height: 3140px;
 `;
+
+export const LastTopicWrapper = styled.div`
+  height: 260px;
+  margin: 100px 0;
+`;

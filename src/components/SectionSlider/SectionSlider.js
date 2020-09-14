@@ -15,17 +15,13 @@ gsap.registerPlugin(ScrollTrigger);
 const SectionSlider = ({ title, children }) => {
   let sectionWrapperRef = useRef(null);
   let mainWrapperRef = useRef(null);
+  let titleRef = useRef(null);
 
   useLayoutEffect(() => {
     gsap.set([...sectionWrapperRef.current.children], {
       y: "100%",
       autoAlpha: 0,
     });
-
-    // console.log(mainWrapperRef.current.getBoundingClientRect());
-  }, []);
-
-  useEffect(() => {
     gsap.to([...sectionWrapperRef.current.children], {
       y: "0%",
       autoAlpha: 1,
@@ -33,13 +29,14 @@ const SectionSlider = ({ title, children }) => {
       stagger: 0.15,
       scrollTrigger: {
         trigger: mainWrapperRef.current,
+        scroller: "#scrollWrapper",
       },
     });
   }, []);
 
   return (
     <MainWrapper ref={mainWrapperRef}>
-      <Title>{title}</Title>
+      <Title ref={titleRef}>{title}</Title>
       <TopicsWrapper>
         <InnerTopicsWrapper ref={sectionWrapperRef}>
           {children}
