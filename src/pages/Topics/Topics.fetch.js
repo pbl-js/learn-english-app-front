@@ -52,7 +52,6 @@ export default function () {
 
       return { ...section, topics };
     });
-  console.log(topicsError);
   const loading = topicsLoading || sectionsLoading;
 
   return { data, loading, error: { sectionsError, topicsError } };

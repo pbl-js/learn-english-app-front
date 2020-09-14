@@ -5,4 +5,5 @@ export const MainWrapper = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 50px;
   width: 100%;
+  min-height: 3140px;
 `;

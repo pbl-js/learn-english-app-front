@@ -9,8 +9,6 @@ import TopicItem from "components/TopicItem/TopicItem";
 const Topics = () => {
   const { data, loading } = useData();
 
-  console.log(data);
-
   return (
     <MainWrapper>
       {data &&
