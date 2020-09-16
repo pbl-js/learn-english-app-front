@@ -29,18 +29,6 @@ export const Title = styled.div`
   ${flexRowCenter}
 `;
 
-export const Timer = styled.div`
-  ${flexRowCenter}
-  ${normalText}
-
-  svg {
-    fill: white;
-    width: 35px;
-    height: 35px;
-    margin-left: 10px;
-  }
-`;
-
 export const TotalWords = styled.div`
   ${flexRowCenter}
   ${normalText}

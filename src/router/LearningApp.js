@@ -13,6 +13,7 @@ import Dojo from "pages/Dojo/Dojo";
 import Collection from "pages/Collection/Collection";
 import Profile from "pages/Profile/Profile";
 import Game from "pages/Game/Game";
+import TimerContextProvider from "context/TimerContext";
 
 const routesList = [
   { path: routes.topics, name: "Topics", color: "orange", Component: Topics },
@@ -40,25 +41,27 @@ const routesList = [
 const LearningApp = () => {
   return (
     <BackgroundContextProvider>
-      <GradientLayout>
-        <NavigationLayout>
-          <Route exact path="/app">
-            <Redirect to="/app/topics" />
-          </Route>
-
-          {routesList.map(({ path, name, color, Component }) => (
-            <Route key={name} path={path} exact>
-              {({ match }) => (
-                <FadeInOutLayout match={match} color={color}>
-                  <PageLayout isTopics={name === "Topics"}>
-                    <Component />
-                  </PageLayout>
-                </FadeInOutLayout>
-              )}
+      <TimerContextProvider>
+        <GradientLayout>
+          <NavigationLayout>
+            <Route exact path="/app">
+              <Redirect to="/app/topics" />
             </Route>
-          ))}
-        </NavigationLayout>
-      </GradientLayout>
+
+            {routesList.map(({ path, name, color, Component }) => (
+              <Route key={name} path={path} exact>
+                {({ match }) => (
+                  <FadeInOutLayout match={match} color={color}>
+                    <PageLayout isTopics={name === "Topics"}>
+                      <Component />
+                    </PageLayout>
+                  </FadeInOutLayout>
+                )}
+              </Route>
+            ))}
+          </NavigationLayout>
+        </GradientLayout>
+      </TimerContextProvider>
     </BackgroundContextProvider>
   );
 };
