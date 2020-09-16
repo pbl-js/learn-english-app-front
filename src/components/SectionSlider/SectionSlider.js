@@ -20,13 +20,12 @@ const SectionSlider = ({ title, children }) => {
   useLayoutEffect(() => {
     gsap.set([...sectionWrapperRef.current.children], {
       y: "100%",
-      autoAlpha: 0,
     });
     gsap.to([...sectionWrapperRef.current.children], {
       y: "0%",
-      autoAlpha: 1,
       delay: animations.appRouteTransition,
-      stagger: 0.15,
+      stagger: 0.1,
+      duration: 0.5,
       scrollTrigger: {
         trigger: mainWrapperRef.current,
         scroller: "#scrollWrapper",
