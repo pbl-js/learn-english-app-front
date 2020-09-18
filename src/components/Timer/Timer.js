@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { TimerContext } from "context/TimerContext";
+import { useTimerState } from "context/TimerContext";
 import formatTime from "helpers/formatTime";
 
 import { flexRowCenter, normalText } from "theme/mixins";
@@ -19,11 +19,12 @@ const MainWrapper = styled.div`
 `;
 
 const Timer = () => {
-  const { time } = useContext(TimerContext);
+  const { time } = useTimerState();
 
   return (
     <MainWrapper>
       {formatTime(time)} <Clock />
+      {/* {count} */}
     </MainWrapper>
   );
 };

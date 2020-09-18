@@ -1,9 +1,8 @@
-import React, { memo, useContext } from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import routes from "router/routes";
-import { TimerContext } from "context/TimerContext";
-import Omg from "./Omg";
+import { useTimerDispatch } from "context/TimerContext";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -15,7 +14,7 @@ const MainWrapper = styled.div`
 `;
 
 const Game = (props) => {
-  // const { startTimer, stopTimer } = useContext(TimerContext);
+  const dispatch = useTimerDispatch();
   console.log("object");
 
   return (
@@ -23,10 +22,8 @@ const Game = (props) => {
       <h1>Game</h1>
       <h1>Game</h1>
       <Link to={routes.topics}>Ognia</Link>
-      <Omg />
-      {/* <h2>{time}</h2> */}
-      {/* <button onClick={startTimer}>Start</button>
-      <button onClick={stopTimer}>Stop</button> */}
+      <button onClick={() => dispatch({ type: "START_CLOCK" })}>Start</button>
+      <button onClick={() => dispatch({ type: "STOP_CLOCK" })}>Stop</button>
     </MainWrapper>
   );
 };

@@ -13,7 +13,7 @@ import Dojo from "pages/Dojo/Dojo";
 import Collection from "pages/Collection/Collection";
 import Profile from "pages/Profile/Profile";
 import Game from "pages/Game/Game";
-import TimerContextProvider from "context/TimerContext";
+import { TimerProvider } from "context/TimerContext";
 
 const routesList = [
   { path: routes.topics, name: "Topics", color: "orange", Component: Topics },
@@ -41,7 +41,7 @@ const routesList = [
 const LearningApp = () => {
   return (
     <BackgroundContextProvider>
-      <TimerContextProvider>
+      <TimerProvider>
         <GradientLayout>
           <NavigationLayout>
             <Route exact path="/app">
@@ -61,7 +61,7 @@ const LearningApp = () => {
             ))}
           </NavigationLayout>
         </GradientLayout>
-      </TimerContextProvider>
+      </TimerProvider>
     </BackgroundContextProvider>
   );
 };

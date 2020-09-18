@@ -1,41 +1,69 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import React, { useEffect, useReducer } from "react";
+const CountStateContext = React.createContext();
+const CountDispatchContext = React.createContext();
 
-export const TimerContext = createContext();
-
-const initialTime = 300;
-
-const TimerContextProvider = (props) => {
-  const [time, setTime] = useState(initialTime);
-  const [start, setStart] = useState(false);
-
-  useEffect(() => {
-    if (start) {
-      if (time > 0) {
-        setTimeout(() => setTime(time - 1), 1000);
-      }
+function timeReducer(state, action) {
+  switch (action.type) {
+    case "INCREMENT": {
+      return { ...state, time: state.time + 1 };
     }
+    case "DECREMENT": {
+      return { ...state, time: state.time - 1 };
+    }
+    case "START_CLOCK": {
+      return { ...state, start: true };
+    }
+    case "STOP_CLOCK": {
+      return { ...state, start: false };
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`);
+    }
+  }
+}
+
+function TimerProvider({ children }) {
+  const [state, dispatch] = useReducer(timeReducer, {
+    time: 300,
+    start: false,
   });
 
-  const startTimer = useCallback(() => {
-    setStart(true);
-  }, []);
+  useEffect(() => {
+    let interval = null;
 
-  const stopTimer = useCallback(() => {
-    setStart(false);
-  }, []);
+    if (state.start) {
+      interval = setInterval(() => {
+        dispatch({ type: "DECREMENT" });
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
 
-  const value = {
-    time,
-    initialTime,
-    startTimer,
-    stopTimer,
-  };
+    return () => clearInterval(interval);
+  }, [state.start]);
 
   return (
-    <TimerContext.Provider value={value}>
-      {props.children}
-    </TimerContext.Provider>
+    <CountStateContext.Provider value={state}>
+      <CountDispatchContext.Provider value={dispatch}>
+        {children}
+      </CountDispatchContext.Provider>
+    </CountStateContext.Provider>
   );
-};
+}
 
-export default TimerContextProvider;
+function useTimerState() {
+  const context = React.useContext(CountStateContext);
+  if (context === undefined) {
+    throw new Error("useTimerState must be used within a TimerProvider");
+  }
+  return context;
+}
+
+function useTimerDispatch() {
+  const context = React.useContext(CountDispatchContext);
+  if (context === undefined) {
+    throw new Error("useTimerDispatch must be used within a TimerProvider");
+  }
+  return context;
+}
+export { TimerProvider, useTimerState, useTimerDispatch };
