@@ -13,6 +13,16 @@ export const bigNormalText = css`
   font-weight: ${fontWeight.bold};
 `;
 
+export const mediumText = css`
+  font-size: ${fontSize.s};
+  font-weight: ${fontWeight.semiBold};
+`;
+
+export const normalText = css`
+  font-size: ${fontSize.xs};
+  font-weight: ${fontWeight.semiBold};
+`;
+
 export const flexRowCenter = css`
   display: flex;
   flex-direction: row;
@@ -25,11 +35,6 @@ export const flexColumnCenter = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-export const normalText = css`
-  font-size: ${fontSize.xs};
-  font-weight: ${fontWeight.semiBold};
 `;
 
 export const bigButton = css`
