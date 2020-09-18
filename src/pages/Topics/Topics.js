@@ -33,7 +33,7 @@ const Topics = () => {
                 section.topics.map((topic) => (
                   <TopicItem
                     key={topic.title}
-                    to={routes.game}
+                    to={`${routes.game}/${topic._id}`}
                     title={topic.title}
                     img={topic.img}
                     color={section.color}

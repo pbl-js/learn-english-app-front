@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import routes from "router/routes";
@@ -15,11 +15,13 @@ const MainWrapper = styled.div`
 
 const Game = (props) => {
   const dispatch = useTimerDispatch();
-  console.log("object");
+
+  useEffect(() => {
+    console.log(props.match.params.handle);
+  }, []);
 
   return (
     <MainWrapper>
-      <h1>Game</h1>
       <h1>Game</h1>
       <Link to={routes.topics}>Ognia</Link>
       <button onClick={() => dispatch({ type: "START_CLOCK" })}>Start</button>

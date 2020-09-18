@@ -31,7 +31,7 @@ const routesList = [
     Component: Profile,
   },
   {
-    path: routes.game,
+    path: `${routes.game}/:handle`,
     name: "Game",
     color: "green",
     Component: Game,
@@ -50,10 +50,10 @@ const LearningApp = () => {
 
             {routesList.map(({ path, name, color, Component }) => (
               <Route key={name} path={path} exact>
-                {({ match }) => (
-                  <FadeInOutLayout match={match} color={color}>
+                {(props) => (
+                  <FadeInOutLayout match={props.match} color={color}>
                     <PageLayout isTopics={name === "Topics"}>
-                      <Component />
+                      <Component {...props} />
                     </PageLayout>
                   </FadeInOutLayout>
                 )}
