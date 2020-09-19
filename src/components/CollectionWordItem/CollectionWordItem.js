@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as MenuIcon } from "assets/menuDots.svg";
+import { useSpeechSynthesis } from "react-speech-kit";
 
 import {
   MainWrapper,
@@ -9,37 +9,18 @@ import {
   MenuButton,
 } from "./CollectionWordItem.style";
 import ProgressBar from "components/ProgressBar/ProgressBar";
+import { ReactComponent as MenuIcon } from "assets/menuDots.svg";
 
 const CollectionWordItem = ({ title, img, progress }) => {
   const unseen = progress.status === "unseen";
 
-  const showMoreInfo = () => {
-    if (unseen) {
-      return null;
-    } else {
-      return (
-        <>
-          <p>{title.pl}</p>
-          <ProgressWrapper>
-            <ProgressBar
-              progress={
-                progress.status === "mastering"
-                  ? progress.masteringProgress
-                  : progress.learningProgress
-              }
-              mastering={progress.status === "mastering" ? true : false}
-            />
-          </ProgressWrapper>
-        </>
-      );
-    }
-  };
+  const { speak } = useSpeechSynthesis();
 
   return (
     <MainWrapper>
       <WordIcon src={img} unseen={unseen} />
 
-      <InnerWrapper unseen={unseen}>
+      <InnerWrapper unseen={unseen} onClick={() => speak({ text: title.eng })}>
         <h3>{title.eng}</h3>
         {unseen ? null : (
           <>
