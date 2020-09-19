@@ -75,3 +75,10 @@ export const bigButton = css`
     margin-left: 10px;
   }
 `;
+
+export const darkModalBackground = css`
+  border-radius: 20px;
+  background-color: ${colors.purpleModalDark};
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  color: white;
+`;

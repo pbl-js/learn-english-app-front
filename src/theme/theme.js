@@ -26,13 +26,14 @@ export const colors = {
   orangeMenu: "#E67E22",
   blueMenu: "#3498DA",
   greenMenu: "#1ABB9C",
-  purpleMenu: "#9B59B6",
+  purpleMenu: "#B83FF8",
   yellow: "#fee06a",
 
-  purpleAuthDark: "#221447",
   purpleAuthMedium: "#321B5C",
   purpleAuthLight: "#3F206C",
-  // purpleAuthStrong: "",
+
+  purpleModalDark: "#221447",
+  purpleModalMedium: "#512883",
 
   orangeGradient: "linear-gradient(135deg, #b54798, #e67625)",
   blueGradient: "linear-gradient(135deg, #4353b3, #38207f)",

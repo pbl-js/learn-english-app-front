@@ -24,7 +24,6 @@ const Timer = () => {
   return (
     <MainWrapper>
       {formatTime(time)} <Clock />
-      {/* {count} */}
     </MainWrapper>
   );
 };

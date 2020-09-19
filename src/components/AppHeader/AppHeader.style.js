@@ -5,6 +5,7 @@ import { mediumUppercaseText, normalText, flexRowCenter } from "theme/mixins";
 export const MainWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 
   position: fixed;
