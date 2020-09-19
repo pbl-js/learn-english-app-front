@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { colors } from "theme/theme";
+import { colors, breakPoints } from "theme/theme";
 import { mediumUppercaseText } from "theme/mixins";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
 
@@ -11,7 +11,7 @@ const MainWrapper = styled.article`
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 25px 30px;
+    padding: 15px 20px;
     background-color: ${colors.greenMenu};
     color: white;
     ${mediumUppercaseText}
@@ -24,6 +24,13 @@ const MainWrapper = styled.article`
       width: 25px;
       fill: white;
       margin-left: auto;
+      transform: ${({ open }) => (open ? "rotate(180deg)" : "rotate(0deg)")};
+    }
+  }
+
+  @media ${breakPoints.mobileL} {
+    header {
+      padding: 25px 30px;
     }
   }
 `;
@@ -31,8 +38,17 @@ const MainWrapper = styled.article`
 const InnerWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 50px;
-  padding: 50px;
+  grid-gap: 30px;
+  padding: 20px 10px;
+
+  @media ${breakPoints.mobileM} {
+    padding: 30px;
+    grid-gap: 30px;
+  }
+
+  @media ${breakPoints.mobileL} {
+    padding: 50px;
+  }
 `;
 
 const CollectionItem = ({ title, children }) => {
@@ -43,7 +59,7 @@ const CollectionItem = ({ title, children }) => {
   };
 
   return (
-    <MainWrapper>
+    <MainWrapper open={open}>
       <header onClick={toggleOpen}>
         {title} <Arrow />
       </header>

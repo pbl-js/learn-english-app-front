@@ -1,11 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import { ReactComponent as MenuIcon } from "assets/menuDots.svg";
 
 import {
   MainWrapper,
   WordIcon,
   InnerWrapper,
   ProgressWrapper,
+  MenuButton,
 } from "./CollectionWordItem.style";
 import ProgressBar from "components/ProgressBar/ProgressBar";
 
@@ -56,6 +57,10 @@ const CollectionWordItem = ({ title, img, progress }) => {
           </>
         )}
       </InnerWrapper>
+
+      <MenuButton>
+        <MenuIcon />
+      </MenuButton>
     </MainWrapper>
   );
 };

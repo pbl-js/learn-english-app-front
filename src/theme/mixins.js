@@ -1,11 +1,15 @@
 import { css } from "styled-components";
-import { fontSize, fontWeight, colors } from "theme/theme";
+import { fontSize, fontWeight, colors, breakPoints } from "theme/theme";
 
 export const mediumUppercaseText = css`
-  font-size: ${fontSize.s};
-  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.xs};
+  font-weight: ${fontWeight.semiBold};
   text-transform: uppercase;
   letter-spacing: 1px;
+
+  @media ${breakPoints.mobileL} {
+    font-size: ${fontSize.s};
+  }
 `;
 
 export const bigNormalText = css`
@@ -14,13 +18,21 @@ export const bigNormalText = css`
 `;
 
 export const mediumText = css`
-  font-size: ${fontSize.s};
+  font-size: ${fontSize.xs};
   font-weight: ${fontWeight.semiBold};
+
+  @media ${breakPoints.mobileL} {
+    font-size: ${fontSize.s};
+  }
 `;
 
 export const normalText = css`
-  font-size: ${fontSize.xs};
+  font-size: ${fontSize.xxs};
   font-weight: ${fontWeight.semiBold};
+
+  @media ${breakPoints.mobileL} {
+    font-size: ${fontSize.xs};
+  }
 `;
 
 export const flexRowCenter = css`

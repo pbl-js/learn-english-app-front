@@ -11,9 +11,6 @@ const Collection = () => {
   console.log(data);
   return (
     <MainWrapper>
-      <h1>Collection</h1>
-      <h1>Collection</h1>
-
       <TopicsWrapper>
         {data &&
           data.map((topic) => (
