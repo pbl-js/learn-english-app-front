@@ -10,19 +10,33 @@ const BackgroundContextProvider = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    switch (location.pathname) {
-      case routes.topics:
-        return setTheme("orange");
-      case routes.dojo:
-        return setTheme("blue");
-      case routes.collection:
-        return setTheme("green");
-      case routes.profile:
-        return setTheme("purple");
-      case routes.game:
-        return setTheme("green");
-      default:
-        return setTheme("blue");
+    // switch (location.pathname) {
+    //   case routes.topics:
+    //     return setTheme("orange");
+    //   case routes.dojo:
+    //     return setTheme("blue");
+    //   case routes.collection:
+    //     return setTheme("green");
+    //   case routes.profile:
+    //     return setTheme("purple");
+    //   case routes.game:
+    //     return setTheme("green");
+    //   default:
+    //     return setTheme("blue");
+    // }
+
+    if (location.pathname.includes(routes.topics)) {
+      return setTheme("orange");
+    } else if (location.pathname.includes(routes.dojo)) {
+      return setTheme("blue");
+    } else if (location.pathname.includes(routes.collection)) {
+      return setTheme("green");
+    } else if (location.pathname.includes(routes.profile)) {
+      return setTheme("purple");
+    } else if (location.pathname.includes(routes.game)) {
+      return setTheme("orange");
+    } else {
+      return setTheme("blue");
     }
   }, [location]);
 

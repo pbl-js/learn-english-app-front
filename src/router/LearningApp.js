@@ -33,7 +33,7 @@ const routesList = [
   {
     path: `${routes.game}/:handle`,
     name: "Game",
-    color: "green",
+    color: "orange",
     Component: Game,
   },
 ];
