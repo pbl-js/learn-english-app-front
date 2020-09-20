@@ -1,7 +1,6 @@
 import React, { memo, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import routes from "router/routes";
 import { useTimerDispatch } from "context/TimerContext";
 
 import useData from "./Game.data";
@@ -17,12 +16,12 @@ const MainWrapper = styled.div`
 
 const Game = (props) => {
   const dispatch = useTimerDispatch();
-  const data = useData(props.match.params.handle);
+  const { handle } = useParams();
+  const data = useData(handle);
 
-  console.log(data);
+  console.log("game");
 
   useEffect(() => {
-    console.log(props.match.params.handle);
     dispatch({ type: "START_CLOCK" });
   }, []);
 

@@ -8,7 +8,7 @@ import CollectionWordItem from "components/CollectionWordItem/CollectionWordItem
 const Collection = () => {
   const { data, loading } = useData();
 
-  console.log(data);
+  console.log("Collection");
   return (
     <MainWrapper>
       <TopicsWrapper>

@@ -60,7 +60,5 @@ export default function () {
     });
   const loading = topicsLoading || wordsLoading;
 
-  console.log(wordsData);
-
   return { data, loading, error: { topicsError, wordsError } };
 }
