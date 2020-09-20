@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { fontSize, fontWeight, breakPoints } from "theme/theme";
-import { normalText, mediumText } from "theme/mixins";
+import { normalText, mediumText, whiteFilter } from "theme/mixins";
 
 export const MainWrapper = styled.section`
   display: grid;
@@ -16,8 +16,7 @@ export const MainWrapper = styled.section`
 
 export const WordIcon = styled.img`
   width: 50px;
-  filter: invert(100%) sepia(0%) saturate(7460%) hue-rotate(169deg)
-    brightness(113%) contrast(100%);
+  ${whiteFilter}
   opacity: ${({ unseen }) => (unseen ? 0.4 : 1)};
 
   @media ${breakPoints.mobileL} {

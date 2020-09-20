@@ -5,6 +5,8 @@ import { useTimerDispatch } from "context/TimerContext";
 
 import useData from "./Game.data";
 
+import FirstTime from "components/gameTypes/FirstTime/FirstTime";
+
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,9 +19,9 @@ const MainWrapper = styled.div`
 const Game = (props) => {
   const dispatch = useTimerDispatch();
   const { handle } = useParams();
-  const data = useData(handle);
+  const { data, error, loading } = useData(handle);
 
-  console.log("game");
+  // console.log(data && data.wordsByTopicId[0]);
 
   useEffect(() => {
     dispatch({ type: "START_CLOCK" });
@@ -27,7 +29,7 @@ const Game = (props) => {
 
   return (
     <MainWrapper>
-      <h1>Game</h1>
+      {data && <FirstTime wordItem={data.wordsByTopicId[0]} />}
     </MainWrapper>
   );
 };

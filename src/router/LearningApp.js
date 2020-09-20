@@ -53,7 +53,7 @@ const LearningApp = () => {
                 {(props) => (
                   <FadeInOutLayout match={props.match} color={color}>
                     <PageLayout isTopics={name === "Topics"}>
-                      <Component />
+                      <Component {...props} />
                     </PageLayout>
                   </FadeInOutLayout>
                 )}

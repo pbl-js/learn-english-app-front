@@ -82,3 +82,8 @@ export const darkModalBackground = css`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   color: white;
 `;
+
+export const whiteFilter = css`
+  filter: invert(100%) sepia(0%) saturate(7460%) hue-rotate(169deg)
+    brightness(113%) contrast(100%);
+`;
