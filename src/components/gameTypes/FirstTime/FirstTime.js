@@ -86,10 +86,10 @@ const FirstTime = ({ wordItem }) => {
     <MainWrapper ref={(el) => (containerRef = el)}>
       <Hide ref={(el) => (hideRef = el)} />
 
-      <WordWrapper ref={(el) => (wordRef = el)}>
-        <WordImage src={wordItem.img} />
+      <WordImage ref={(el) => (wordRef = el)}>
+        <img src={wordItem.img} />
         {wordItem.eng}
-      </WordWrapper>
+      </WordImage>
 
       <Learn ref={(el) => (learnRef = el)} />
     </MainWrapper>

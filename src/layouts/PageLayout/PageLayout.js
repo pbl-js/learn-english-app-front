@@ -11,6 +11,7 @@ const TopicsWrappper = styled.div`
 `;
 
 const MainWrapper = styled.div`
+  overflow: hidden;
   padding: 70px ${layout.mainPadding.tablet} 70px ${layout.mainPadding.tablet};
 
   @media ${breakPoints.tablet} {
