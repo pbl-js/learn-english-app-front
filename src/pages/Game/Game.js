@@ -7,6 +7,7 @@ import useData from "./Game.data";
 
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import GetPoint from "components/gameTypes/GetPoint/GetPoint";
+import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -50,8 +51,15 @@ const Game = (props) => {
 
   return (
     <MainWrapper>
-      {data && <FirstTime wordItem={data.wordsByTopicId[7]} />}
+      {/* {data && <FirstTime wordItem={data.wordsByTopicId[7]} />} */}
       {/* {data && <GetPoint wordItem={data.wordsByTopicId[7]} />} */}
+      {data && (
+        <CompleteComposition
+          completeComponent={GetPoint}
+          gameComponent={FirstTime}
+          wordItem={data.wordsByTopicId[7]}
+        />
+      )}
     </MainWrapper>
   );
 };
