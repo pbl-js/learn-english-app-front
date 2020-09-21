@@ -7,14 +7,16 @@ export const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 75%;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 `;
 
 export const WordWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto 0;
   ${bigNormalText}
 
   img {
@@ -33,8 +35,12 @@ const icon = css`
 
 export const Hide = styled(HideIcon)`
   ${icon}
+  margin-bottom: auto;
+  margin-top: 100px;
 `;
 
 export const Learn = styled(LearnIcon)`
   ${icon}
+  margin-top: auto;
+  margin-bottom: 100px;
 `;

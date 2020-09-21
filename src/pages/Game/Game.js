@@ -29,7 +29,7 @@ const Game = (props) => {
 
   return (
     <MainWrapper>
-      {data && <FirstTime wordItem={data.wordsByTopicId[0]} />}
+      {data && <FirstTime wordItem={data.wordsByTopicId[7]} />}
     </MainWrapper>
   );
 };
