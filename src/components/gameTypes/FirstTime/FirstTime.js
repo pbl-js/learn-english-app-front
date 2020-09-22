@@ -4,15 +4,13 @@ import { Draggable } from "gsap/Draggable";
 
 import didElementFits from "helpers/didElementFits";
 
-import { MainWrapper, WordWrapper, Learn, Hide } from "./FirstItem.style";
+import { MainWrapper, Learn, Hide } from "./FirstItem.style";
 import WordImage from "components/WordImage/WordImage";
 import GetPoint from "components/gameTypes/GetPoint/GetPoint";
 
 gsap.registerPlugin(Draggable);
 
-const FirstTime = ({ wordItem }) => {
-  const [complete, setComplete] = useState(false);
-
+const FirstTime = ({ wordItem, setComplete }) => {
   let containerRef = useRef(null);
   let wordRef = useRef(null);
   let hideRef = useRef(null);
@@ -85,22 +83,18 @@ const FirstTime = ({ wordItem }) => {
     });
   }, []);
 
-  if (complete) {
-    return <GetPoint wordItem={wordItem} />;
-  } else {
-    return (
-      <MainWrapper ref={(el) => (containerRef = el)}>
-        <Hide ref={(el) => (hideRef = el)} />
+  return (
+    <MainWrapper ref={(el) => (containerRef = el)}>
+      <Hide ref={(el) => (hideRef = el)} />
 
-        <WordImage ref={(el) => (wordRef = el)}>
-          <img src={wordItem.img} />
-          {wordItem.eng}
-        </WordImage>
+      <WordImage ref={(el) => (wordRef = el)}>
+        <img src={wordItem.img} />
+        {wordItem.eng}
+      </WordImage>
 
-        <Learn ref={(el) => (learnRef = el)} />
-      </MainWrapper>
-    );
-  }
+      <Learn ref={(el) => (learnRef = el)} />
+    </MainWrapper>
+  );
 };
 
 export default FirstTime;

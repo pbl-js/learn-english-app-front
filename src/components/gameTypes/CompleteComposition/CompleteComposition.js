@@ -10,7 +10,7 @@ const CompleteComposition = ({
   if (complete) {
     return <CompleteComponent wordItem={wordItem} />;
   } else {
-    return <GameComponent wordItem={wordItem} />;
+    return <GameComponent wordItem={wordItem} setComplete={setComplete} />;
   }
 };
 
