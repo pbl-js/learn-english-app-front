@@ -6,6 +6,7 @@ import { useTimerDispatch } from "context/TimerContext";
 import useData from "./Game.data";
 
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
+import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
 import GetPoint from "components/gameTypes/GetPoint/GetPoint";
 import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 
@@ -46,9 +47,15 @@ const Game = (props) => {
   return (
     <MainWrapper>
       {data && (
+        // <CompleteComposition
+        //   completeComponent={GetPoint}
+        //   gameComponent={FirstTime}
+        //   wordItem={data.wordsByTopicId[7]}
+        // />
+
         <CompleteComposition
           completeComponent={GetPoint}
-          gameComponent={FirstTime}
+          gameComponent={LetterByLetter}
           wordItem={data.wordsByTopicId[7]}
         />
       )}

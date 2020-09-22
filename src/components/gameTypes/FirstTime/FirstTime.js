@@ -6,7 +6,6 @@ import didElementFits from "helpers/didElementFits";
 
 import { MainWrapper, Learn, Hide } from "./FirstItem.style";
 import WordImage from "components/WordImage/WordImage";
-import GetPoint from "components/gameTypes/GetPoint/GetPoint";
 
 gsap.registerPlugin(Draggable);
 
