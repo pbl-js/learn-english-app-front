@@ -40,4 +40,5 @@ export const LetterItem = styled.div`
   ${flexColumnCenter};
   font-size: ${fontSize.xl};
   cursor: pointer;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
