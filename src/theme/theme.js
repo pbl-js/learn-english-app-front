@@ -19,6 +19,8 @@ export const fontSize = {
 };
 
 export const colors = {
+  red: "#ED524F",
+
   purplePrimary: "#331541",
   purpleSecondary: "#755D81",
   purpleTertiary: "#B69CC7",

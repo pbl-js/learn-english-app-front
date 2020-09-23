@@ -9,7 +9,7 @@ import WordImage from "components/WordImage/WordImage";
 
 gsap.registerPlugin(Draggable);
 
-const FirstTime = ({ wordItem, setComplete }) => {
+const FirstTime = ({ wordItem, onComplete }) => {
   let containerRef = useRef(null);
   let wordRef = useRef(null);
   let hideRef = useRef(null);
@@ -65,9 +65,9 @@ const FirstTime = ({ wordItem, setComplete }) => {
     gsap.to([hideRef, learnRef], { scale: 1, duration: 0.3 });
 
     if (didElementFits(wordPosition, hidePosition)) {
-      setComplete(true);
+      onComplete();
     } else if (didElementFits(wordPosition, learnPosition)) {
-      setComplete(true);
+      onComplete();
     } else {
       gsap.to(wordRef, { x: 0, y: 0 });
     }

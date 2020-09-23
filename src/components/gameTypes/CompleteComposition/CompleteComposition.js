@@ -2,17 +2,31 @@ import React, { useState, useEffect } from "react";
 import GetPoint from "components/gameTypes/GetPoint/GetPoint";
 
 const CompleteComposition = ({
-  completeComponent: CompleteComponent,
   gameComponent: GameComponent,
   wordItem,
-  onComplete,
+  onFinish,
 }) => {
   const [complete, setComplete] = useState(false);
+  const [fail, setFail] = useState(false);
 
-  if (complete) {
-    return <GetPoint wordItem={wordItem} onComplete={onComplete} />;
+  const onComplete = () => {
+    setComplete(true);
+  };
+
+  const onFail = () => {
+    setFail(true);
+  };
+
+  if (complete || fail) {
+    return <GetPoint wordItem={wordItem} onFinish={onFinish} fail={fail} />;
   } else {
-    return <GameComponent wordItem={wordItem} setComplete={setComplete} />;
+    return (
+      <GameComponent
+        wordItem={wordItem}
+        onComplete={onComplete}
+        onFail={onFail}
+      />
+    );
   }
 };
 

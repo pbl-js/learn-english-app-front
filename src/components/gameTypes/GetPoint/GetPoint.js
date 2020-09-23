@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { gsap } from "gsap";
 
 import { colors } from "theme/theme";
-import { ReactComponent as CorrectIcon } from "assets/correct.svg";
+import { ReactComponent as CompleteIcon } from "assets/correct.svg";
+import { ReactComponent as FailIcon } from "assets/close.svg";
 import WordImage from "components/WordImage/WordImage";
 
-const Correct = styled(CorrectIcon)`
+const Correct = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -17,12 +18,14 @@ const Correct = styled(CorrectIcon)`
   border-radius: 1000px;
   background-color: white;
 
-  path {
-    fill: ${colors.greenMenu};
+  svg {
+    fill: ${({ fail }) => (fail ? colors.red : colors.greenMenu)};
+    width: 100%;
+    height: 100%;
   }
 `;
 
-const GetPoint = ({ wordItem, onComplete }) => {
+const GetPoint = ({ wordItem, onFinish, fail }) => {
   let correctRef = useRef(null);
   let wordRef = useRef(null);
 
@@ -60,13 +63,16 @@ const GetPoint = ({ wordItem, onComplete }) => {
         autoAlpha: 0,
         y: 500,
         delay: 0.3,
-        onComplete: () => onComplete(),
+        onComplete: () => onFinish(),
       });
   }, []);
 
   return (
     <>
-      <Correct ref={(el) => (correctRef = el)} />
+      <Correct fail={fail} ref={(el) => (correctRef = el)}>
+        {fail ? <FailIcon /> : <CompleteIcon />}
+      </Correct>
+
       <WordImage ref={(el) => (wordRef = el)}>
         <img src={wordItem.img} />
         {wordItem.eng}

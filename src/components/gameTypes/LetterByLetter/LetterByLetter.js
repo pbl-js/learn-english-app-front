@@ -14,6 +14,7 @@ import WordImage from "components/WordImage/WordImage";
 import Letter from "./components/Letter";
 
 const howManyLettersDisplay = 5;
+const maxMistakes = 5;
 
 const genNewLetters = (correctLetter) => {
   const letters = getRandomLetters(howManyLettersDisplay - 1);
@@ -30,10 +31,11 @@ const genNewLetters = (correctLetter) => {
   return buttonItems;
 };
 
-const LetterByLetter = ({ wordItem, setComplete }) => {
+const LetterByLetter = ({ wordItem, onComplete, onFail }) => {
   const wordArray = wordItem.eng.split("");
 
   const [wordProgress, setWordProgress] = useState([]);
+  const [mistakes, setMistakes] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [buttonLetters, setButtonLetters] = useState(
     genNewLetters(wordArray[0])
@@ -44,6 +46,7 @@ const LetterByLetter = ({ wordItem, setComplete }) => {
       setWordProgress((prevState) => [...prevState, letter]);
       setCurrentIndex((prevState) => prevState + 1);
     } else {
+      setMistakes((prevState) => prevState + 1);
       setButtonLetters((prevState) => {
         return prevState.map((letter, index) => {
           if (index === letterIndex) {
@@ -57,12 +60,18 @@ const LetterByLetter = ({ wordItem, setComplete }) => {
   };
 
   useEffect(() => {
-    if (currentIndex === howManyLettersDisplay - 1) {
-      setComplete(true);
+    if (currentIndex === wordArray.length) {
+      onComplete();
     } else {
       setButtonLetters(genNewLetters(wordArray[currentIndex]));
     }
   }, [currentIndex]);
+
+  useEffect(() => {
+    if (mistakes === maxMistakes) {
+      onFail();
+    }
+  }, [mistakes]);
 
   return (
     <MainWrapper>

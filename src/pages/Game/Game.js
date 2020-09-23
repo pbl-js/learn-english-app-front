@@ -20,10 +20,6 @@ const MainWrapper = styled.div`
   position: relative;
 `;
 
-const randomIndex = (arrayLength) => {
-  return Math.floor(Math.random() * arrayLength);
-};
-
 const Game = (props) => {
   const dispatch = useTimerDispatch();
   const { handle } = useParams();
@@ -32,7 +28,7 @@ const Game = (props) => {
   const [currentWord, setCurrentWord] = useState(0);
   const [gameCourse, setGameCourse] = useState([]);
 
-  const onComplete = () => {
+  const onFinish = () => {
     setCurrentWord((prevState) => prevState + 1);
   };
 
@@ -42,22 +38,16 @@ const Game = (props) => {
     data &&
       setGameCourse([
         {
-          id: uuid(),
           gameComponent: FirstTime,
           wordItem: data.wordsByTopicId[1],
-          complete: false,
         },
         {
-          id: uuid(),
-          gameComponent: FirstTime,
+          gameComponent: LetterByLetter,
           wordItem: data.wordsByTopicId[2],
-          complete: false,
         },
         {
-          id: uuid(),
           gameComponent: FirstTime,
           wordItem: data.wordsByTopicId[3],
-          complete: false,
         },
       ]);
   }, [data]);
@@ -69,28 +59,16 @@ const Game = (props) => {
           if (index === currentWord) {
             return (
               <CompleteComposition
-                key={gameItem.id}
+                key={uuid()}
                 gameComponent={gameItem.gameComponent}
                 wordItem={gameItem.wordItem}
-                onComplete={onComplete}
+                onFinish={onFinish}
               />
             );
           } else {
             return null;
           }
         })}
-      {
-        // <CompleteComposition
-        //   completeComponent={GetPoint}
-        //   gameComponent={FirstTime}
-        //   wordItem={data.wordsByTopicId[7]}
-        // />
-        // <CompleteComposition
-        //   completeComponent={GetPoint}
-        //   gameComponent={LetterByLetter}
-        //   wordItem={data.wordsByTopicId[7]}
-        // />
-      }
     </MainWrapper>
   );
 };
