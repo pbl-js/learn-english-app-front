@@ -80,6 +80,8 @@ const FirstTime = ({ wordItem, setComplete }) => {
       onDragEnd: (value) => onDragEnd(value),
       onDrag: (value) => onDrag(value),
     });
+
+    return () => {};
   }, []);
 
   return (

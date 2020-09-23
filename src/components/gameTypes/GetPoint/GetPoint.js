@@ -22,7 +22,7 @@ const Correct = styled(CorrectIcon)`
   }
 `;
 
-const GetPoint = ({ wordItem }) => {
+const GetPoint = ({ wordItem, onComplete }) => {
   let correctRef = useRef(null);
   let wordRef = useRef(null);
 
@@ -60,6 +60,7 @@ const GetPoint = ({ wordItem }) => {
         autoAlpha: 0,
         y: 500,
         delay: 0.3,
+        onComplete: () => onComplete(),
       });
   }, []);
 

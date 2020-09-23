@@ -2,12 +2,12 @@ import React, { memo, useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useTimerDispatch } from "context/TimerContext";
+import uuid from "react-uuid";
 
 import useData from "./Game.data";
 
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
-import GetPoint from "components/gameTypes/GetPoint/GetPoint";
 import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 
 const MainWrapper = styled.div`
@@ -30,35 +30,67 @@ const Game = (props) => {
   const { data, error, loading } = useData(handle);
 
   const [currentWord, setCurrentWord] = useState(0);
-  const [currentGameType, setCurrentGameType] = useState("firstTime");
+  const [gameCourse, setGameCourse] = useState([]);
 
-  const newGame = () => {
-    if (currentGameType === "firstTime") {
-      return null;
-    }
+  const onComplete = () => {
+    setCurrentWord((prevState) => prevState + 1);
   };
 
   useEffect(() => {
     dispatch({ type: "START_CLOCK" });
-  }, []);
 
-  useEffect(() => {}, [data]);
+    data &&
+      setGameCourse([
+        {
+          id: uuid(),
+          gameComponent: FirstTime,
+          wordItem: data.wordsByTopicId[1],
+          complete: false,
+        },
+        {
+          id: uuid(),
+          gameComponent: FirstTime,
+          wordItem: data.wordsByTopicId[2],
+          complete: false,
+        },
+        {
+          id: uuid(),
+          gameComponent: FirstTime,
+          wordItem: data.wordsByTopicId[3],
+          complete: false,
+        },
+      ]);
+  }, [data]);
 
   return (
     <MainWrapper>
-      {data && (
+      {data &&
+        gameCourse.map((gameItem, index) => {
+          if (index === currentWord) {
+            return (
+              <CompleteComposition
+                key={gameItem.id}
+                gameComponent={gameItem.gameComponent}
+                wordItem={gameItem.wordItem}
+                onComplete={onComplete}
+              />
+            );
+          } else {
+            return null;
+          }
+        })}
+      {
         // <CompleteComposition
         //   completeComponent={GetPoint}
         //   gameComponent={FirstTime}
         //   wordItem={data.wordsByTopicId[7]}
         // />
-
-        <CompleteComposition
-          completeComponent={GetPoint}
-          gameComponent={LetterByLetter}
-          wordItem={data.wordsByTopicId[7]}
-        />
-      )}
+        // <CompleteComposition
+        //   completeComponent={GetPoint}
+        //   gameComponent={LetterByLetter}
+        //   wordItem={data.wordsByTopicId[7]}
+        // />
+      }
     </MainWrapper>
   );
 };
