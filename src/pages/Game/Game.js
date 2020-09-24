@@ -34,7 +34,9 @@ const Game = (props) => {
 
   useEffect(() => {
     dispatch({ type: "START_CLOCK" });
+  }, []);
 
+  useEffect(() => {
     data &&
       setGameCourse([
         {
