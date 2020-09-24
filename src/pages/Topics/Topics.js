@@ -12,8 +12,6 @@ import { ReactComponent as Play } from "assets/play.svg";
 const Topics = () => {
   const { data, loading } = useData();
 
-  console.log("topics");
-
   return (
     <MainWrapper>
       <LastTopicWrapper>
