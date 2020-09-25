@@ -47,8 +47,8 @@ export const colors = {
 
 export const layout = {
   mainPadding: {
-    tablet: "20px",
-    desktop: "50px",
+    tablet: 20,
+    desktop: 50,
   },
 };
 

@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { fontSize, fontWeight, colors, breakPoints } from "theme/theme";
+import { fontSize, fontWeight, layout, colors, breakPoints } from "theme/theme";
 
 export const mediumUppercaseText = css`
   font-size: ${fontSize.xs};
@@ -86,4 +86,14 @@ export const darkModalBackground = css`
 export const whiteFilter = css`
   filter: invert(100%) sepia(0%) saturate(7460%) hue-rotate(169deg)
     brightness(113%) contrast(100%);
+`;
+
+export const defaultPaddingLayout = css`
+  padding: 70px ${layout.mainPadding.tablet + "px"} 70px
+    ${layout.mainPadding.tablet + "px"};
+
+  @media ${breakPoints.tablet} {
+    padding: 70px ${layout.mainPadding.desktop + "px"} 0
+      ${layout.mainPadding.desktop + "px"};
+  }
 `;

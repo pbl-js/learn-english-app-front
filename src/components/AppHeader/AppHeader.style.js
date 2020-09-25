@@ -14,14 +14,14 @@ export const MainWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 70px;
-  padding: 0 ${layout.mainPadding.tablet};
+  padding: 0 ${layout.mainPadding.tablet + "px"};
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), transparent);
 
   @media ${breakPoints.tablet} {
     left: ${({ visable }) => (visable ? "150px" : 0)};
     width: ${({ visable }) => (visable ? "calc(100% - 150px)" : "calc(100%)")};
     transition: ${animations.appRouteTransition + "s"};
-    padding: 0 ${layout.mainPadding.desktop};
+    padding: 0 ${layout.mainPadding.desktop + "px"};
   }
 `;
 

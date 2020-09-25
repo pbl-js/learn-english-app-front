@@ -11,13 +11,7 @@ const TopicsWrappper = styled.div`
 `;
 
 const MainWrapper = styled.div`
-  overflow: hidden;
-  padding: 70px ${layout.mainPadding.tablet} 70px ${layout.mainPadding.tablet};
-
-  @media ${breakPoints.tablet} {
-    height: 100%;
-    padding: 70px ${layout.mainPadding.desktop} 0 ${layout.mainPadding.desktop};
-  }
+  height: 100%;
 `;
 
 const PageLayout = ({ children, isTopics }) => {

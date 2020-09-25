@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import { defaultPaddingLayout } from "theme/mixins";
 
-export const MainWrapper = styled.div``;
+export const MainWrapper = styled.div`
+  ${defaultPaddingLayout};
+`;
 
 export const TopicsWrapper = styled.div`
   display: grid;
