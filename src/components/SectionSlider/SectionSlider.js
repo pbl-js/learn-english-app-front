@@ -37,8 +37,6 @@ const SectionSlider = ({ title, children }) => {
       },
     });
 
-    console.log(sectionWrapperRef.offsetWidth);
-
     Draggable.create(sectionWrapperRef, {
       type: "x",
       bounds: {

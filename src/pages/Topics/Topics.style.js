@@ -3,16 +3,16 @@ import { bigNormalText, mediumUppercaseText, bigButton } from "theme/mixins";
 import { layout, breakPoints, colors } from "theme/theme";
 
 export const MainWrapper = styled.div`
-  min-height: 3140px;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 70px;
 
-  padding: 70px ${layout.mainPadding.tablet + "px"} 70px
-    ${layout.mainPadding.tablet + "px"};
+  padding: ${layout.mainPadding.tablet + 70 + "px"}
+    ${layout.mainPadding.tablet + "px"} 70px ${layout.mainPadding.tablet + "px"};
 
   @media ${breakPoints.tablet} {
-    padding: 70px ${layout.mainPadding.desktop + "px"} 0
+    padding: ${layout.mainPadding.desktop + 70 + "px"}
+      ${layout.mainPadding.desktop + "px"} 0
       ${layout.mainPadding.desktop + "px"};
   }
 `;
@@ -20,9 +20,7 @@ export const MainWrapper = styled.div`
 export const LastTopicWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 30px;
-  height: 260px;
-  margin: 35px 0;
+  grid-gap: 20px;
 
   h1 {
     ${mediumUppercaseText}
@@ -43,7 +41,7 @@ export const LastTopicWrapper = styled.div`
   }
 
   @media ${breakPoints.tablet} {
-    margin: 50px 0;
+    grid-gap: 30px;
   }
 `;
 
@@ -55,5 +53,55 @@ export const SectionsWrapper = styled.div`
 
   @media ${breakPoints.tablet} {
     grid-gap: 50px;
+  }
+`;
+
+export const SectionIndicator = styled.span`
+  overflow: hidden;
+  width: ${`calc(100% + ${layout.mainPadding.tablet + "px"})`};
+
+  @media ${breakPoints.tablet} {
+    width: ${`calc(100% + ${layout.mainPadding.desktop + "px"})`};
+  }
+`;
+
+export const InnerSectionIndicator = styled.span`
+  height: 112px;
+  width: 10000px;
+  display: flex;
+  flex-direction: row;
+
+  @media ${breakPoints.tablet} {
+    height: 150px;
+  }
+`;
+
+export const TitleIndicator = styled.span`
+  display: block;
+  height: 19px;
+  width: 150px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  @media ${breakPoints.tablet} {
+    height: 24px;
+    width: 280px;
+    margin-bottom: 25px;
+  }
+`;
+
+export const TopicIndicator = styled.span`
+  display: block;
+  width: 150px;
+  height: 112px;
+  margin-right: 10px;
+  border-radius: 10px;
+
+  @media ${breakPoints.tablet} {
+    width: 200px;
+    height: 150px;
+    margin-right: 15px;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;

@@ -1,16 +1,48 @@
-import React, { memo } from "react";
+import React, { useEffect, useCallback, memo } from "react";
 import routes from "router/routes";
+import uuid from "react-uuid";
 
 import useData from "./Topics.fetch";
-import { MainWrapper, LastTopicWrapper, SectionsWrapper } from "./Topics.style";
+import {
+  MainWrapper,
+  LastTopicWrapper,
+  SectionsWrapper,
+  SectionIndicator,
+  InnerSectionIndicator,
+  TopicIndicator,
+  TitleIndicator,
+} from "./Topics.style";
 import SectionSlider from "components/SectionSlider/SectionSlider";
 import TopicItem from "components/TopicItem/TopicItem";
 import ProgressStatus from "components/ProgressStatus/ProgressStatus";
 
 import { ReactComponent as Play } from "assets/play.svg";
 
+const sectionsCount = 13;
+const topicsPerSection = 15;
+
 const Topics = () => {
   const { data, loading } = useData();
+
+  // const data = null;
+
+  const genIndicatorsData = useCallback(() => {
+    let indicatorData = [];
+    for (let index = 0; index <= sectionsCount - 1; index++) {
+      let topics = [];
+      for (
+        let innerIndex = 0;
+        innerIndex <= topicsPerSection - 1;
+        innerIndex++
+      ) {
+        topics.push(uuid());
+      }
+      indicatorData.push({ id: uuid(), topics });
+    }
+    return indicatorData;
+  }, []);
+
+  const indicatorsData = genIndicatorsData();
 
   return (
     <MainWrapper>
@@ -26,11 +58,10 @@ const Topics = () => {
       </LastTopicWrapper>
 
       <SectionsWrapper>
-        {data &&
-          data.map((section) => (
-            <SectionSlider key={section.title} title={section.title}>
-              {section.topics &&
-                section.topics.map((topic) => (
+        {!loading
+          ? data.map((section) => (
+              <SectionSlider key={section.title} title={section.title}>
+                {section.topics.map((topic) => (
                   <TopicItem
                     key={topic.title}
                     to={`${routes.game}/${topic._id}`}
@@ -42,8 +73,19 @@ const Topics = () => {
                     masteringProgress={topic.progress.masteringProgress}
                   />
                 ))}
-            </SectionSlider>
-          ))}
+              </SectionSlider>
+            ))
+          : indicatorsData.map((section) => (
+              <SectionIndicator key={section.id}>
+                <TitleIndicator />
+
+                <InnerSectionIndicator>
+                  {section.topics.map((topic) => (
+                    <TopicIndicator key={topic} />
+                  ))}
+                </InnerSectionIndicator>
+              </SectionIndicator>
+            ))}
       </SectionsWrapper>
     </MainWrapper>
   );
