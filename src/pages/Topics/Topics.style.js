@@ -79,7 +79,7 @@ export const InnerSectionIndicator = styled.span`
 export const TitleIndicator = styled.span`
   display: block;
   height: 19px;
-  width: 150px;
+  width: 200px;
   margin-bottom: 15px;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.1);
@@ -97,11 +97,11 @@ export const TopicIndicator = styled.span`
   height: 112px;
   margin-right: 10px;
   border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
 
   @media ${breakPoints.tablet} {
     width: 200px;
     height: 150px;
     margin-right: 15px;
-    background-color: rgba(0, 0, 0, 0.1);
   }
 `;

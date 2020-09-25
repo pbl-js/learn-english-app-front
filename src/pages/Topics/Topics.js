@@ -24,8 +24,6 @@ const topicsPerSection = 15;
 const Topics = () => {
   const { data, loading } = useData();
 
-  // const data = null;
-
   const genIndicatorsData = useCallback(() => {
     let indicatorData = [];
     for (let index = 0; index <= sectionsCount - 1; index++) {
