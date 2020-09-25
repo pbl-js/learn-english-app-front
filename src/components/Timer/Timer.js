@@ -8,6 +8,7 @@ import { ReactComponent as Clock } from "assets/timer.svg";
 
 const MainWrapper = styled.div`
   ${flexRowCenter}
+  margin-left: auto;
   ${normalText}
 
   svg {

@@ -3,10 +3,10 @@ import { breakPoints, depth, layout, animations } from "theme/theme";
 import { mediumUppercaseText, normalText, flexRowCenter } from "theme/mixins";
 
 export const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
   align-items: center;
-  justify-content: space-between;
 
   position: fixed;
   z-index: ${depth.highest};
@@ -32,5 +32,6 @@ export const Title = styled.div`
 
 export const TotalWords = styled.div`
   ${flexRowCenter}
+  margin-right: auto;
   ${normalText}
 `;
