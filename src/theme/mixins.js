@@ -13,8 +13,16 @@ export const mediumUppercaseText = css`
 `;
 
 export const bigNormalText = css`
-  font-size: ${fontSize.xxl};
+  font-size: ${fontSize.l};
   font-weight: ${fontWeight.bold};
+
+  @media ${breakPoints.mobileL} {
+    font-size: ${fontSize.xl};
+  }
+
+  @media ${breakPoints.tablet} {
+    font-size: ${fontSize.xxl};
+  }
 `;
 
 export const mediumText = css`
@@ -60,7 +68,7 @@ export const bigButton = css`
   color: white;
   text-transform: uppercase;
   font-weight: ${fontWeight.semiBold};
-  font-size: ${fontSize.s};
+  font-size: ${fontSize.xs};
   cursor: pointer;
   background-color: ${colors.orangeMenu};
 
@@ -70,9 +78,20 @@ export const bigButton = css`
 
   svg {
     fill: white;
-    height: 20px;
-    width: 20px;
+    height: 13px;
+    width: 13px;
     margin-left: 10px;
+  }
+
+  @media ${breakPoints.tablet} {
+    font-size: ${fontSize.s};
+
+    svg {
+      fill: white;
+      height: 20px;
+      width: 20px;
+      margin-left: 10px;
+    }
   }
 `;
 

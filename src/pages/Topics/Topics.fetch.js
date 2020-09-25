@@ -24,6 +24,14 @@ export const TOPICS = gql`
       }
       progress {
         status
+        learningProgress {
+          value
+          total
+        }
+        masteringProgress {
+          value
+          total
+        }
       }
     }
   }

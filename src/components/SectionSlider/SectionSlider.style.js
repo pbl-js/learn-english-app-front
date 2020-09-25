@@ -8,7 +8,11 @@ export const MainWrapper = styled.div`
 
 export const Title = styled.h2`
   ${mediumUppercaseText}
-  height: 40px;
+  margin-bottom: 15px;
+
+  @media ${breakPoints.tablet} {
+    margin-bottom: 25px;
+  }
 `;
 
 export const TopicsWrapper = styled.div`
@@ -16,9 +20,10 @@ export const TopicsWrapper = styled.div`
   overflow: hidden;
   margin-left: ${"-" + layout.mainPadding.tablet + "px"};
   width: ${`calc(100% + ${layout.mainPadding.tablet * 2 + "px"})`};
-  height: 150px;
+  height: 112px;
 
   @media ${breakPoints.tablet} {
+    height: 150px;
     margin-left: ${"-" + layout.mainPadding.desktop + "px"};
     width: ${`calc(100% + ${layout.mainPadding.desktop * 2 + "px"})`};
   }
@@ -29,6 +34,10 @@ export const InnerTopicsWrapper = styled.div`
   display: flex;
   flex-direction: row;
 
+  a {
+    margin-right: 10px;
+  }
+
   a:last-child {
     margin-right: ${layout.mainPadding.tablet + "px"};
   }
@@ -37,11 +46,11 @@ export const InnerTopicsWrapper = styled.div`
     margin-left: ${layout.mainPadding.tablet + "px"};
   }
 
-  a {
-    margin-right: 15px;
-  }
-
   @media ${breakPoints.tablet} {
+    a {
+      margin-right: 15px;
+    }
+
     a:last-child {
       margin-right: ${layout.mainPadding.desktop + "px"};
     }

@@ -22,7 +22,7 @@ export const LastTopicWrapper = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 30px;
   height: 260px;
-  margin: 50px 0;
+  margin: 35px 0;
 
   h1 {
     ${mediumUppercaseText}
@@ -33,19 +33,27 @@ export const LastTopicWrapper = styled.div`
   }
 
   div {
-    height: 15px;
-    width: 200px;
+    height: 12px;
+    width: 140px;
   }
 
   button {
     ${bigButton}
     margin-right: auto;
   }
+
+  @media ${breakPoints.tablet} {
+    margin: 50px 0;
+  }
 `;
 
 export const SectionsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 50px;
+  grid-gap: 15px;
   width: 100%;
+
+  @media ${breakPoints.tablet} {
+    grid-gap: 50px;
+  }
 `;
