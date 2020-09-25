@@ -75,7 +75,6 @@ const FirstTime = ({ wordItem, onComplete }) => {
 
   useEffect(() => {
     Draggable.create(wordRef, {
-      bounds: containerRef,
       onDragStart: (value) => onDragStart(value),
       onDragEnd: (value) => onDragEnd(value),
       onDrag: (value) => onDrag(value),
