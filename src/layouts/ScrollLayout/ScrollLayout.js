@@ -7,7 +7,14 @@ import routes from "router/routes";
 import GradientBackground from "components/GradientBackground/GradientBackground";
 import { useBackgroundState } from "context/BackgroundContext";
 
-const MainWrapper = styled(GradientBackground)`
+const MainWrapper = styled.div`
+  position: absolute;
+  z-index: ${({ index }) => index};
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
   overflow-y: auto;
 
   ::-webkit-scrollbar {
