@@ -41,10 +41,10 @@ const InnerWrapper = styled.div`
 `;
 
 const FadeInOutLayout = ({ children, match, color }) => {
-  const visable = useCurrentSite(routes.game);
+  const currentSite = useCurrentSite(routes.game);
 
   return (
-    <InnerWrapper visable={visable}>
+    <InnerWrapper visable={!currentSite}>
       <CSSTransition
         in={match != null}
         timeout={animations.appRouteTransition * 1000}

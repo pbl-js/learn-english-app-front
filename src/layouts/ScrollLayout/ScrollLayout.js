@@ -42,7 +42,7 @@ const AppPageLayout = ({ children, color }) => {
   const isTopics = useCurrentSite(routes.topics);
 
   return (
-    <MainWrapper color={color} index={1} isTopic={!isTopics} id="scrollWrapper">
+    <MainWrapper color={color} index={1} isTopic={isTopics} id="scrollWrapper">
       {children}
     </MainWrapper>
   );

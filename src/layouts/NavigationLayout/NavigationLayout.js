@@ -10,13 +10,13 @@ import AppHeader from "components/AppHeader/AppHeader";
 import ProtectedLayout from "layouts/ProtectedLayout/ProtectedLayout";
 
 const NavigationLayout = ({ children }) => {
-  const visable = useCurrentSite(routes.game);
+  const currentSite = useCurrentSite(routes.game);
 
   return (
     <ProtectedLayout>
-      <Navigation visable={visable} />
+      <Navigation visable={!currentSite} />
       <StyledMain>
-        <AppHeader visable={visable} />
+        <AppHeader visable={!currentSite} />
         {children}
       </StyledMain>
     </ProtectedLayout>
