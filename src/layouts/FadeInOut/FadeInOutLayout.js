@@ -40,7 +40,7 @@ const InnerWrapper = styled.div`
   }
 `;
 
-const FadeInOutLayout = ({ children, match, color }) => {
+const FadeInOutLayout = ({ children, match }) => {
   const currentSite = useCurrentSite(routes.game);
 
   return (
@@ -52,7 +52,7 @@ const FadeInOutLayout = ({ children, match, color }) => {
         onExit={onExit}
         onEnter={onEnter}
       >
-        <ScrollLayout color={color}>{children}</ScrollLayout>
+        <ScrollLayout>{children}</ScrollLayout>
       </CSSTransition>
     </InnerWrapper>
   );

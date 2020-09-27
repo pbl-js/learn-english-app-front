@@ -3,6 +3,7 @@ import { bigNormalText, mediumUppercaseText, bigButton } from "theme/mixins";
 import { layout, breakPoints, colors } from "theme/theme";
 
 export const MainWrapper = styled.div`
+  background-image: ${colors.colorfulGradient};
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 70px;

@@ -1,11 +1,8 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { breakPoints, colors } from "theme/theme";
 import useCurrentSite from "hooks/useCurrentSite";
 import routes from "router/routes";
-
-import GradientBackground from "components/GradientBackground/GradientBackground";
-import { useBackgroundState } from "context/BackgroundContext";
 
 const MainWrapper = styled.div`
   position: absolute;
@@ -45,11 +42,11 @@ const MainWrapper = styled.div`
   }
 `;
 
-const AppPageLayout = ({ children, color }) => {
+const AppPageLayout = ({ children }) => {
   const isTopics = useCurrentSite(routes.topics);
 
   return (
-    <MainWrapper color={color} index={1} isTopic={isTopics} id="scrollWrapper">
+    <MainWrapper index={1} isTopic={isTopics} id="scrollWrapper">
       {children}
     </MainWrapper>
   );
