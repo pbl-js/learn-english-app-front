@@ -5,6 +5,7 @@ import useCurrentSite from "hooks/useCurrentSite";
 import routes from "router/routes";
 
 import GradientBackground from "components/GradientBackground/GradientBackground";
+import { useBackgroundState } from "context/BackgroundContext";
 
 const MainWrapper = styled(GradientBackground)`
   overflow-y: auto;

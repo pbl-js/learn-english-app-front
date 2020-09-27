@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useRef } from "react";
 import { gsap } from "gsap";
 import { colors, animations } from "theme/theme";
 
-import { BackgroundContext } from "context/BackgroundContext";
+import { useBackgroundState } from "context/BackgroundContext";
 
 import GradientBackground from "components/GradientBackground/GradientBackground";
 
@@ -14,7 +14,7 @@ const changeBackgroundWithDelay = (ref, gradient) => {
 };
 
 const GradientLayout = ({ children }) => {
-  const { theme } = useContext(BackgroundContext);
+  const theme = useBackgroundState();
   let backgroundRef = useRef(null);
 
   useEffect(() => {

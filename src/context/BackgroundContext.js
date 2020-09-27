@@ -1,50 +1,84 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useReducer,
+  useCallback,
+  useEffect,
+} from "react";
 import { useLocation } from "react-router-dom";
 import routes from "router/routes";
+import getRandomInt from "helpers/getRandomInt";
 
-export const BackgroundContext = createContext();
+const BackgroundStateContext = React.createContext();
+const BackgroundDispatchContext = React.createContext();
 
-const BackgroundContextProvider = (props) => {
-  const [theme, setTheme] = useState();
+function timeReducer(state, action) {
+  switch (action.type) {
+    case "SET_THEME": {
+      return { ...state, theme: action.payload.theme };
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`);
+    }
+  }
+}
+
+const BackgroundProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(timeReducer, {
+    theme: "orange",
+  });
 
   const location = useLocation();
 
   useEffect(() => {
-    // switch (location.pathname) {
-    //   case routes.topics:
-    //     return setTheme("orange");
-    //   case routes.dojo:
-    //     return setTheme("blue");
-    //   case routes.collection:
-    //     return setTheme("green");
-    //   case routes.profile:
-    //     return setTheme("purple");
-    //   case routes.game:
-    //     return setTheme("green");
-    //   default:
-    //     return setTheme("blue");
-    // }
-
     if (location.pathname.includes(routes.topics)) {
-      return setTheme("orange");
+      return dispatch({ type: "SET_THEME", payload: { theme: "orange" } });
     } else if (location.pathname.includes(routes.dojo)) {
-      return setTheme("blue");
+      return dispatch({ type: "SET_THEME", payload: { theme: "blue" } });
     } else if (location.pathname.includes(routes.collection)) {
-      return setTheme("green");
+      return dispatch({ type: "SET_THEME", payload: { theme: "green" } });
     } else if (location.pathname.includes(routes.profile)) {
-      return setTheme("purple");
+      return dispatch({ type: "SET_THEME", payload: { theme: "purple" } });
     } else if (location.pathname.includes(routes.game)) {
-      return setTheme("orange");
+      return dispatch({ type: "SET_THEME", payload: { theme: "orange" } });
     } else {
-      return setTheme("blue");
+      return dispatch({ type: "SET_THEME", payload: { theme: "blue" } });
     }
   }, [location]);
 
+  const setRandomTheme = useCallback(() => {
+    const variants = ["orange", "blue", "green", "purple"];
+    const randomIndex = getRandomInt(0, variants.length);
+
+    dispatch({ type: "SET_THEME", payload: { theme: variants[randomIndex] } });
+  });
+
   return (
-    <BackgroundContext.Provider value={{ theme, setTheme }}>
-      {props.children}
-    </BackgroundContext.Provider>
+    <BackgroundStateContext.Provider value={state.theme}>
+      <BackgroundDispatchContext.Provider value={{ dispatch, setRandomTheme }}>
+        {children}
+      </BackgroundDispatchContext.Provider>
+    </BackgroundStateContext.Provider>
   );
 };
 
-export default BackgroundContextProvider;
+function useBackgroundState() {
+  const context = React.useContext(BackgroundStateContext);
+  if (context === undefined) {
+    throw new Error(
+      "useBackgroundState must be used within a BackgroundProvider"
+    );
+  }
+  return context;
+}
+
+function useBackgroundDispatch() {
+  const context = React.useContext(BackgroundDispatchContext);
+  if (context === undefined) {
+    throw new Error(
+      "useBackgroundDispatch must be used within a BackgroundProvider"
+    );
+  }
+  return context;
+}
+
+export { BackgroundProvider, useBackgroundState, useBackgroundDispatch };

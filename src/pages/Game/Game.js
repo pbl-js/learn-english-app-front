@@ -1,7 +1,8 @@
-import React, { memo, useState, useEffect, useCallback } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useTimerDispatch } from "context/TimerContext";
+import { useBackgroundDispatch } from "context/BackgroundContext";
 import uuid from "react-uuid";
 
 import useData from "./Game.data";
@@ -24,6 +25,7 @@ const MainWrapper = styled.div`
 
 const Game = (props) => {
   const dispatch = useTimerDispatch();
+  const { setRandomTheme } = useBackgroundDispatch();
   const { handle } = useParams();
   const { data, error, loading } = useData(handle);
 
@@ -36,13 +38,18 @@ const Game = (props) => {
 
   useEffect(() => {
     dispatch({ type: "START_CLOCK" });
-  }, []);
+    return () => dispatch({ type: "STOP_CLOCK" });
+  }, [dispatch]);
+
+  useEffect(() => {
+    setRandomTheme();
+  }, [currentWord]);
 
   useEffect(() => {
     data &&
       setGameCourse([
         {
-          gameComponent: LettersSnake,
+          gameComponent: FirstTime,
           wordItem: data.wordsByTopicId[1],
         },
         {

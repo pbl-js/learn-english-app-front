@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import routes from "router/routes";
 
-import BackgroundContextProvider from "context/BackgroundContext";
+import { BackgroundProvider } from "context/BackgroundContext";
 import FadeInOutLayout from "layouts/FadeInOut/FadeInOutLayout";
 import GradientLayout from "layouts/GradientLayout/GradientLayout";
 import PageLayout from "layouts/PageLayout/PageLayout";
@@ -40,7 +40,7 @@ const routesList = [
 
 const LearningApp = () => {
   return (
-    <BackgroundContextProvider>
+    <BackgroundProvider>
       <TimerProvider>
         <GradientLayout>
           <NavigationLayout>
@@ -62,7 +62,7 @@ const LearningApp = () => {
           </NavigationLayout>
         </GradientLayout>
       </TimerProvider>
-    </BackgroundContextProvider>
+    </BackgroundProvider>
   );
 };
 
