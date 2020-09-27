@@ -9,7 +9,6 @@ export default styled.div`
   ${bigNormalText}
 
   img {
-    margin-bottom: 20px;
     ${whiteFilter}
     width: 100px;
     height: 100px;

@@ -8,6 +8,7 @@ import useData from "./Game.data";
 
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
+import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
 import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 
 const MainWrapper = styled.div`
@@ -35,11 +36,13 @@ const Game = (props) => {
 
   useEffect(() => {
     dispatch({ type: "START_CLOCK" });
+  }, []);
 
+  useEffect(() => {
     data &&
       setGameCourse([
         {
-          gameComponent: FirstTime,
+          gameComponent: LettersSnake,
           wordItem: data.wordsByTopicId[1],
         },
         {
