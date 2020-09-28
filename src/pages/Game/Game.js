@@ -10,6 +10,7 @@ import useData from "./Game.data";
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
 import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
+import TrueFalse from "components/gameTypes/TrueFalse/TrueFalse";
 import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 
 const MainWrapper = styled.div`
@@ -49,7 +50,7 @@ const Game = (props) => {
     data &&
       setGameCourse([
         {
-          gameComponent: FirstTime,
+          gameComponent: TrueFalse,
           wordItem: data.wordsByTopicId[1],
         },
         {
@@ -73,6 +74,7 @@ const Game = (props) => {
                 key={uuid()}
                 gameComponent={gameItem.gameComponent}
                 wordItem={gameItem.wordItem}
+                allWords={data.wordsByTopicId}
                 onFinish={onFinish}
               />
             );

@@ -14,6 +14,10 @@ export default styled.div`
     height: 100px;
   }
 
+  p {
+    margin-top: 20px;
+  }
+
   @media ${breakPoints.tablet} {
     img {
       width: 200px;

@@ -79,8 +79,6 @@ const FirstTime = ({ wordItem, onComplete }) => {
       onDragEnd: (value) => onDragEnd(value),
       onDrag: (value) => onDrag(value),
     });
-
-    return () => {};
   }, []);
 
   return (
@@ -89,7 +87,7 @@ const FirstTime = ({ wordItem, onComplete }) => {
 
       <WordImage ref={(el) => (wordRef = el)}>
         <img src={wordItem.img} />
-        {wordItem.eng}
+        <p>{wordItem.eng}</p>
       </WordImage>
 
       <Learn ref={(el) => (learnRef = el)} />

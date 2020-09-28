@@ -1,6 +1,7 @@
-import React, { useEffect, useCallback, memo } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import routes from "router/routes";
 import uuid from "react-uuid";
+import { animations } from "theme/theme";
 
 import useData from "./Topics.fetch";
 import {
@@ -23,6 +24,13 @@ const topicsPerSection = 15;
 
 const Topics = () => {
   const { data, loading } = useData();
+  const [canAnimate, setCanAnimate] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCanAnimate(true);
+    }, animations.appRouteTransition * 1000);
+  }, []);
 
   const genIndicatorsData = useCallback(() => {
     let indicatorData = [];
@@ -56,7 +64,7 @@ const Topics = () => {
       </LastTopicWrapper>
 
       <SectionsWrapper>
-        {!loading
+        {!loading && canAnimate
           ? data.map((section) => (
               <SectionSlider key={section.title} title={section.title}>
                 {section.topics.map((topic) => (

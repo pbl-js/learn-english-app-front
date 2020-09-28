@@ -4,6 +4,7 @@ import GetPoint from "components/gameTypes/GetPoint/GetPoint";
 const CompleteComposition = ({
   gameComponent: GameComponent,
   wordItem,
+  allWords,
   onFinish,
 }) => {
   const [complete, setComplete] = useState(false);
@@ -23,6 +24,7 @@ const CompleteComposition = ({
     return (
       <GameComponent
         wordItem={wordItem}
+        allWords={allWords}
         onComplete={onComplete}
         onFail={onFail}
       />

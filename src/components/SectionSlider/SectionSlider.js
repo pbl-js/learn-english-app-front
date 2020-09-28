@@ -28,7 +28,6 @@ const SectionSlider = ({ title, children }) => {
   useEffect(() => {
     gsap.to([...sectionWrapperRef.children], {
       y: "0%",
-      delay: animations.appRouteTransition,
       stagger: 0.1,
       duration: 0.5,
       scrollTrigger: {

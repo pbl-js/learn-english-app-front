@@ -5,7 +5,6 @@ import routes from "router/routes";
 import { BackgroundProvider } from "context/BackgroundContext";
 import FadeInOutLayout from "layouts/FadeInOut/FadeInOutLayout";
 import GradientLayout from "layouts/GradientLayout/GradientLayout";
-import PageLayout from "layouts/PageLayout/PageLayout";
 
 import NavigationLayout from "layouts/NavigationLayout/NavigationLayout";
 import Topics from "pages/Topics/Topics";
