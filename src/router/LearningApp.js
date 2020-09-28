@@ -3,6 +3,8 @@ import { Route, Redirect } from "react-router-dom";
 import routes from "router/routes";
 
 import { BackgroundProvider } from "context/BackgroundContext";
+import { TimerProvider } from "context/TimerContext";
+import { SpeakProvider } from "context/SpeakContext";
 import FadeInOutLayout from "layouts/FadeInOut/FadeInOutLayout";
 import GradientLayout from "layouts/GradientLayout/GradientLayout";
 
@@ -12,7 +14,6 @@ import Dojo from "pages/Dojo/Dojo";
 import Collection from "pages/Collection/Collection";
 import Profile from "pages/Profile/Profile";
 import Game from "pages/Game/Game";
-import { TimerProvider } from "context/TimerContext";
 
 const routesList = [
   { path: routes.topics, name: "Topics", Component: Topics },
@@ -38,23 +39,25 @@ const LearningApp = () => {
   return (
     <BackgroundProvider>
       <TimerProvider>
-        <GradientLayout>
-          <NavigationLayout>
-            <Route exact path="/app">
-              <Redirect to="/app/topics" />
-            </Route>
-
-            {routesList.map(({ path, name, Component }) => (
-              <Route key={name} path={path} exact>
-                {(props) => (
-                  <FadeInOutLayout match={props.match}>
-                    <Component {...props} />
-                  </FadeInOutLayout>
-                )}
+        <SpeakProvider>
+          <GradientLayout>
+            <NavigationLayout>
+              <Route exact path="/app">
+                <Redirect to="/app/topics" />
               </Route>
-            ))}
-          </NavigationLayout>
-        </GradientLayout>
+
+              {routesList.map(({ path, name, Component }) => (
+                <Route key={name} path={path} exact>
+                  {(props) => (
+                    <FadeInOutLayout match={props.match}>
+                      <Component {...props} />
+                    </FadeInOutLayout>
+                  )}
+                </Route>
+              ))}
+            </NavigationLayout>
+          </GradientLayout>
+        </SpeakProvider>
       </TimerProvider>
     </BackgroundProvider>
   );

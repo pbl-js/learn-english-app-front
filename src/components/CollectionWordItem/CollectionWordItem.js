@@ -1,5 +1,5 @@
-import React from "react";
-import { useSpeechSynthesis } from "react-speech-kit";
+import React, { useState, useEffect } from "react";
+import { useSpeakContext } from "context/SpeakContext";
 
 import {
   MainWrapper,
@@ -13,14 +13,13 @@ import { ReactComponent as MenuIcon } from "assets/menuDots.svg";
 
 const CollectionWordItem = ({ title, img, progress }) => {
   const unseen = progress.status === "unseen";
-
-  const { speak } = useSpeechSynthesis();
+  const { speakText } = useSpeakContext();
 
   return (
     <MainWrapper>
       <WordIcon src={img} unseen={unseen} />
 
-      <InnerWrapper unseen={unseen} onClick={() => speak({ text: title.eng })}>
+      <InnerWrapper unseen={unseen} onClick={() => speakText(title.eng)}>
         <h3>{title.eng}</h3>
         {unseen ? null : (
           <>

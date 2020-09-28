@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
+import { useSpeakContext } from "context/SpeakContext";
 
 import { colors } from "theme/theme";
 import { ReactComponent as CompleteIcon } from "assets/correct.svg";
@@ -29,6 +30,8 @@ const GetPoint = ({ wordItem, onFinish, fail }) => {
   let correctRef = useRef(null);
   let wordRef = useRef(null);
 
+  const { speakText } = useSpeakContext();
+
   useLayoutEffect(() => {
     gsap.set([correctRef, wordRef], {
       scale: 0,
@@ -51,6 +54,7 @@ const GetPoint = ({ wordItem, onFinish, fail }) => {
         scale: 10,
         autoAlpha: 0,
         delay: 0.3,
+        onStart: () => speakText(wordItem.eng),
       })
       .to(wordRef, {
         scale: 1.1,
