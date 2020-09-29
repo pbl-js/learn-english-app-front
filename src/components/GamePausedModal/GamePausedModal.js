@@ -2,14 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import routes from "router/routes";
+import { colors } from "theme/theme";
 
 import { mediumText, darkModalBackground } from "theme/mixins";
-import Modal from "components/Modal/Modal";
+import ModalPortal from "components/ModalPortal/ModalPortal";
 import CircleButtonIcon from "components/CircleButtonIcon/CircleButtonIcon";
 import { ReactComponent as ExitIcon } from "assets/logout.svg";
 import { ReactComponent as ResumeIcon } from "assets/play.svg";
 
 const MainWrapper = styled.div`
+  position: fixed;
+  z-index: 99999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,28 +38,44 @@ const ButtonsWrapper = styled.div`
   grid-gap: 20px;
 `;
 
-const GamePausedModal = ({ open, startGame }) => {
+const Background = styled.span`
+  z-index: 9999;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${colors.purplePrimary};
+  opacity: 0.2;
+`;
+
+const GamePausedModal = ({ startGame, withBackground }) => {
   const history = useHistory();
 
   return (
-    <Modal open={open} closeModal={startGame}>
-      <MainWrapper>
-        <header>Czas zatrzymany</header>
+    <ModalPortal>
+      <div>
+        <MainWrapper>
+          <header>Czas zatrzymany</header>
 
-        <ButtonsWrapper>
-          <CircleButtonIcon
-            title="Wyjdź"
-            onClick={() => history.push(routes.topics)}
-          >
-            <ExitIcon />
-          </CircleButtonIcon>
+          <ButtonsWrapper>
+            <CircleButtonIcon
+              title="Wyjdź"
+              onClick={() => history.push(routes.topics)}
+            >
+              <ExitIcon />
+            </CircleButtonIcon>
 
-          <CircleButtonIcon light={true} title="Wznów" onClick={startGame}>
-            <ResumeIcon />
-          </CircleButtonIcon>
-        </ButtonsWrapper>
-      </MainWrapper>
-    </Modal>
+            <CircleButtonIcon light={true} title="Wznów" onClick={startGame}>
+              <ResumeIcon />
+            </CircleButtonIcon>
+          </ButtonsWrapper>
+        </MainWrapper>
+
+        <Background onClick={startGame} />
+      </div>
+    </ModalPortal>
   );
 };
 

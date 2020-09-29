@@ -4,9 +4,12 @@ import { fontWeight, fontSize, breakPoints } from "theme/theme";
 import { ReactComponent as Lock } from "assets/lock.svg";
 import { ReactComponent as Info } from "assets/info.svg";
 
+export const MainWrapper = styled.div`
+  position: relative;
+`;
+
 export const LinkWrapper = styled(Link)`
   pointer-events: ${({ locked }) => (locked ? "none" : "auto")};
-  position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -50,6 +53,10 @@ export const LinkWrapper = styled(Link)`
     background-color: black;
     border-radius: 10px;
     opacity: 0.5;
+
+    @media ${breakPoints.tablet} {
+      border-radius: 20px;
+    }
   }
 
   @media ${breakPoints.tablet} {

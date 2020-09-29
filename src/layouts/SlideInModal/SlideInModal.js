@@ -4,12 +4,7 @@ import { gsap } from "gsap";
 import { animations } from "theme/theme";
 
 const onExit = (node) => {
-  gsap.to(node.children[1], {
-    duration: animations.modalIn,
-    opacity: 0,
-  });
-
-  gsap.to(node.children[0], {
+  gsap.to(node, {
     y: "100vh",
     duration: animations.modalIn,
   });
@@ -17,18 +12,7 @@ const onExit = (node) => {
 
 const onEnter = (node) => {
   gsap.fromTo(
-    node.children[1],
-    {
-      opacity: 0,
-    },
-    {
-      opacity: 0.4,
-      duration: animations.modalIn,
-    }
-  );
-
-  gsap.fromTo(
-    node.children[0],
+    node,
     {
       y: "100vh",
     },
@@ -39,7 +23,7 @@ const onEnter = (node) => {
   );
 };
 
-const FadeInSlideInModal = ({ children, isOpen }) => {
+const SlideInModal = ({ children, isOpen }) => {
   return (
     <CSSTransition
       in={isOpen}
@@ -53,4 +37,4 @@ const FadeInSlideInModal = ({ children, isOpen }) => {
   );
 };
 
-export default FadeInSlideInModal;
+export default SlideInModal;
