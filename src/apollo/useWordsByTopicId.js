@@ -3,6 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 export const WORDS_BY_ID = gql`
   query GetWords($topicId: String!) {
     wordsByTopicId(topicId: $topicId) {
+      _id
       eng
       pl
       img

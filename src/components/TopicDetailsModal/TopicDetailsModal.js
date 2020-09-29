@@ -3,9 +3,12 @@ import styled from "styled-components";
 import { breakPoints } from "theme/theme";
 import { lighten, darken } from "polished";
 
+import useWordsByTopicId from "apollo/useWordsByTopicId";
+
 import { ReactComponent as CloseIcon } from "assets/closeLight.svg";
 import ModalPortal from "components/ModalPortal/ModalPortal";
 import CollectionWordItem from "components/CollectionWordItem/CollectionWordItem";
+import ListWrapper from "components/ListWrapper/ListWrapper";
 
 const MainWrapper = styled.div`
   position: fixed;
@@ -16,6 +19,14 @@ const MainWrapper = styled.div`
   height: 100vh;
   background-image: ${({ darkColor, color }) =>
     "linear-gradient(135deg," + darkColor + "," + color + ")"};
+
+  padding-top: 50px;
+  overflow: auto;
+`;
+
+const InnerWrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
 const CloseButton = styled(CloseIcon)`
@@ -36,6 +47,8 @@ const CloseButton = styled(CloseIcon)`
 `;
 
 const TopicDetailsModal = ({ closeModal, color, topicItem }) => {
+  const { data, loading, error } = useWordsByTopicId(topicItem._id);
+
   const darkColor = darken("0.2", color);
   const lightColor = lighten("0.05", color);
 
@@ -44,7 +57,19 @@ const TopicDetailsModal = ({ closeModal, color, topicItem }) => {
       <MainWrapper darkColor={darkColor} color={color}>
         <CloseButton onClick={closeModal} />
 
-        <CollectionWordItem />
+        <InnerWrapper>
+          <ListWrapper>
+            {data &&
+              data.wordsByTopicId.map((word) => (
+                <CollectionWordItem
+                  key={word._id}
+                  img={word.img}
+                  title={{ eng: word.eng, pl: word.pl }}
+                  progress={word.progress}
+                />
+              ))}
+          </ListWrapper>
+        </InnerWrapper>
       </MainWrapper>
     </ModalPortal>
   );

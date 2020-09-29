@@ -5,7 +5,7 @@ import { useTimerDispatch } from "context/TimerContext";
 import { useBackgroundDispatch } from "context/BackgroundContext";
 import uuid from "react-uuid";
 
-import useData from "./Game.data";
+import useWordsByTopicId from "apollo/useWordsByTopicId";
 
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
@@ -28,7 +28,7 @@ const Game = (props) => {
   const dispatch = useTimerDispatch();
   const { setRandomTheme } = useBackgroundDispatch();
   const { handle } = useParams();
-  const { data, error, loading } = useData(handle);
+  const { data, error, loading } = useWordsByTopicId(handle);
 
   const [currentWord, setCurrentWord] = useState(0);
   const [gameCourse, setGameCourse] = useState([]);

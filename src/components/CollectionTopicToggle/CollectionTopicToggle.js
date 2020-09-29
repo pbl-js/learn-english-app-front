@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { colors, breakPoints } from "theme/theme";
 import { mediumUppercaseText } from "theme/mixins";
+
 import { ReactComponent as Arrow } from "assets/arrow.svg";
+import ListWrapper from "components/ListWrapper/ListWrapper";
 
 const MainWrapper = styled.article`
   width: 100%;
@@ -35,22 +37,6 @@ const MainWrapper = styled.article`
   }
 `;
 
-const InnerWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 30px;
-  padding: 20px 10px;
-
-  @media ${breakPoints.mobileM} {
-    padding: 30px;
-    grid-gap: 30px;
-  }
-
-  @media ${breakPoints.mobileL} {
-    padding: 50px;
-  }
-`;
-
 const CollectionItem = ({ title, children }) => {
   const [open, setOpen] = useState(true);
 
@@ -64,7 +50,7 @@ const CollectionItem = ({ title, children }) => {
         {title} <Arrow />
       </header>
 
-      {open && <InnerWrapper>{children}</InnerWrapper>}
+      {open && <ListWrapper>{children}</ListWrapper>}
     </MainWrapper>
   );
 };
