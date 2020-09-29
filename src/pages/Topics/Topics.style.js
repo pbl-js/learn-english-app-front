@@ -104,5 +104,6 @@ export const TopicIndicator = styled.span`
     width: 200px;
     height: 150px;
     margin-right: 15px;
+    border-radius: 25px;
   }
 `;

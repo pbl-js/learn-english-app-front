@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { fontWeight, fontSize, breakPoints } from "theme/theme";
 import { ReactComponent as Lock } from "assets/lock.svg";
+import { ReactComponent as Info } from "assets/info.svg";
 
 export const LinkWrapper = styled(Link)`
   pointer-events: ${({ locked }) => (locked ? "none" : "auto")};
@@ -28,7 +29,7 @@ export const LinkWrapper = styled(Link)`
     left: 0;
     right: 0;
     background-image: url(${({ img }) => img});
-    background-position: bottom 10px right 10px;
+    background-position: top 10px right 10px;
     background-size: 55px 55px;
     background-repeat: no-repeat;
     opacity: 0.3;
@@ -55,6 +56,7 @@ export const LinkWrapper = styled(Link)`
     width: 200px;
     height: 150px;
     font-size: ${fontSize.s};
+    border-radius: 20px;
   }
 `;
 
@@ -65,12 +67,37 @@ export const LockIcon = styled(Lock)`
   z-index: 1;
   width: 15px;
   height: 15px;
-  margin-top: auto;
   fill: white;
 
   @media ${breakPoints.tablet} {
     width: 25px;
     height: 25px;
+  }
+`;
+
+export const InfoIcon = styled(Info)`
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 1;
+  width: 25px;
+  height: 25px;
+  fill: white;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  border-radius: 100px;
+  transition: transform 0.1s;
+
+  :hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    transform: scale(1.2);
+  }
+
+  @media ${breakPoints.tablet} {
+    width: 30px;
+    height: 30px;
+    padding: 7px;
   }
 `;
 

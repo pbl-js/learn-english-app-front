@@ -1,6 +1,11 @@
 import React from "react";
 
-import { LinkWrapper, LockIcon, ProgressWraper } from "./TopicItem.style";
+import {
+  LinkWrapper,
+  LockIcon,
+  ProgressWraper,
+  InfoIcon,
+} from "./TopicItem.style";
 import ProgressStatus from "components/ProgressStatus/ProgressStatus";
 import ProgressIcon from "components/ProgressIcon/ProgressIcon";
 
@@ -37,6 +42,9 @@ const TopicItem = ({
       {title}
 
       <ProgressWraper>{statusType()}</ProgressWraper>
+      {status !== "locked" ? (
+        <InfoIcon onClick={(e) => e.preventDefault} />
+      ) : null}
     </LinkWrapper>
   );
 };
