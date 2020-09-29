@@ -50,7 +50,7 @@ const Pause = () => {
       </MainWrapper>
 
       <FadeInSlideInModal isOpen={isOpen}>
-        <GamePausedModal startGame={startGame} withBackground={true} />
+        <GamePausedModal startGame={startGame} />
       </FadeInSlideInModal>
     </>
   );

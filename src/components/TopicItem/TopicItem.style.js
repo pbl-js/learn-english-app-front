@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { fontWeight, fontSize, breakPoints } from "theme/theme";
 import { ReactComponent as Lock } from "assets/lock.svg";
@@ -90,6 +90,7 @@ export const InfoIcon = styled(Info)`
   width: 25px;
   height: 25px;
   fill: white;
+  cursor: pointer;
 
   background-color: rgba(0, 0, 0, 0.3);
   padding: 5px;

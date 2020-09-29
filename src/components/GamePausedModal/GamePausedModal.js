@@ -50,7 +50,7 @@ const Background = styled.span`
   opacity: 0.2;
 `;
 
-const GamePausedModal = ({ startGame, withBackground }) => {
+const GamePausedModal = ({ startGame }) => {
   const history = useHistory();
 
   return (

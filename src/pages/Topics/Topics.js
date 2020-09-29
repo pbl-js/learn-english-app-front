@@ -71,12 +71,8 @@ const Topics = () => {
                   <TopicItem
                     key={topic.title}
                     to={`${routes.game}/${topic._id}`}
-                    title={topic.title}
-                    img={topic.img}
                     color={section.color}
-                    status={topic.progress.status}
-                    learningProgress={topic.progress.learningProgress}
-                    masteringProgress={topic.progress.masteringProgress}
+                    topicItem={topic}
                   />
                 ))}
               </SectionSlider>

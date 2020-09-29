@@ -34,28 +34,28 @@ export const InnerTopicsWrapper = styled.div`
   display: flex;
   flex-direction: row;
 
-  div {
+  & > div {
     margin-right: 10px;
   }
 
-  div:last-child {
+  & > div:last-child {
     margin-right: ${layout.mainPadding.tablet + "px"};
   }
 
-  div:first-child {
+  & > div:first-child {
     margin-left: ${layout.mainPadding.tablet + "px"};
   }
 
   @media ${breakPoints.tablet} {
-    div {
+    & > div {
       margin-right: 15px;
     }
 
-    div:last-child {
+    & > div:last-child {
       margin-right: ${layout.mainPadding.desktop + "px"};
     }
 
-    div:first-child {
+    & > div:first-child {
       margin-left: ${layout.mainPadding.desktop + "px"};
     }
   }

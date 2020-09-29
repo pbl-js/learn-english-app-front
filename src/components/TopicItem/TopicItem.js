@@ -27,16 +27,10 @@ const statusType = (status, learningProgress, masteringProgress) => {
   }
 };
 
-const TopicItem = ({
-  to,
-  title,
-  color,
-  img,
-  status,
-  learningProgress,
-  masteringProgress,
-}) => {
+const TopicItem = ({ to, color, topicItem }) => {
   const [isOpen, toggleOpen] = useToggle(false);
+  const { img, title, progress } = topicItem;
+  const { status, learningProgress, masteringProgress } = progress;
 
   return (
     <MainWrapper>
@@ -56,7 +50,13 @@ const TopicItem = ({
       {status !== "locked" ? <InfoIcon onClick={() => toggleOpen()} /> : null}
 
       <SlideInModal isOpen={isOpen}>
-        <TopicDetailsModal closeModal={toggleOpen} />
+        <TopicDetailsModal
+          closeModal={toggleOpen}
+          color={color}
+          title={title}
+          img={img}
+          topicItem={topicItem}
+        />
       </SlideInModal>
     </MainWrapper>
   );
