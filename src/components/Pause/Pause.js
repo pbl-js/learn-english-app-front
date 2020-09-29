@@ -5,6 +5,7 @@ import { useTimerDispatch } from "context/TimerContext";
 import { ReactComponent as PauseIcon } from "assets/pause.svg";
 import { flexRowCenter } from "theme/mixins";
 import GamePausedModal from "components/GamePausedModal/GamePausedModal";
+import FadeInSlideInModal from "layouts/FadeInSlideInModal/FadeInSlideInModal";
 
 const MainWrapper = styled.button`
   ${flexRowCenter}
@@ -28,26 +29,29 @@ const MainWrapper = styled.button`
 
 const Pause = () => {
   const dispatch = useTimerDispatch();
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   console.log("object");
 
   const pauseGame = useCallback(() => {
     dispatch({ type: "STOP_CLOCK" });
-    setOpen(true);
-  }, [open]);
+    setIsOpen(true);
+  }, [isOpen]);
 
   const startGame = useCallback(() => {
     dispatch({ type: "START_CLOCK" });
-    setOpen(false);
-  }, [open]);
+    setIsOpen(false);
+  }, [isOpen]);
 
   return (
     <>
       <MainWrapper onClick={pauseGame}>
         <PauseIcon />
       </MainWrapper>
-      <GamePausedModal open={open} startGame={startGame} />
+
+      <FadeInSlideInModal isOpen={isOpen}>
+        <GamePausedModal startGame={startGame} />
+      </FadeInSlideInModal>
     </>
   );
 };

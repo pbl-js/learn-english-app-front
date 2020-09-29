@@ -54,6 +54,7 @@ export const layout = {
 
 export const animations = {
   appRouteTransition: 0.8,
+  modalIn: 0.3,
 };
 
 export const breakPoints = {

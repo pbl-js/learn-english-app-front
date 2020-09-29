@@ -23,16 +23,14 @@ const Background = styled.span`
   opacity: 0.2;
 `;
 
-const Modal = ({ children, open, closeModal }) => {
-  return open
-    ? ReactDom.createPortal(
-        <>
-          <Background onClick={closeModal} />
-          <MainWrapper>{children}</MainWrapper>
-        </>,
-        document.getElementById("portal")
-      )
-    : null;
+const Modal = ({ children, closeModal }) => {
+  return ReactDom.createPortal(
+    <div>
+      <Background onClick={closeModal} />
+      <MainWrapper>{children}</MainWrapper>
+    </div>,
+    document.getElementById("portal")
+  );
 };
 
 export default Modal;
