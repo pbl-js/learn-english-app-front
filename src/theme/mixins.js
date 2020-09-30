@@ -116,3 +116,37 @@ export const defaultPaddingLayout = css`
       ${layout.mainPadding.desktop + "px"};
   }
 `;
+
+export const primaryScrollbar = css`
+  ::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 100px;
+    border: 4px solid transparent;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+`;
+
+export const secondaryScrollbar = css`
+  ::-webkit-scrollbar {
+    width: 14px;
+    background-color: ${colors.purplePrimary};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${colors.orangeMenu};
+    border-radius: 100px;
+    border: 4px solid ${colors.purplePrimary};
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: ${colors.orangeMenu};
+  }
+`;

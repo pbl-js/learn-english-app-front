@@ -10,6 +10,7 @@ import ModalPortal from "components/ModalPortal/ModalPortal";
 import CollectionWordItem from "components/CollectionWordItem/CollectionWordItem";
 import ListWrapper from "components/ListWrapper/ListWrapper";
 import BigTopicItem from "components/BigTopicItem/BigTopicItem";
+import { primaryScrollbar } from "theme/mixins";
 
 const MainWrapper = styled.div`
   position: fixed;
@@ -23,6 +24,7 @@ const MainWrapper = styled.div`
 
   padding-top: 90px;
   overflow: auto;
+  ${primaryScrollbar}
 `;
 
 const InnerWrapper = styled.div`

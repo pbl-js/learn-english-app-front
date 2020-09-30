@@ -1,8 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { breakPoints, colors } from "theme/theme";
 import useCurrentSite from "hooks/useCurrentSite";
 import routes from "router/routes";
+import { secondaryScrollbar, primaryScrollbar } from "theme/mixins";
 
 const MainWrapper = styled.div`
   position: absolute;
@@ -16,22 +17,9 @@ const MainWrapper = styled.div`
 
   ::-webkit-scrollbar {
     display: none;
-    width: ${({ isTopic }) => (isTopic ? "14px" : "10px")};
-    background-color: ${({ isTopic }) =>
-      isTopic ? colors.purplePrimary : "transparent"};
   }
 
-  ::-webkit-scrollbar-thumb {
-    background-color: ${({ isTopic }) =>
-      isTopic ? colors.orangeMenu : "rgba(0, 0, 0, 0.5)"};
-    border-radius: 100px;
-    border: 4px solid
-      ${({ isTopic }) => (isTopic ? colors.purplePrimary : "transparent")};
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: ${colors.orangeMenu};
-  }
+  ${({ secondary }) => (secondary ? secondaryScrollbar : primaryScrollbar)}
 
   @media ${breakPoints.tablet} {
     overflow-y: scroll;
@@ -46,7 +34,7 @@ const AppPageLayout = ({ children }) => {
   const isTopics = useCurrentSite(routes.topics);
 
   return (
-    <MainWrapper index={1} isTopic={isTopics} id="scrollWrapper">
+    <MainWrapper index={1} secondary={isTopics} id="scrollWrapper">
       {children}
     </MainWrapper>
   );
