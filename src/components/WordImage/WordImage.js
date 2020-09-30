@@ -7,21 +7,18 @@ export default styled.div`
   flex-direction: column;
   align-items: center;
   ${bigNormalText}
+  max-width: 250px;
+  max-height: 250px;
+  width: 100%;
+  height: 100%;
 
   img {
     ${whiteFilter}
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
   }
 
   p {
     margin-top: 20px;
-  }
-
-  @media ${breakPoints.tablet} {
-    img {
-      width: 200px;
-      height: 200px;
-    }
   }
 `;

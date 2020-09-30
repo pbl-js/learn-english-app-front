@@ -95,6 +95,21 @@ export const bigButton = css`
   }
 `;
 
+export const icon = css`
+  width: 80px;
+  height: 80px;
+  padding: 20px;
+  border-radius: 1000px;
+  background-color: rgba(0, 0, 0, 0.3);
+  fill: white;
+
+  @media ${breakPoints.tablet} {
+    width: 120px;
+    height: 120px;
+    padding: 30px;
+  }
+`;
+
 export const darkModalBackground = css`
   border-radius: 20px;
   background-color: ${colors.purpleModalDark};

@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { ReactComponent as LearnIcon } from "assets/learn.svg";
 import { ReactComponent as HideIcon } from "assets/hide.svg";
-import { breakPoints } from "theme/theme";
+import { icon } from "theme/mixins";
 
 export const MainWrapper = styled.div`
   display: grid;
@@ -13,21 +13,6 @@ export const MainWrapper = styled.div`
   width: 100%;
   overflow: hidden;
   padding-top: 70px;
-`;
-
-const icon = css`
-  width: 80px;
-  height: 80px;
-  padding: 20px;
-  border-radius: 1000px;
-  background-color: rgba(0, 0, 0, 0.3);
-  fill: white;
-
-  @media ${breakPoints.tablet} {
-    width: 120px;
-    height: 120px;
-    padding: 30px;
-  }
 `;
 
 export const Hide = styled(HideIcon)`

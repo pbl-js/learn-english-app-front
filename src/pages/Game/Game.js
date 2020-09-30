@@ -10,6 +10,7 @@ import useWordsByTopicId from "apollo/useWordsByTopicId";
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
 import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
+import SwipeCorrect4 from "components/gameTypes/SwipeCorrect4/SwipeCorrect4";
 import TrueFalse from "components/gameTypes/TrueFalse/TrueFalse";
 import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 
@@ -50,7 +51,7 @@ const Game = (props) => {
     data &&
       setGameCourse([
         {
-          gameComponent: TrueFalse,
+          gameComponent: SwipeCorrect4,
           wordItem: data.wordsByTopicId[1],
         },
         {

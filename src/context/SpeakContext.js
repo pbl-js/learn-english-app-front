@@ -10,8 +10,6 @@ const SpeakProvider = ({ children }) => {
   const enVoices = voices.filter((item) => item.lang.includes("en"));
   const voice = enVoices[index] || null;
 
-  console.log(enVoices);
-
   const speakText = useCallback(
     (text) => {
       speak({ text, voice });
