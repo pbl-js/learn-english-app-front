@@ -5,14 +5,14 @@ export default styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 30px;
-  padding: 20px 10px;
+  padding: ${({ withPadding }) => (withPadding ? "20px 10px" : null)};
 
   @media ${breakPoints.mobileM} {
-    padding: 30px;
+    padding: ${({ withPadding }) => (withPadding ? "30px" : null)};
     grid-gap: 30px;
   }
 
   @media ${breakPoints.mobileL} {
-    padding: 50px;
+    padding: ${({ withPadding }) => (withPadding ? "50px" : null)};
   }
 `;

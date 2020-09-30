@@ -16,7 +16,6 @@ import {
 import SectionSlider from "components/SectionSlider/SectionSlider";
 import TopicItem from "components/TopicItem/TopicItem";
 import ProgressStatus from "components/ProgressStatus/ProgressStatus";
-
 import { ReactComponent as Play } from "assets/play.svg";
 
 const sectionsCount = 13;
@@ -52,7 +51,7 @@ const Topics = () => {
 
   return (
     <MainWrapper>
-      <LastTopicWrapper>
+      <LastTopicWrapper color={"#e67e22"}>
         <h1>Jedzenie i picie</h1>
         <h2>Warzywa Ciąg dalszy</h2>
         <div>

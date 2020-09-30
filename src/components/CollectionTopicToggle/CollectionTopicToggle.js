@@ -50,7 +50,7 @@ const CollectionItem = ({ title, children }) => {
         {title} <Arrow />
       </header>
 
-      {open && <ListWrapper>{children}</ListWrapper>}
+      {open && <ListWrapper withPadding={1}>{children}</ListWrapper>}
     </MainWrapper>
   );
 };

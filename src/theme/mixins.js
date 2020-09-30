@@ -70,7 +70,7 @@ export const bigButton = css`
   font-weight: ${fontWeight.semiBold};
   font-size: ${fontSize.xs};
   cursor: pointer;
-  background-color: ${colors.orangeMenu};
+  background-color: ${({ color }) => color};
 
   :hover {
     transform: scale(1.05);

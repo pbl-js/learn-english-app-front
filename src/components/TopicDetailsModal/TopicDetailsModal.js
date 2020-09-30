@@ -9,6 +9,7 @@ import { ReactComponent as CloseIcon } from "assets/closeLight.svg";
 import ModalPortal from "components/ModalPortal/ModalPortal";
 import CollectionWordItem from "components/CollectionWordItem/CollectionWordItem";
 import ListWrapper from "components/ListWrapper/ListWrapper";
+import BigTopicItem from "components/BigTopicItem/BigTopicItem";
 
 const MainWrapper = styled.div`
   position: fixed;
@@ -20,13 +21,24 @@ const MainWrapper = styled.div`
   background-image: ${({ darkColor, color }) =>
     "linear-gradient(135deg," + darkColor + "," + color + ")"};
 
-  padding-top: 50px;
+  padding-top: 90px;
   overflow: auto;
 `;
 
 const InnerWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 80px;
+`;
+
+const Divider = styled.span`
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: ${({ color }) => color};
 `;
 
 const CloseButton = styled(CloseIcon)`
@@ -58,6 +70,10 @@ const TopicDetailsModal = ({ closeModal, color, topicItem }) => {
         <CloseButton onClick={closeModal} />
 
         <InnerWrapper>
+          <BigTopicItem topicItem={topicItem} />
+
+          <Divider color={color} />
+
           <ListWrapper>
             {data &&
               data.wordsByTopicId.map((word) => (
