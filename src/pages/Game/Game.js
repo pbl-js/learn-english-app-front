@@ -55,7 +55,7 @@ const Game = (props) => {
           wordItem: data.wordsByTopicId[1],
         },
         {
-          gameComponent: LetterByLetter,
+          gameComponent: SwipeCorrect4,
           wordItem: data.wordsByTopicId[2],
         },
         {
