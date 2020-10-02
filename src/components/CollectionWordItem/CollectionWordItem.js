@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSpeakContext } from "context/SpeakContext";
+import { useSpeakDispatch } from "context/SpeakContext";
 
 import {
   MainWrapper,
@@ -13,7 +13,7 @@ import { ReactComponent as MenuIcon } from "assets/menuDots.svg";
 
 const CollectionWordItem = ({ title, img, progress }) => {
   const unseen = progress.status === "unseen";
-  const { speakText } = useSpeakContext();
+  const { speakText } = useSpeakDispatch();
 
   return (
     <MainWrapper>

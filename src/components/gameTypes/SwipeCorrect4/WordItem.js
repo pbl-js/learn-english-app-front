@@ -8,22 +8,14 @@ import WordImage from "components/WordImage/WordImage";
 
 const WordItem = React.forwardRef(
   ({ word, pointerRef, onFail, onComplete }, ref) => {
-    const onDragStart = (value) => {
-      gsap.to(ref.current, {
-        scale: 0.4,
-        duration: 0.3,
-      });
+    let refPosition;
+    let pointerPosition;
 
-      gsap.to(pointerRef.current, { scale: 1.5, duration: 0.3 });
-    };
+    const onDrag = () => {
+      refPosition = ref.current.getBoundingClientRect();
+      pointerPosition = pointerRef.current.getBoundingClientRect();
 
-    const onDrag = (value) => {
-      if (
-        didElementFits(
-          ref.current.getBoundingClientRect(),
-          pointerRef.current.getBoundingClientRect()
-        )
-      ) {
+      if (didElementFits(refPosition, pointerPosition)) {
         gsap.to(pointerRef.current, {
           scale: 2,
           duration: 0.3,
@@ -36,13 +28,17 @@ const WordItem = React.forwardRef(
       }
     };
 
-    const onDragEnd = (value) => {
-      if (
-        didElementFits(
-          ref.current.getBoundingClientRect(),
-          pointerRef.current.getBoundingClientRect()
-        )
-      ) {
+    const onDragStart = () => {
+      gsap.to(ref.current, {
+        scale: 0.4,
+        duration: 0.3,
+      });
+
+      gsap.to(pointerRef.current, { scale: 1.5, duration: 0.3 });
+    };
+
+    const onDragEnd = () => {
+      if (didElementFits(refPosition, pointerPosition)) {
         word.correct ? onComplete() : onFail();
       } else {
         gsap.to(ref.current, { x: 0, y: 0, scale: 1, duration: 0.3 });
@@ -59,7 +55,7 @@ const WordItem = React.forwardRef(
         onDrag: onDrag,
         onDragEnd: onDragEnd,
       });
-    }, [ref]);
+    }, [onDragStart, onDrag, onDragEnd]);
 
     return (
       <WordImage key={word._id} ref={ref}>

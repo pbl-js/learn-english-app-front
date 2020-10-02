@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo, useCallback } from "react";
-import { useSpeakContext } from "context/SpeakContext";
+import { useSpeakDispatch } from "context/SpeakContext";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 
@@ -38,7 +38,7 @@ const genWordsToPlay = (wordItem, allWords) => {
 };
 
 const SwipeCorrect4 = ({ wordItem, allWords, onComplete, onFail }) => {
-  const { speakText } = useSpeakContext();
+  const { speakText } = useSpeakDispatch();
   const wordsToPlay = useMemo(() => genWordsToPlay(wordItem, allWords), []);
   console.log(wordsToPlay);
 
@@ -49,11 +49,7 @@ const SwipeCorrect4 = ({ wordItem, allWords, onComplete, onFail }) => {
   let pointerRefPosition = null;
   let itemRefsPosition = [];
 
-  const onDragStart = useCallback(() => {
-    gsap.to(pointerRef.current, { scale: 0.4, duration: 0.3 });
-  }, []);
-
-  const onDrag = useCallback(() => {
+  const onDrag = () => {
     pointerRefPosition = pointerRef.current.getBoundingClientRect();
 
     itemRefsPosition = itemRefs.map((itemRef) =>
@@ -67,9 +63,13 @@ const SwipeCorrect4 = ({ wordItem, allWords, onComplete, onFail }) => {
         gsap.to(itemRefs[index].current, { scale: 1, duration: 0.3 });
       }
     });
-  }, [pointerRef, itemRefs]);
+  };
 
-  const onDragEnd = useCallback(() => {
+  const onDragStart = () => {
+    gsap.to(pointerRef.current, { scale: 0.4, duration: 0.3 });
+  };
+
+  const onDragEnd = () => {
     gsap.to(pointerRef.current, { x: 0, y: 0 });
     gsap.to(pointerRef.current, { scale: 1, duration: 0.3 });
 
@@ -78,7 +78,7 @@ const SwipeCorrect4 = ({ wordItem, allWords, onComplete, onFail }) => {
         word.correct ? onComplete() : onFail();
       }
     });
-  }, [, pointerRef, itemRefs, pointerRefPosition]);
+  };
 
   useEffect(() => {
     speakText(wordItem.eng);
@@ -90,7 +90,7 @@ const SwipeCorrect4 = ({ wordItem, allWords, onComplete, onFail }) => {
       onDrag,
       onDragEnd,
     });
-  }, [pointerRef, itemRefs]);
+  }, [onDragStart, onDrag, onDragEnd]);
 
   return (
     <MainWrapper>

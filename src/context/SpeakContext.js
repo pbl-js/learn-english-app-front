@@ -1,14 +1,13 @@
 import React, { createContext, useState, useCallback } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 
-const SpeakContext = React.createContext();
+const SpeakStateContext = React.createContext();
+const SpeakDispatchContext = React.createContext();
 
 const SpeakProvider = ({ children }) => {
-  const [index, setIndex] = useState(13);
   const { speak, voices, speaking } = useSpeechSynthesis();
-
   const enVoices = voices.filter((item) => item.lang.includes("en"));
-  const voice = enVoices[index] || null;
+  const voice = enVoices[13] || null;
 
   const speakText = useCallback(
     (text) => {
@@ -18,18 +17,28 @@ const SpeakProvider = ({ children }) => {
   );
 
   return (
-    <SpeakContext.Provider value={{ speakText, enVoices, setIndex, speaking }}>
-      {children}
-    </SpeakContext.Provider>
+    <SpeakStateContext.Provider value={{ voices, speaking }}>
+      <SpeakDispatchContext.Provider value={{ speakText }}>
+        {children}
+      </SpeakDispatchContext.Provider>
+    </SpeakStateContext.Provider>
   );
 };
 
-function useSpeakContext() {
-  const context = React.useContext(SpeakContext);
+function useSpeakState() {
+  const context = React.useContext(SpeakStateContext);
   if (context === undefined) {
-    throw new Error("useSpeakContext must be used within a SpeakProvider");
+    throw new Error("useSpeakState must be used within a SpeakProvider");
   }
   return context;
 }
 
-export { SpeakProvider, useSpeakContext };
+function useSpeakDispatch() {
+  const context = React.useContext(SpeakDispatchContext);
+  if (context === undefined) {
+    throw new Error("UseSpeakDispatch must be used within a SpeakProvider");
+  }
+  return context;
+}
+
+export { SpeakProvider, useSpeakState, useSpeakDispatch };

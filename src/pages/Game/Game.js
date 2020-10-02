@@ -51,15 +51,18 @@ const Game = (props) => {
     data &&
       setGameCourse([
         {
+          id: uuid(),
           gameComponent: SwipeCorrect4,
           wordItem: data.wordsByTopicId[1],
         },
         {
+          id: uuid(),
           gameComponent: SwipeCorrect4,
           wordItem: data.wordsByTopicId[2],
         },
         {
-          gameComponent: FirstTime,
+          id: uuid(),
+          gameComponent: SwipeCorrect4,
           wordItem: data.wordsByTopicId[3],
         },
       ]);
@@ -72,7 +75,7 @@ const Game = (props) => {
           if (index === currentWord) {
             return (
               <CompleteComposition
-                key={uuid()}
+                key={gameItem.id}
                 gameComponent={gameItem.gameComponent}
                 wordItem={gameItem.wordItem}
                 allWords={data.wordsByTopicId}

@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
+import { useSpeakDispatch } from "context/SpeakContext";
 
 import didElementFits from "helpers/didElementFits";
 
@@ -10,23 +11,20 @@ import WordImage from "components/WordImage/WordImage";
 gsap.registerPlugin(Draggable);
 
 const FirstTime = ({ wordItem, onComplete }) => {
+  const { speakText } = useSpeakDispatch();
+
   let containerRef = useRef(null);
   let wordRef = useRef(null);
   let hideRef = useRef(null);
   let learnRef = useRef(null);
+  let hidePosition;
+  let learnPosition;
+  let wordPosition;
 
-  const onDragStart = (value) => {
-    gsap.to(wordRef, {
-      scale: 0.4,
-      duration: 0.3,
-    });
-    gsap.to([hideRef, learnRef], { scale: 1.5, duration: 0.3 });
-  };
-
-  const onDrag = (value) => {
-    const hidePosition = hideRef.getBoundingClientRect();
-    const learnPosition = learnRef.getBoundingClientRect();
-    const wordPosition = wordRef.getBoundingClientRect();
+  const onDrag = () => {
+    hidePosition = hideRef.getBoundingClientRect();
+    learnPosition = learnRef.getBoundingClientRect();
+    wordPosition = wordRef.getBoundingClientRect();
 
     if (didElementFits(wordPosition, hidePosition)) {
       gsap.to(hideRef, {
@@ -53,33 +51,40 @@ const FirstTime = ({ wordItem, onComplete }) => {
     }
   };
 
-  const onDragEnd = (value) => {
-    const hidePosition = hideRef.getBoundingClientRect();
-    const learnPosition = learnRef.getBoundingClientRect();
-    const wordPosition = wordRef.getBoundingClientRect();
-
+  const onDragStart = () => {
     gsap.to(wordRef, {
-      scale: 1,
+      scale: 0.4,
       duration: 0.3,
     });
-    gsap.to([hideRef, learnRef], { scale: 1, duration: 0.3 });
+    gsap.to([hideRef, learnRef], { scale: 1.5, duration: 0.3 });
+  };
 
+  const onDragEnd = () => {
     if (didElementFits(wordPosition, hidePosition)) {
       onComplete();
     } else if (didElementFits(wordPosition, learnPosition)) {
       onComplete();
     } else {
       gsap.to(wordRef, { x: 0, y: 0 });
+      gsap.to(wordRef, {
+        scale: 1,
+        duration: 0.3,
+      });
+      gsap.to([hideRef, learnRef], { scale: 1, duration: 0.3 });
     }
   };
 
   useEffect(() => {
-    Draggable.create(wordRef, {
-      onDragStart: (value) => onDragStart(value),
-      onDragEnd: (value) => onDragEnd(value),
-      onDrag: (value) => onDrag(value),
-    });
+    speakText(wordItem.eng);
   }, []);
+
+  useEffect(() => {
+    Draggable.create(wordRef, {
+      onDragStart,
+      onDragEnd,
+      onDrag,
+    });
+  }, [onDragStart, onDragEnd, onDrag]);
 
   return (
     <MainWrapper ref={(el) => (containerRef = el)}>
