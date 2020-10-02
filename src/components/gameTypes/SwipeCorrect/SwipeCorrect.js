@@ -1,6 +1,11 @@
-import React, { useEffect, useRef, useMemo, useCallback } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+  useState,
+} from "react";
 import { useSpeakDispatch } from "context/SpeakContext";
-import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 
 import { MainWrapper, CenterItem } from "./SwipeCorrect.style";
@@ -8,8 +13,8 @@ import { MainWrapper, CenterItem } from "./SwipeCorrect.style";
 import { ReactComponent as LearnIcon } from "assets/learn.svg";
 import getRandomInt from "helpers/getRandomInt";
 import getUniqueRandomInts from "helpers/getUniqueRandomInts";
-import didElementFits from "helpers/didElementFits";
 import WordItem from "./WordItem";
+import { onDragStart, onDrag, onDragEnd } from "./SwipeCorrect.drag";
 
 const genWordsToPlay = (wordsCount, wordItem, allWords) => {
   let wordsToPlay = [];
@@ -49,42 +54,10 @@ const SwipeCorrect4 = ({
   );
 
   let pointerRef = useRef(null);
-  const itemRefs = useMemo(() =>
-    Array.from(wordsToPlay, () => React.createRef())
+  const itemRefs = useCallback(
+    Array.from(wordsToPlay, () => React.createRef()),
+    []
   );
-  let pointerRefPosition = null;
-  let itemRefsPosition = [];
-
-  const onDrag = () => {
-    pointerRefPosition = pointerRef.current.getBoundingClientRect();
-
-    itemRefsPosition = itemRefs.map((itemRef) =>
-      itemRef.current.getBoundingClientRect()
-    );
-
-    wordsToPlay.forEach((word, index) => {
-      if (didElementFits(pointerRefPosition, itemRefsPosition[index])) {
-        gsap.to(itemRefs[index].current, { scale: 1.1, duration: 0.3 });
-      } else {
-        gsap.to(itemRefs[index].current, { scale: 1, duration: 0.3 });
-      }
-    });
-  };
-
-  const onDragStart = () => {
-    gsap.to(pointerRef.current, { scale: 0.4, duration: 0.3 });
-  };
-
-  const onDragEnd = () => {
-    gsap.to(pointerRef.current, { x: 0, y: 0 });
-    gsap.to(pointerRef.current, { scale: 1, duration: 0.3 });
-
-    wordsToPlay.forEach((word, index) => {
-      if (didElementFits(pointerRefPosition, itemRefsPosition[index])) {
-        word.correct ? onComplete() : onFail();
-      }
-    });
-  };
 
   useEffect(() => {
     speakText(wordItem.eng);
@@ -93,10 +66,13 @@ const SwipeCorrect4 = ({
   useEffect(() => {
     Draggable.create(pointerRef.current, {
       onDragStart,
+      onDragStartParams: [pointerRef, itemRefs],
       onDrag,
+      onDragParams: [pointerRef, itemRefs],
       onDragEnd,
+      onDragEndParams: [pointerRef, itemRefs, wordsToPlay, onComplete, onFail],
     });
-  }, [onDragStart, onDrag, onDragEnd]);
+  }, [itemRefs]);
 
   return (
     <MainWrapper wordsCount={wordsCount}>

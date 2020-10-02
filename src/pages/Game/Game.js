@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useCallback, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useTimerDispatch } from "context/TimerContext";
@@ -66,7 +66,7 @@ const genGameCourse = (wordItem) => {
   return {
     id: uuid(),
     // gameComponent: genGameComponent(wordItem.progress.status),
-    gameComponent: FirstTime,
+    gameComponent: SwipeCorrectFour,
     wordItem: wordItem,
   };
 };
@@ -80,16 +80,18 @@ const Game = (props) => {
   const [gameProgress, setGameProgress] = useState(0);
   const [gameCourse, setGameCourse] = useState([]);
 
-  const onFinish = () => {
-    setGameProgress((prevState) => prevState + 1);
-
+  const addGameItem = useCallback(() => {
     setGameCourse((prevState) => {
-      console.log(prevState);
       const newState = prevState.map((item) => item);
       const index = getRandomInt(0, data.wordsByTopicId.length);
       newState.push(genGameCourse(data.wordsByTopicId[index]));
       return newState;
     });
+  }, [data]);
+
+  const onFinish = () => {
+    setGameProgress((prevState) => prevState + 1);
+    addGameItem();
   };
 
   useEffect(() => {
@@ -102,17 +104,7 @@ const Game = (props) => {
   }, [gameProgress]);
 
   useEffect(() => {
-    data &&
-      setGameCourse([
-        {
-          id: uuid(),
-          // gameComponent: genGameComponent(
-          //   data.wordsByTopicId[0].progress.status
-          // ),
-          gameComponent: FirstTime,
-          wordItem: data.wordsByTopicId[1],
-        },
-      ]);
+    data && addGameItem();
   }, [data]);
 
   return (
