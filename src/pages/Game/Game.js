@@ -66,7 +66,7 @@ const genGameCourse = (wordItem) => {
   return {
     id: uuid(),
     // gameComponent: genGameComponent(wordItem.progress.status),
-    gameComponent: SwipeCorrectTwo,
+    gameComponent: FirstTime,
     wordItem: wordItem,
   };
 };
@@ -106,9 +106,10 @@ const Game = (props) => {
       setGameCourse([
         {
           id: uuid(),
-          gameComponent: genGameComponent(
-            data.wordsByTopicId[0].progress.status
-          ),
+          // gameComponent: genGameComponent(
+          //   data.wordsByTopicId[0].progress.status
+          // ),
+          gameComponent: FirstTime,
           wordItem: data.wordsByTopicId[1],
         },
       ]);
