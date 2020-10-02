@@ -84,7 +84,7 @@ const FirstTime = ({ wordItem, onComplete }) => {
       onDragEnd,
       onDrag,
     });
-  }, [onDragStart, onDragEnd, onDrag]);
+  }, [onDragStart, onDragEnd, onDrag, wordRef]);
 
   return (
     <MainWrapper ref={(el) => (containerRef = el)}>

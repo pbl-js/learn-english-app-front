@@ -6,14 +6,16 @@ import { useBackgroundDispatch } from "context/BackgroundContext";
 import uuid from "react-uuid";
 
 import useWordsByTopicId from "apollo/useWordsByTopicId";
+import getRandomInt from "helpers/getRandomInt";
 
+import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
+////////////////////////////////////////////////////////////////////////////////////////
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
-import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
+// import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
 import SwipeCorrectFour from "components/gameTypes/SwipeCorrectFour/SwipeCorrectFour";
 import SwipeCorrectTwo from "components/gameTypes/SwipeCorrectTwo/SwipeCorrectTwo";
 import TrueFalse from "components/gameTypes/TrueFalse/TrueFalse";
-import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -26,17 +28,68 @@ const MainWrapper = styled.div`
   overflow: hidden;
 `;
 
+const genGameComponent = (status) => {
+  const learningRandomComponent = () => {
+    const learningGameVariants = [SwipeCorrectTwo, SwipeCorrectFour];
+    const index = getRandomInt(0, learningGameVariants.length);
+
+    return learningGameVariants[index];
+  };
+
+  const masteringRandomComponent = () => {
+    const learningGameVariants = [
+      SwipeCorrectTwo,
+      SwipeCorrectFour,
+      LetterByLetter,
+    ];
+    const index = getRandomInt(0, learningGameVariants.length);
+
+    return learningGameVariants[index];
+  };
+
+  switch (status) {
+    case "unseen":
+      // return FirstTime;
+      return learningRandomComponent();
+    case "learning":
+      return learningRandomComponent();
+    case "mastering":
+      return masteringRandomComponent();
+    case "complete":
+      return FirstTime;
+    default:
+      break;
+  }
+};
+
+const genGameCourse = (wordItem) => {
+  return {
+    id: uuid(),
+    // gameComponent: genGameComponent(wordItem.progress.status),
+    gameComponent: SwipeCorrectTwo,
+    wordItem: wordItem,
+  };
+};
+
 const Game = (props) => {
   const dispatch = useTimerDispatch();
-  const { setRandomTheme } = useBackgroundDispatch();
   const { handle } = useParams();
-  const { data, error, loading } = useWordsByTopicId(handle);
+  const { setRandomTheme } = useBackgroundDispatch();
 
-  const [currentWord, setCurrentWord] = useState(0);
+  const { data, error, loading } = useWordsByTopicId(handle);
+  const [gameProgress, setGameProgress] = useState(0);
   const [gameCourse, setGameCourse] = useState([]);
 
   const onFinish = () => {
-    setCurrentWord((prevState) => prevState + 1);
+    setGameProgress((prevState) => prevState + 1);
+
+    setGameCourse((prevState) => {
+      console.log(prevState);
+      const newState = prevState.map((item) => item);
+      const index = getRandomInt(0, data.wordsByTopicId.length);
+      newState.push(genGameCourse(data.wordsByTopicId[index]));
+      return newState;
+    });
   };
 
   useEffect(() => {
@@ -46,25 +99,17 @@ const Game = (props) => {
 
   useEffect(() => {
     setRandomTheme();
-  }, [currentWord]);
+  }, [gameProgress]);
 
   useEffect(() => {
     data &&
       setGameCourse([
         {
           id: uuid(),
-          gameComponent: SwipeCorrectFour,
+          gameComponent: genGameComponent(
+            data.wordsByTopicId[0].progress.status
+          ),
           wordItem: data.wordsByTopicId[1],
-        },
-        {
-          id: uuid(),
-          gameComponent: SwipeCorrectTwo,
-          wordItem: data.wordsByTopicId[2],
-        },
-        {
-          id: uuid(),
-          gameComponent: SwipeCorrectFour,
-          wordItem: data.wordsByTopicId[3],
         },
       ]);
   }, [data]);
@@ -73,7 +118,7 @@ const Game = (props) => {
     <MainWrapper>
       {data &&
         gameCourse.map((gameItem, index) => {
-          if (index === currentWord) {
+          if (index === gameProgress) {
             return (
               <CompleteComposition
                 key={gameItem.id}
