@@ -3,7 +3,7 @@ import { useSpeakDispatch } from "context/SpeakContext";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 
-import { MainWrapper, CenterItem } from "./SwipeCorrect4.style";
+import { MainWrapper, CenterItem } from "./SwipeCorrect.style";
 
 import { ReactComponent as LearnIcon } from "assets/learn.svg";
 import getRandomInt from "helpers/getRandomInt";
@@ -11,15 +11,13 @@ import getUniqueRandomInts from "helpers/getUniqueRandomInts";
 import didElementFits from "helpers/didElementFits";
 import WordItem from "./WordItem";
 
-const howManyWordsDisplay = 4;
-
-const genWordsToPlay = (wordItem, allWords) => {
+const genWordsToPlay = (wordsCount, wordItem, allWords) => {
   let wordsToPlay = [];
   const allWordsWithoutCorrect = allWords.filter(
     (word) => word.eng !== wordItem.eng
   );
   const randomIndexes = getUniqueRandomInts(
-    howManyWordsDisplay - 1,
+    wordsCount - 1,
     0,
     allWordsWithoutCorrect.length
   );
@@ -29,7 +27,7 @@ const genWordsToPlay = (wordItem, allWords) => {
     return { ...item, correct: false };
   });
 
-  wordsToPlay.splice(getRandomInt(0, howManyWordsDisplay), 0, {
+  wordsToPlay.splice(getRandomInt(0, wordsCount), 0, {
     ...wordItem,
     correct: true,
   });
@@ -37,10 +35,18 @@ const genWordsToPlay = (wordItem, allWords) => {
   return wordsToPlay;
 };
 
-const SwipeCorrect4 = ({ wordItem, allWords, onComplete, onFail }) => {
+const SwipeCorrect4 = ({
+  wordsCount,
+  wordItem,
+  allWords,
+  onComplete,
+  onFail,
+}) => {
   const { speakText } = useSpeakDispatch();
-  const wordsToPlay = useMemo(() => genWordsToPlay(wordItem, allWords), []);
-  console.log(wordsToPlay);
+  const wordsToPlay = useMemo(
+    () => genWordsToPlay(wordsCount, wordItem, allWords),
+    []
+  );
 
   let pointerRef = useRef(null);
   const itemRefs = useMemo(() =>
@@ -93,7 +99,7 @@ const SwipeCorrect4 = ({ wordItem, allWords, onComplete, onFail }) => {
   }, [onDragStart, onDrag, onDragEnd]);
 
   return (
-    <MainWrapper>
+    <MainWrapper wordsCount={wordsCount}>
       <CenterItem ref={pointerRef}>
         <LearnIcon />
       </CenterItem>

@@ -10,7 +10,8 @@ import useWordsByTopicId from "apollo/useWordsByTopicId";
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
 import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
-import SwipeCorrect4 from "components/gameTypes/SwipeCorrect4/SwipeCorrect4";
+import SwipeCorrectFour from "components/gameTypes/SwipeCorrectFour/SwipeCorrectFour";
+import SwipeCorrectTwo from "components/gameTypes/SwipeCorrectTwo/SwipeCorrectTwo";
 import TrueFalse from "components/gameTypes/TrueFalse/TrueFalse";
 import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 
@@ -52,17 +53,17 @@ const Game = (props) => {
       setGameCourse([
         {
           id: uuid(),
-          gameComponent: SwipeCorrect4,
+          gameComponent: SwipeCorrectFour,
           wordItem: data.wordsByTopicId[1],
         },
         {
           id: uuid(),
-          gameComponent: SwipeCorrect4,
+          gameComponent: SwipeCorrectTwo,
           wordItem: data.wordsByTopicId[2],
         },
         {
           id: uuid(),
-          gameComponent: SwipeCorrect4,
+          gameComponent: SwipeCorrectFour,
           wordItem: data.wordsByTopicId[3],
         },
       ]);
