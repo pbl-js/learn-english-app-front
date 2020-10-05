@@ -13,15 +13,17 @@ import ProgressIcon from "components/ProgressIcon/ProgressIcon";
 import SlideInModal from "layouts/SlideInModal/SlideInModal";
 import TopicDetailsModal from "components/TopicDetailsModal/TopicDetailsModal";
 
-const statusType = (status, learningProgress, masteringProgress) => {
+const statusType = (progress) => {
+  const status = progress.status;
+
   if (status === "locked") {
     return <LockIcon />;
   } else if (status === "normal") {
     return null;
   } else if (status === "learning") {
-    return <ProgressStatus progress={learningProgress} />;
+    return <ProgressStatus progressData={progress} />;
   } else if (status === "mastering") {
-    return <ProgressStatus progress={masteringProgress} mastering={1} />;
+    return <ProgressStatus progressData={progress} />;
   } else if (status === "complete") {
     return <ProgressIcon complete={1} />;
   }
@@ -42,9 +44,7 @@ const TopicItem = ({ to, color, topicItem }) => {
       >
         {title}
 
-        <ProgressWraper>
-          {statusType(status, learningProgress, masteringProgress)}
-        </ProgressWraper>
+        <ProgressWraper>{statusType(progress)}</ProgressWraper>
       </LinkWrapper>
 
       {status !== "locked" ? <InfoIcon onClick={() => toggleOpen()} /> : null}

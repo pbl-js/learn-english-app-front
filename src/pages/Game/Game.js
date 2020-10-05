@@ -124,7 +124,7 @@ const Game = (props) => {
             return null;
           }
         })}
-      <GameFooter />
+      <GameFooter topicId={handle} />
     </MainWrapper>
   );
 };

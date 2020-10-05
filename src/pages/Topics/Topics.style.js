@@ -18,34 +18,6 @@ export const MainWrapper = styled.div`
   }
 `;
 
-export const LastTopicWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
-
-  h1 {
-    ${mediumUppercaseText}
-  }
-
-  h2 {
-    ${bigNormalText}
-  }
-
-  div {
-    height: 12px;
-    width: 140px;
-  }
-
-  button {
-    ${bigButton}
-    margin-right: auto;
-  }
-
-  @media ${breakPoints.tablet} {
-    grid-gap: 30px;
-  }
-`;
-
 export const SectionsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;

@@ -16,11 +16,18 @@ const MainWrapper = styled.div`
   }
 `;
 
-const ProgressStatus = ({ mastering, progress, complete }) => {
+const ProgressStatus = ({ progressData }) => {
+  const { status, learningProgress, masteringProgress } = progressData;
+  const isMastering = status === "mastering" ? true : false;
+  const isComplete = status === "complete" ? true : false;
+
   return (
     <MainWrapper>
-      <ProgressBar progress={progress} mastering={mastering} />
-      <ProgressIcon mastering={mastering} complete={complete} />
+      <ProgressBar
+        progress={isMastering ? masteringProgress : learningProgress}
+        mastering={isMastering}
+      />
+      <ProgressIcon mastering={isMastering} complete={isComplete} />
     </MainWrapper>
   );
 };

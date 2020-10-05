@@ -6,17 +6,15 @@ import { animations } from "theme/theme";
 import useData from "./Topics.fetch";
 import {
   MainWrapper,
-  LastTopicWrapper,
   SectionsWrapper,
   SectionIndicator,
   InnerSectionIndicator,
   TopicIndicator,
   TitleIndicator,
 } from "./Topics.style";
+import BigTopicItem from "components/BigTopicItem/BigTopicItem";
 import SectionSlider from "components/SectionSlider/SectionSlider";
 import TopicItem from "components/TopicItem/TopicItem";
-import ProgressStatus from "components/ProgressStatus/ProgressStatus";
-import { ReactComponent as Play } from "assets/play.svg";
 
 const sectionsCount = 13;
 const topicsPerSection = 15;
@@ -51,16 +49,7 @@ const Topics = () => {
 
   return (
     <MainWrapper>
-      <LastTopicWrapper color={"#e67e22"}>
-        <h1>Jedzenie i picie</h1>
-        <h2>Warzywa Ciąg dalszy</h2>
-        <div>
-          <ProgressStatus progress={{ value: 20, total: 100 }} mastering={1} />
-        </div>
-        <button>
-          Kontynuuj <Play />
-        </button>
-      </LastTopicWrapper>
+      {data && <BigTopicItem topicItem={data[1].topics[0]} isContinue={true} />}
 
       <SectionsWrapper>
         {!loading && canAnimate
