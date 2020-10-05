@@ -2,7 +2,11 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 
 import ProgressStatus from "components/ProgressStatus/ProgressStatus";
-import { MainWrapper, ShowTopicData } from "./GameFooter.style";
+import {
+  MainWrapper,
+  ShowTopicData,
+  ProgressWrapper,
+} from "./GameFooter.style";
 import { ReactComponent as Arrow } from "assets/arrow.svg";
 
 const GET_SINGLE_TOPIC = gql`
@@ -29,6 +33,18 @@ const GameFooter = ({ topicId }) => {
     variables: { topicId },
   });
 
+  const calcPercent = () => {
+    const progress = data.singleTopic.progress;
+    const isMastering = progress.status === "mastering";
+    const total = isMastering
+      ? progress.masteringProgress.total
+      : progress.learningProgress.total;
+    const value = isMastering
+      ? progress.masteringProgress.value
+      : progress.learningProgress.value;
+    return (total / 100) * value;
+  };
+
   data && console.log(data.singleTopic);
 
   return (
@@ -38,7 +54,12 @@ const GameFooter = ({ topicId }) => {
         {data && data.singleTopic.title}
       </ShowTopicData>
 
-      {data && <ProgressStatus progressData={data.singleTopic.progress} />}
+      {data && (
+        <ProgressWrapper>
+          {calcPercent() + "%"}
+          <ProgressStatus progressData={data.singleTopic.progress} />
+        </ProgressWrapper>
+      )}
     </MainWrapper>
   );
 };

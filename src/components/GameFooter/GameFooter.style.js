@@ -34,3 +34,21 @@ export const ShowTopicData = styled.div`
     margin-right: 15px;
   }
 `;
+
+export const ProgressWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 120px;
+  height: 10px;
+  ${normalText}
+
+  & > div {
+    margin-left: 10px;
+  }
+
+  @media ${breakPoints.tablet} {
+    width: 140px;
+    height: 12px;
+  }
+`;
