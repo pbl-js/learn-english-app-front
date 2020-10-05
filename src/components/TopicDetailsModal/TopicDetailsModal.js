@@ -60,21 +60,21 @@ const CloseButton = styled(CloseIcon)`
   }
 `;
 
-const TopicDetailsModal = ({ closeModal, color, topicItem }) => {
+const TopicDetailsModal = ({ closeModal, topicItem, withButton }) => {
   const { data, loading, error } = useWordsByTopicId(topicItem._id);
 
-  const darkColor = darken("0.2", color);
-  const lightColor = lighten("0.05", color);
+  const darkColor = darken("0.2", topicItem.section.color);
+  const lightColor = lighten("0.05", topicItem.section.color);
 
   return (
     <ModalPortal>
-      <MainWrapper darkColor={darkColor} color={color}>
+      <MainWrapper darkColor={darkColor} color={topicItem.section.color}>
         <CloseButton onClick={closeModal} />
 
         <InnerWrapper>
-          <BigTopicItem topicItem={topicItem} />
+          <BigTopicItem topicItem={topicItem} withButton={withButton} />
 
-          <Divider color={color} />
+          <Divider color={topicItem.section.color} />
 
           <ListWrapper>
             {data &&

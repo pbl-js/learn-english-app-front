@@ -50,13 +50,7 @@ const TopicItem = ({ to, color, topicItem }) => {
       {status !== "locked" ? <InfoIcon onClick={() => toggleOpen()} /> : null}
 
       <SlideInModal isOpen={isOpen}>
-        <TopicDetailsModal
-          closeModal={toggleOpen}
-          color={color}
-          title={title}
-          img={img}
-          topicItem={topicItem}
-        />
+        <TopicDetailsModal closeModal={toggleOpen} topicItem={topicItem} />
       </SlideInModal>
     </MainWrapper>
   );

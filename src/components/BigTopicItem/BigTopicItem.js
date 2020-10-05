@@ -37,7 +37,7 @@ export const MainWrapper = styled.div`
   }
 `;
 
-const BigTopicItem = ({ topicItem, isContinue }) => {
+const BigTopicItem = ({ topicItem, isContinue, withButton = true }) => {
   return (
     <MainWrapper color={topicItem.section.color} isContinue={isContinue}>
       <h1>{topicItem.section.title}</h1>
@@ -47,9 +47,11 @@ const BigTopicItem = ({ topicItem, isContinue }) => {
         <ProgressStatus progressData={topicItem.progress} />
       </div>
 
-      <button>
-        {isContinue ? "Kontynuuj" : "start"} <Play />
-      </button>
+      {withButton && (
+        <button>
+          {isContinue ? "Kontynuuj" : "start"} <Play />
+        </button>
+      )}
     </MainWrapper>
   );
 };
