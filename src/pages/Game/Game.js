@@ -8,6 +8,7 @@ import uuid from "react-uuid";
 import useWordsByTopicId from "apollo/useWordsByTopicId";
 import getRandomInt from "helpers/getRandomInt";
 
+import GameFooter from "components/GameFooter/GameFooter";
 import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 ////////////////////////////////////////////////////////////////////////////////////////
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
@@ -18,13 +19,13 @@ import SwipeCorrectTwo from "components/gameTypes/SwipeCorrectTwo/SwipeCorrectTw
 import TrueFalse from "components/gameTypes/TrueFalse/TrueFalse";
 
 const MainWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  position: relative;
   overflow: hidden;
 `;
 
@@ -49,8 +50,7 @@ const genGameComponent = (status) => {
 
   switch (status) {
     case "unseen":
-      // return FirstTime;
-      return learningRandomComponent();
+      return FirstTime;
     case "learning":
       return learningRandomComponent();
     case "mastering":
@@ -65,8 +65,7 @@ const genGameComponent = (status) => {
 const genGameCourse = (wordItem) => {
   return {
     id: uuid(),
-    // gameComponent: genGameComponent(wordItem.progress.status),
-    gameComponent: SwipeCorrectFour,
+    gameComponent: genGameComponent(wordItem.progress.status),
     wordItem: wordItem,
   };
 };
@@ -125,6 +124,7 @@ const Game = (props) => {
             return null;
           }
         })}
+      <GameFooter />
     </MainWrapper>
   );
 };
