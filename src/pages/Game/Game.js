@@ -5,7 +5,7 @@ import { useTimerDispatch } from "context/TimerContext";
 import { useBackgroundDispatch } from "context/BackgroundContext";
 import uuid from "react-uuid";
 
-import useWordsByTopicId from "apollo/useWordsByTopicId";
+import useGameData from "./Game.data";
 import getRandomInt from "helpers/getRandomInt";
 
 import GameFooter from "components/GameFooter/GameFooter";
@@ -56,7 +56,7 @@ const genGameComponent = (status) => {
     case "mastering":
       return masteringRandomComponent();
     case "complete":
-      return FirstTime;
+      return null;
     default:
       break;
   }
@@ -75,7 +75,7 @@ const Game = (props) => {
   const { handle } = useParams();
   const { setRandomTheme } = useBackgroundDispatch();
 
-  const { data, error, loading } = useWordsByTopicId(handle);
+  const { data, error, loading } = useGameData(handle);
   const [gameProgress, setGameProgress] = useState(0);
   const [gameCourse, setGameCourse] = useState([]);
 

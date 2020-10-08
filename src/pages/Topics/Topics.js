@@ -49,7 +49,7 @@ const Topics = () => {
 
   return (
     <MainWrapper>
-      {data && <BigTopicItem topicItem={data[1].topics[0]} isContinue={true} />}
+      {data && <BigTopicItem topicItem={data[0].topics[0]} isContinue={true} />}
 
       <SectionsWrapper>
         {!loading && canAnimate

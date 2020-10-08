@@ -31,8 +31,6 @@ const Pause = () => {
   const dispatch = useTimerDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log("object");
-
   const pauseGame = useCallback(() => {
     dispatch({ type: "STOP_CLOCK" });
     setIsOpen(true);

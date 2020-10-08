@@ -52,7 +52,7 @@ const GameFooter = ({ topicId }) => {
     const value = isMastering
       ? progress.masteringProgress.value
       : progress.learningProgress.value;
-    return (total / 100) * value;
+    return Math.round((value * 100) / total);
   };
 
   if (data) {
