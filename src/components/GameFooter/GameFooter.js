@@ -55,8 +55,6 @@ const GameFooter = ({ topicId }) => {
     return (total / 100) * value;
   };
 
-  data && console.log(data.singleTopic);
-
   if (data) {
     return (
       <>

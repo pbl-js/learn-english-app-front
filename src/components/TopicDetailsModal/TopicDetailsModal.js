@@ -79,12 +79,7 @@ const TopicDetailsModal = ({ closeModal, topicItem, withButton }) => {
           <ListWrapper>
             {data &&
               data.wordsByTopicId.map((word) => (
-                <CollectionWordItem
-                  key={word._id}
-                  img={word.img}
-                  title={{ eng: word.eng, pl: word.pl }}
-                  progress={word.progress}
-                />
+                <CollectionWordItem key={word._id} wordItem={word} />
               ))}
           </ListWrapper>
         </InnerWrapper>

@@ -16,12 +16,7 @@ const Collection = () => {
           data.map((topic) => (
             <CollectionTopicToggle title={topic.title} key={topic._id}>
               {topic.words.map((word) => (
-                <CollectionWordItem
-                  key={word._id}
-                  img={word.img}
-                  title={{ eng: word.eng, pl: word.pl }}
-                  progress={word.progress}
-                />
+                <CollectionWordItem key={word._id} wordItem={word} />
               ))}
             </CollectionTopicToggle>
           ))}
