@@ -14,6 +14,7 @@ import CompleteComposition from "components/gameTypes/CompleteComposition/Comple
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
 // import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
+import FillWithPart from "components/gameTypes/FillWithPart/FillWithPart";
 import SwipeCorrectFour from "components/gameTypes/SwipeCorrectFour/SwipeCorrectFour";
 import SwipeCorrectTwo from "components/gameTypes/SwipeCorrectTwo/SwipeCorrectTwo";
 import TrueFalse from "components/gameTypes/TrueFalse/TrueFalse";
@@ -48,18 +49,20 @@ const genGameComponent = (status) => {
     return learningGameVariants[index];
   };
 
-  switch (status) {
-    case "unseen":
-      return FirstTime;
-    case "learning":
-      return learningRandomComponent();
-    case "mastering":
-      return masteringRandomComponent();
-    case "complete":
-      return null;
-    default:
-      break;
-  }
+  // switch (status) {
+  //   case "unseen":
+  //     return FirstTime;
+  //   case "learning":
+  //     return learningRandomComponent();
+  //   case "mastering":
+  //     return masteringRandomComponent();
+  //   case "complete":
+  //     return null;
+  //   default:
+  //     break;
+  // }
+
+  return FillWithPart;
 };
 
 const genGameCourse = (wordItem) => {
