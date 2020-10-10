@@ -37,12 +37,26 @@ export const colors = {
   purpleModalDark: "#221447",
   purpleModalMedium: "#512883",
 
-  orangeGradient: "linear-gradient(135deg, #b54798, #e67625)",
-  blueGradient: "linear-gradient(135deg, #4353b3, #38207f)",
-  greenGradient: "linear-gradient(135deg, #45a77e, #02929b)",
-  purpleGradient: "linear-gradient(135deg, #803a9e, #4d1360)",
-  colorfulGradient:
-    "linear-gradient(180deg,#b54798,#e67625,#4353b3,#38207f,#45a77e,#02929b,#803a9e,#4d1360)",
+  orangeTheme: {
+    gradient: "linear-gradient(135deg, #b54798, #e67625)",
+    color: "#CF6161",
+  },
+  blueTheme: {
+    gradient: "linear-gradient(135deg, #4353b3, #38207f)",
+    color: "#3D3A99",
+  },
+  greenTheme: {
+    gradient: "linear-gradient(135deg, #45a77e, #02929b)",
+    color: "#279C8E",
+  },
+  purpleTheme: {
+    gradient: "linear-gradient(135deg, #803a9e, #4d1360)",
+    color: "#66267F",
+  },
+  colorfulTheme: {
+    gradient:
+      "linear-gradient(180deg,#b54798,#e67625,#4353b3,#38207f,#45a77e,#02929b,#803a9e,#4d1360)",
+  },
 };
 
 export const layout = {

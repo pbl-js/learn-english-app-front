@@ -9,20 +9,5 @@ export default styled.div`
   width: 100%;
   min-height: 100vh;
   height: 100%;
-  background-image: ${({ color }) => {
-    switch (color) {
-      case "colorful":
-        return colors.colorfulGradient;
-      case "orange":
-        return colors.orangeGradient;
-      case "blue":
-        return colors.blueGradient;
-      case "green":
-        return colors.greenGradient;
-      case "purple":
-        return colors.purpleGradient;
-      default:
-        return colors.purpleGradient;
-    }
-  }};
+  background-image: ${({ gradient }) => gradient};
 `;

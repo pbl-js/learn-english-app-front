@@ -16,25 +16,25 @@ const changeBackgroundWithDelay = (ref, gradient) => {
 };
 
 const GradientLayout = ({ children }) => {
-  const theme = useBackgroundState();
+  const background = useBackgroundState();
   let backgroundRef = useRef(null);
 
   const gradientComponents = ["orange", "blue", "green", "purple"];
 
   useEffect(() => {
-    switch (theme) {
+    switch (background) {
       case "orange":
-        return changeBackgroundWithDelay(backgroundRef, colors.orangeGradient);
+        return changeBackgroundWithDelay(backgroundRef, background.gradient);
       case "blue":
-        return changeBackgroundWithDelay(backgroundRef, colors.blueGradient);
+        return changeBackgroundWithDelay(backgroundRef, background.gradient);
       case "green":
-        return changeBackgroundWithDelay(backgroundRef, colors.greenGradient);
+        return changeBackgroundWithDelay(backgroundRef, background.gradient);
       case "purple":
-        return changeBackgroundWithDelay(backgroundRef, colors.purpleGradient);
+        return changeBackgroundWithDelay(backgroundRef, background.gradient);
       default:
-        return changeBackgroundWithDelay(backgroundRef, colors.purpleGradient);
+        return changeBackgroundWithDelay(backgroundRef, background.gradient);
     }
-  }, [theme]);
+  }, [background]);
 
   return (
     <>
@@ -42,14 +42,18 @@ const GradientLayout = ({ children }) => {
 
       {gradientComponents.map(
         (item) =>
-          item === theme && (
-            <GradientBackgroundTop key={item} index={1} color={theme} />
+          item === background.theme && (
+            <GradientBackgroundTop
+              key={item}
+              index={1}
+              gradient={background.gradient}
+            />
           )
       )}
 
       <GradientBackground
         index={0}
-        color={theme}
+        gradient={background.gradient}
         ref={(el) => (backgroundRef = el)}
       />
     </>
