@@ -6,8 +6,9 @@ import { breakPoints, colors } from "theme/theme";
 
 import ProgressStatus from "components/ProgressStatus/ProgressStatus";
 import { ReactComponent as Play } from "assets/play.svg";
+import { ReactComponent as Reset } from "assets/backArrow.svg";
 
-export const MainWrapper = styled.div`
+const MainWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 20px;
@@ -20,38 +21,58 @@ export const MainWrapper = styled.div`
     ${bigNormalText}
   }
 
-  & > div {
-    height: 12px;
-    width: 140px;
-  }
-
-  & > button {
-    ${bigButton}
-    background-color: ${({ isContinue, color }) =>
-      isContinue ? colors.orangeMenu : color};
-    margin-right: auto;
-  }
-
   @media ${breakPoints.tablet} {
     grid-gap: 30px;
   }
 `;
 
-const BigTopicItem = ({ topicItem, isContinue, withButton = true }) => {
+const ProgressStatusWrapper = styled.div`
+  height: 12px;
+  width: 140px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 20px;
+
+  button {
+    ${bigButton}
+    background-color: ${({ isContinue, color }) =>
+      isContinue ? colors.orangeMenu : color};
+    margin-right: auto;
+  }
+`;
+
+const BigTopicItem = ({
+  topicItem,
+  isContinue,
+  withButton = true,
+  resetTopic = false,
+}) => {
   return (
-    <MainWrapper color={topicItem.section.color} isContinue={isContinue}>
+    <MainWrapper>
       <h1>{topicItem.section.title}</h1>
       <h2>{topicItem.title}</h2>
 
-      <div>
+      <ProgressStatusWrapper>
         <ProgressStatus progressData={topicItem.progress} />
-      </div>
+      </ProgressStatusWrapper>
 
-      {withButton && (
-        <button>
-          {isContinue ? "Kontynuuj" : "start"} <Play />
-        </button>
-      )}
+      <ButtonWrapper color={topicItem.section.color} isContinue={isContinue}>
+        {withButton && (
+          <button>
+            {isContinue ? "Kontynuuj" : "start"} <Play />
+          </button>
+        )}
+
+        {resetTopic && (
+          <button onClick={resetTopic}>
+            Resetuj <Reset />
+          </button>
+        )}
+      </ButtonWrapper>
     </MainWrapper>
   );
 };
