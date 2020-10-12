@@ -1,11 +1,6 @@
-import React, {
-  useEffect,
-  useRef,
-  useMemo,
-  useCallback,
-  useState,
-} from "react";
+import React, { useEffect, useRef, useMemo, useCallback } from "react";
 import { useSpeakDispatch } from "context/SpeakContext";
+import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 
 import { MainWrapper, CenterItem } from "./SwipeCorrect.style";
@@ -15,6 +10,8 @@ import getRandomInt from "helpers/getRandomInt";
 import getUniqueRandomInts from "helpers/getUniqueRandomInts";
 import WordItem from "./WordItem";
 import { onDragStart, onDrag, onDragEnd } from "./SwipeCorrect.drag";
+
+gsap.registerPlugin(Draggable);
 
 const genWordsToPlay = (wordsCount, wordItem, allWords) => {
   let wordsToPlay = [];

@@ -28,6 +28,7 @@ const MainWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  padding: 70px 0;
 `;
 
 const genGameComponent = (status) => {

@@ -4,8 +4,10 @@ import { colors, fontSize, fontWeight } from "theme/theme";
 
 import GradientBackground from "components/GradientBackground/GradientBackground";
 
-export const GradientWrapper = styled(GradientBackground)`
-  ${flexColumnCenter}
+export const GradientWrapper = styled.div`
+  ${flexColumnCenter};
+  background-image: ${colors.purpleTheme.gradient};
+  height: 100vh;
 `;
 
 export const ModalWrapper = styled.div`
