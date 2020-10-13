@@ -14,10 +14,7 @@ export const MainWrapper = styled.div`
 `;
 
 export const PartsWrapper = styled.div`
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: repeat(${({ partsCount }) => partsCount}, auto);
-  grid-gap: 20px;
+  position: relative;
   width: 100%;
   height: 100%;
 `;

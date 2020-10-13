@@ -33,7 +33,12 @@ const MainWrapper = styled.div`
 
 const genGameComponent = (status) => {
   const learningRandomComponent = () => {
-    const learningGameVariants = [SwipeCorrectTwo, SwipeCorrectFour];
+    const learningGameVariants = [
+      SwipeCorrectTwo,
+      SwipeCorrectFour,
+      FillWithPart,
+      TrueFalse,
+    ];
     const index = getRandomInt(0, learningGameVariants.length);
 
     return learningGameVariants[index];
@@ -44,24 +49,25 @@ const genGameComponent = (status) => {
       SwipeCorrectTwo,
       SwipeCorrectFour,
       LetterByLetter,
+      FillWithPart,
     ];
     const index = getRandomInt(0, learningGameVariants.length);
 
     return learningGameVariants[index];
   };
 
-  // switch (status) {
-  //   case "unseen":
-  //     return FirstTime;
-  //   case "learning":
-  //     return learningRandomComponent();
-  //   case "mastering":
-  //     return masteringRandomComponent();
-  //   case "complete":
-  //     return null;
-  //   default:
-  //     break;
-  // }
+  switch (status) {
+    case "unseen":
+      return FirstTime;
+    case "learning":
+      return learningRandomComponent();
+    case "mastering":
+      return masteringRandomComponent();
+    case "complete":
+      return null;
+    default:
+      break;
+  }
 
   return FillWithPart;
 };

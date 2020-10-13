@@ -10,6 +10,9 @@ import { onDragStart, onDrag, onDragEnd } from "./FillWithPart.drag";
 gsap.registerPlugin(Draggable);
 
 const MainWrapper = styled.div`
+  position: absolute;
+  top: ${({ position }) => position.top + "%"};
+  left: ${({ position }) => position.left + "%"};
   ${flexColumnCenter};
   width: 100px;
   height: 100px;
@@ -25,6 +28,10 @@ const WordPart = React.forwardRef(
     useEffect(() => {
       const currentRefs = partRefs.map((ref) => ref.current);
 
+      gsap.config({
+        units: { left: "%", top: "%" },
+      });
+
       Draggable.create(ref.current, {
         onDragStart,
         onDragStartParams: [wrapperRef.current],
@@ -36,11 +43,12 @@ const WordPart = React.forwardRef(
           (drag) => checkCorrectAnswer(wordPart, ref, drag),
         ],
         bounds: "#gameContainer",
+        type: "top,left",
       });
     }, [wordPart]);
 
     return (
-      <MainWrapper ref={ref} color={color}>
+      <MainWrapper ref={ref} color={color} position={wordPart.position}>
         {wordPart.text}
       </MainWrapper>
     );

@@ -17,6 +17,7 @@ import {
 } from "./FillWithPart.style";
 import WordPart from "./WordPart";
 import WordImage from "components/WordImage/WordImage";
+import getRandomInt from "helpers/getRandomInt";
 
 const genWordParts = (wordItem) => {
   let parts = [];
@@ -26,6 +27,10 @@ const genWordParts = (wordItem) => {
       id: uuid(),
       text: wordItem.eng.slice(index, index + 2),
       current: index === 0 ? true : false,
+      position: {
+        top: getRandomInt(0, 90),
+        left: getRandomInt(0, 90),
+      },
     };
 
     parts.push(wordPart);
@@ -34,7 +39,7 @@ const genWordParts = (wordItem) => {
   return parts;
 };
 
-const FillWithPart = ({ wordItem }) => {
+const FillWithPart = ({ wordItem, onComplete }) => {
   const background = useBackgroundState();
 
   const [parts, setParts] = useState(genWordParts(wordItem));
@@ -80,8 +85,8 @@ const FillWithPart = ({ wordItem }) => {
       });
     } else {
       gsap.to(ref.current, {
-        x: drag.startX,
-        y: drag.startY,
+        left: wordPart.position.left,
+        top: wordPart.position.top,
         duration: 0.2,
       });
 
@@ -106,19 +111,11 @@ const FillWithPart = ({ wordItem }) => {
     []
   );
 
-  // Set random position
-  useLayoutEffect(() => {
-    const w = partsWrapperRef.current.offsetWidth;
-    const h = partsWrapperRef.current.offsetHeight;
-    const currentRefs = partRefs.map((ref) => ref.current);
-
-    currentRefs.forEach((ref) => {
-      gsap.set(ref, {
-        x: gsap.utils.random(0, w),
-        y: gsap.utils.random(0, h - 150),
-      });
-    });
-  }, [partRefs]);
+  useEffect(() => {
+    if (correctLetters === wordItem.eng) {
+      onComplete();
+    }
+  }, [correctLetters]);
 
   return (
     <MainWrapper>
