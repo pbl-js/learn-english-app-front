@@ -31,5 +31,9 @@ export const WordToFillWrapper = styled.div`
   ${flexRowCenter};
   font-size: ${fontSize.m};
   font-weight: ${fontWeight.semiBold};
+`;
+
+export const BlankLetters = styled.div`
+  margin-left: 5px;
   letter-spacing: 5px;
 `;

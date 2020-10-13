@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { gsap } from "gsap";
+import { Draggable } from "gsap/Draggable";
+
 import { flexColumnCenter } from "theme/mixins";
 import { fontSize, fontWeight } from "theme/theme";
+import { onDragStart, onDrag, onDragEnd } from "./FillWithPart.drag";
+
+gsap.registerPlugin(Draggable);
 
 const MainWrapper = styled.div`
   ${flexColumnCenter};
@@ -14,12 +20,31 @@ const MainWrapper = styled.div`
   font-weight: ${fontWeight.semiBold};
 `;
 
-const WordPart = React.forwardRef(({ name, color }, ref) => {
-  return (
-    <MainWrapper ref={ref} color={color}>
-      {name}
-    </MainWrapper>
-  );
-});
+const WordPart = React.forwardRef(
+  ({ wordPart, color, wrapperRef, partRefs, checkCorrectAnswer }, ref) => {
+    useEffect(() => {
+      const currentRefs = partRefs.map((ref) => ref.current);
+
+      Draggable.create(ref.current, {
+        onDragStart,
+        onDragStartParams: [wrapperRef.current],
+        onDrag,
+        onDragParams: [wrapperRef.current, currentRefs],
+        onDragEnd,
+        onDragEndParams: [
+          wrapperRef.current,
+          (drag) => checkCorrectAnswer(wordPart, ref, drag),
+        ],
+        bounds: "#gameContainer",
+      });
+    }, [wordPart]);
+
+    return (
+      <MainWrapper ref={ref} color={color}>
+        {wordPart.text}
+      </MainWrapper>
+    );
+  }
+);
 
 export default WordPart;

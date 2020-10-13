@@ -111,7 +111,7 @@ const Game = (props) => {
   }, [data]);
 
   return (
-    <MainWrapper>
+    <MainWrapper id="gameContainer">
       {data &&
         gameCourse.map((gameItem, index) => {
           if (index === gameProgress) {

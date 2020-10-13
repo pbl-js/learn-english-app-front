@@ -1,6 +1,11 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { gsap } from "gsap";
-import { Draggable } from "gsap/Draggable";
 import uuid from "react-uuid";
 import { useBackgroundState } from "context/BackgroundContext";
 
@@ -8,11 +13,10 @@ import {
   MainWrapper,
   PartsWrapper,
   WordToFillWrapper,
+  BlankLetters,
 } from "./FillWithPart.style";
 import WordPart from "./WordPart";
 import WordImage from "components/WordImage/WordImage";
-
-gsap.registerPlugin(Draggable);
 
 const genWordParts = (wordItem) => {
   let parts = [];
@@ -21,6 +25,7 @@ const genWordParts = (wordItem) => {
     const wordPart = {
       id: uuid(),
       text: wordItem.eng.slice(index, index + 2),
+      current: index === 0 ? true : false,
     };
 
     parts.push(wordPart);
@@ -29,65 +34,91 @@ const genWordParts = (wordItem) => {
   return parts;
 };
 
-function onDrag(currentRefs) {
-  // console.log(this);
-  let i = currentRefs.length;
-
-  while (--i > -1) {
-    if (this.hitTest(currentRefs[i], "1%")) {
-      const direction = this.getDirection(currentRefs[i]);
-      console.log(direction);
-      const isLeft = direction.includes("left");
-      const isTop = direction.includes("up");
-
-      const genMovement = () => {};
-
-      gsap.to(currentRefs[i], {
-        x: isLeft ? "+=10" : "-=10",
-        y: isTop ? "+=10" : "-=10",
-        duration: 0.1,
-      });
-    }
-  }
-}
-
 const FillWithPart = ({ wordItem }) => {
   const background = useBackgroundState();
-  const parts = genWordParts(wordItem);
 
+  const [parts, setParts] = useState(genWordParts(wordItem));
+
+  const [correctLetters, setCorrectLetters] = useState("");
+
+  const genBlankLetters = useCallback(() => {
+    const blankLettersCount = wordItem.eng.length - correctLetters.length;
+    let letters = "";
+    for (let index = 0; index < blankLettersCount; index++) {
+      letters = letters + "_";
+    }
+    return letters;
+  }, [correctLetters, wordItem]);
+
+  const checkCorrectAnswer = (wordPart, ref, drag) => {
+    if (wordPart.current) {
+      gsap.to(ref.current, {
+        scale: 0,
+        duration: 0.2,
+      });
+
+      setCorrectLetters((prevState) => {
+        return `${prevState}${wordPart.text}`;
+      });
+
+      setParts((prevState) => {
+        const actualCurrentIndex = prevState.findIndex(
+          (item) => item.current === true
+        );
+
+        const newstate = prevState.map((item, index) => {
+          if (index === actualCurrentIndex) {
+            return { ...item, current: false };
+          } else if (index == actualCurrentIndex + 1) {
+            return { ...item, current: true };
+          } else {
+            return item;
+          }
+        });
+
+        return newstate;
+      });
+    } else {
+      gsap.to(ref.current, {
+        x: drag.startX,
+        y: drag.startY,
+        duration: 0.2,
+      });
+
+      const tl = gsap.timeline();
+
+      tl.to(wordToFillWrapper.current, {
+        x: 40,
+        duration: 0.05,
+      }).to(wordToFillWrapper.current, {
+        x: 0,
+        duration: 0.4,
+        ease: "Bounce.easeOut",
+      });
+    }
+  };
+
+  // Refs
   const partsWrapperRef = useRef(null);
+  const wordToFillWrapper = useRef(null);
   const partRefs = useCallback(
     Array.from(parts, () => React.createRef()),
     []
   );
 
-  console.log(partRefs);
-
+  // Set random position
   useLayoutEffect(() => {
     const w = partsWrapperRef.current.offsetWidth;
     const h = partsWrapperRef.current.offsetHeight;
     const currentRefs = partRefs.map((ref) => ref.current);
-    console.log(w);
 
     currentRefs.forEach((ref) => {
       gsap.set(ref, {
-        x: gsap.utils.random(0, w - 250),
-        y: gsap.utils.random(0, h - 100),
+        x: gsap.utils.random(0, w),
+        y: gsap.utils.random(0, h - 150),
       });
     });
-  }, []);
-
-  useEffect(() => {
-    const currentRefs = partRefs.map((ref) => ref.current);
-
-    Draggable.create(
-      partRefs.map((ref) => ref.current),
-      {
-        onDrag: onDrag,
-        onDragParams: [currentRefs],
-      }
-    );
-  }, []);
+  }, [partRefs]);
 
   return (
     <MainWrapper>
@@ -101,13 +132,19 @@ const FillWithPart = ({ wordItem }) => {
           <WordPart
             key={wordPart.id}
             ref={partRefs[index]}
-            name={wordPart.text}
+            wordPart={wordPart}
             color={background.color}
+            wrapperRef={wordToFillWrapper}
+            partRefs={partRefs}
+            checkCorrectAnswer={checkCorrectAnswer}
           />
         ))}
       </PartsWrapper>
 
-      <WordToFillWrapper>lem____</WordToFillWrapper>
+      <WordToFillWrapper ref={wordToFillWrapper}>
+        {correctLetters}
+        <BlankLetters>{genBlankLetters()}</BlankLetters>
+      </WordToFillWrapper>
     </MainWrapper>
   );
 };
