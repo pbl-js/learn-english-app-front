@@ -12,6 +12,29 @@ import getRandomInt from "helpers/getRandomInt";
 const BackgroundStateContext = React.createContext();
 const BackgroundDispatchContext = React.createContext();
 
+const themeTypes = {
+  orange: {
+    theme: "orange",
+    color: colors.orangeTheme.color,
+    gradient: colors.orangeTheme.gradient,
+  },
+  blue: {
+    theme: "blue",
+    color: colors.blueTheme.color,
+    gradient: colors.blueTheme.gradient,
+  },
+  green: {
+    theme: "green",
+    color: colors.greenTheme.color,
+    gradient: colors.greenTheme.gradient,
+  },
+  purple: {
+    theme: "purple",
+    color: colors.purpleTheme.color,
+    gradient: colors.purpleTheme.gradient,
+  },
+};
+
 function timeReducer(state, action) {
   switch (action.type) {
     case "SET_THEME": {
@@ -36,56 +59,32 @@ const BackgroundProvider = ({ children }) => {
     if (location.pathname.includes(routes.topics)) {
       return dispatch({
         type: "SET_THEME",
-        payload: {
-          theme: "orange",
-          color: colors.orangeTheme.color,
-          gradient: colors.orangeTheme.gradient,
-        },
+        payload: themeTypes["orange"],
       });
     } else if (location.pathname.includes(routes.dojo)) {
       return dispatch({
         type: "SET_THEME",
-        payload: {
-          theme: "blue",
-          color: colors.blueTheme.color,
-          gradient: colors.blueTheme.gradient,
-        },
+        payload: themeTypes["blue"],
       });
     } else if (location.pathname.includes(routes.collection)) {
       return dispatch({
         type: "SET_THEME",
-        payload: {
-          theme: "green",
-          color: colors.greenTheme.color,
-          gradient: colors.greenTheme.gradient,
-        },
+        payload: themeTypes["green"],
       });
     } else if (location.pathname.includes(routes.profile)) {
       return dispatch({
         type: "SET_THEME",
-        payload: {
-          theme: "purple",
-          color: colors.purpleTheme.color,
-          gradient: colors.purpleTheme.gradient,
-        },
+        payload: themeTypes["purple"],
       });
     } else if (location.pathname.includes(routes.game)) {
       return dispatch({
         type: "SET_THEME",
-        payload: {
-          theme: "orange",
-          color: colors.orangeTheme.color,
-          gradient: colors.orangeTheme.gradient,
-        },
+        payload: themeTypes["orange"],
       });
     } else {
       return dispatch({
         type: "SET_THEME",
-        payload: {
-          theme: "blue",
-          color: colors.blueTheme.color,
-          gradient: colors.blueTheme.gradient,
-        },
+        payload: themeTypes["blue"],
       });
     }
   }, [location]);
@@ -94,7 +93,7 @@ const BackgroundProvider = ({ children }) => {
     const variants = ["orange", "blue", "green", "purple"];
     const randomIndex = getRandomInt(0, variants.length);
 
-    dispatch({ type: "SET_THEME", payload: { theme: variants[randomIndex] } });
+    dispatch({ type: "SET_THEME", payload: themeTypes[variants[randomIndex]] });
   });
 
   return (

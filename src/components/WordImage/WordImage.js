@@ -3,9 +3,11 @@ import { whiteFilter, bigNormalText } from "theme/mixins";
 import { breakPoints } from "theme/theme";
 
 export default styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
   align-items: center;
+  justify-items: center;
   ${bigNormalText}
   max-width: 250px;
   max-height: 250px;
@@ -15,7 +17,7 @@ export default styled.div`
   img {
     ${whiteFilter}
     width: 100%;
-    height: 100%;
+    max-height: 180px;
   }
 
   p {
