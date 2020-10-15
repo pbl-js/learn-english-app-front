@@ -2,22 +2,25 @@ import styled from "styled-components";
 import { ReactComponent as LearnIcon } from "assets/learn.svg";
 import { ReactComponent as HideIcon } from "assets/hide.svg";
 import { icon } from "theme/mixins";
+import { breakPoints } from "theme/theme";
 
 export const MainWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   justify-items: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  padding-top: 70px;
+
+  @media ${breakPoints.tablet} {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
 `;
 
 export const InnerWrapper = styled.div`
   position: relative;
-  height: 80%;
 `;
 
 export const ColorCircle = styled.span`
@@ -33,18 +36,7 @@ export const ColorCircle = styled.span`
 `;
 
 export const Hide = styled(HideIcon)`
-  position: relative;
   ${icon};
-
-  &::before {
-    content: "HIDE";
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    width: 100px;
-    height: 50px;
-  }
 `;
 
 export const Learn = styled(LearnIcon)`

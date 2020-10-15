@@ -13,15 +13,15 @@ export const mediumUppercaseText = css`
 `;
 
 export const bigNormalText = css`
-  font-size: ${fontSize.l};
+  font-size: ${fontSize.m};
   font-weight: ${fontWeight.bold};
 
   @media ${breakPoints.mobileL} {
-    font-size: ${fontSize.xl};
+    font-size: ${fontSize.l};
   }
 
   @media ${breakPoints.tablet} {
-    font-size: ${fontSize.xxl};
+    font-size: ${fontSize.xl};
   }
 `;
 
