@@ -66,7 +66,7 @@ const WordPart = React.forwardRef(
         onDragEnd,
         onDragEndParams: [
           wrapperRef.current,
-          (drag) => checkCorrectAnswer(wordPart, ref, drag),
+          () => checkCorrectAnswer(wordPart, ref),
         ],
         bounds: "#gameContainer",
         type: "top,left",
@@ -74,7 +74,12 @@ const WordPart = React.forwardRef(
     }, [wordPart]);
 
     return (
-      <MainWrapper ref={ref} color={color} position={wordPart.position}>
+      <MainWrapper
+        ref={ref}
+        color={color}
+        position={wordPart.position}
+        onClick={() => checkCorrectAnswer(wordPart, ref)}
+      >
         {wordPart.text}
       </MainWrapper>
     );

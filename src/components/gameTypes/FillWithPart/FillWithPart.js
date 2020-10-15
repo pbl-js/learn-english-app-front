@@ -8,6 +8,7 @@ import React, {
 import { gsap } from "gsap";
 import uuid from "react-uuid";
 import { useBackgroundState } from "context/BackgroundContext";
+import { useSpeakDispatch } from "context/SpeakContext";
 
 import {
   MainWrapper,
@@ -41,6 +42,7 @@ const genWordParts = (wordItem) => {
 
 const FillWithPart = ({ wordItem, onComplete }) => {
   const background = useBackgroundState();
+  const { speakText } = useSpeakDispatch();
 
   const [parts, setParts] = useState(genWordParts(wordItem));
 
@@ -55,7 +57,7 @@ const FillWithPart = ({ wordItem, onComplete }) => {
     return letters;
   }, [correctLetters, wordItem]);
 
-  const checkCorrectAnswer = (wordPart, ref, drag) => {
+  const checkCorrectAnswer = (wordPart, ref) => {
     if (wordPart.current) {
       gsap.to(ref.current, {
         scale: 0,
@@ -111,6 +113,10 @@ const FillWithPart = ({ wordItem, onComplete }) => {
     Array.from(parts, () => React.createRef()),
     []
   );
+
+  useEffect(() => {
+    speakText(wordItem.eng);
+  }, []);
 
   useEffect(() => {
     if (correctLetters === wordItem.eng) {
