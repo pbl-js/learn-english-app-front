@@ -68,11 +68,10 @@ const SwipeCorrect4 = ({
   useEffect(() => {
     Draggable.create(pointerRef.current, {
       onDragStart,
-      onDragStartParams: [pointerRef, itemRefs],
       onDrag,
-      onDragParams: [pointerRef, itemRefs],
+      onDragParams: [itemRefs],
       onDragEnd,
-      onDragEndParams: [pointerRef, itemRefs, wordsToPlay, onComplete, onFail],
+      onDragEndParams: [itemRefs, wordsToPlay, onComplete, onFail],
     });
   }, []);
 
@@ -80,17 +79,31 @@ const SwipeCorrect4 = ({
   useLayoutEffect(() => {
     const currentRefs = itemRefs.map((item) => item.current);
 
-    gsap.set([pointerRef.current, currentRefs], {
+    gsap.set(pointerRef.current, {
       scale: 0,
       autoAlpha: 0,
     });
 
-    gsap.to([pointerRef.current, currentRefs], {
+    gsap.set(currentRefs, {
+      x: 200,
+      y: 200,
+      autoAlpha: 0,
+    });
+
+    gsap.to(pointerRef.current, {
       scale: 1,
       autoAlpha: 1,
-      stagger: 0.1,
-      duration: 1,
-      ease: "bounce.out",
+      duration: 0.5,
+      ease: "power3.in",
+    });
+
+    gsap.to(currentRefs, {
+      x: 0,
+      y: 0,
+      autoAlpha: 1,
+      stagger: 0.2,
+      duration: 0.4,
+      ease: "power3.out",
     });
   }, []);
 

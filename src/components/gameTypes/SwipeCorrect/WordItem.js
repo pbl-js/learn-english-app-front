@@ -9,12 +9,12 @@ const WordItem = React.forwardRef(
   ({ word, pointerRef, onFail, onComplete }, ref) => {
     useEffect(() => {
       Draggable.create(ref.current, {
-        onDragStart: onDragStart,
-        onDragStartParams: [ref, pointerRef],
+        onDragStart,
+        onDragStartParams: [pointerRef],
         onDrag: onDrag,
-        onDragParams: [ref, pointerRef],
+        onDragParams: [pointerRef],
         onDragEnd: onDragEnd,
-        onDragEndParams: [ref, pointerRef, word, onComplete, onFail],
+        onDragEndParams: [pointerRef, word, onComplete, onFail],
       });
     }, []);
 

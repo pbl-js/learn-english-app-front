@@ -1,8 +1,8 @@
 import { gsap } from "gsap";
 import didElementFits from "helpers/didElementFits";
 
-const onDragStart = (ref, pointerRef) => {
-  gsap.to(ref.current, {
+const onDragStart = function (pointerRef) {
+  gsap.to(this.target, {
     scale: 0.4,
     duration: 0.3,
   });
@@ -10,11 +10,8 @@ const onDragStart = (ref, pointerRef) => {
   gsap.to(pointerRef.current, { scale: 1.5, duration: 0.3 });
 };
 
-const onDrag = (ref, pointerRef) => {
-  const refPosition = ref.current.getBoundingClientRect();
-  const pointerPosition = pointerRef.current.getBoundingClientRect();
-
-  if (didElementFits(refPosition, pointerPosition)) {
+const onDrag = function (pointerRef) {
+  if (this.hitTest(pointerRef.current, "50%")) {
     gsap.to(pointerRef.current, {
       scale: 2,
       duration: 0.3,
@@ -27,14 +24,11 @@ const onDrag = (ref, pointerRef) => {
   }
 };
 
-const onDragEnd = (ref, pointerRef, word, onComplete, onFail) => {
-  const refPosition = ref.current.getBoundingClientRect();
-  const pointerPosition = pointerRef.current.getBoundingClientRect();
-
-  if (didElementFits(refPosition, pointerPosition)) {
+const onDragEnd = function (pointerRef, word, onComplete, onFail) {
+  if (this.hitTest(pointerRef.current, "50%")) {
     word.correct ? onComplete() : onFail();
   } else {
-    gsap.to(ref.current, { x: 0, y: 0, scale: 1, duration: 0.3 });
+    gsap.to(this.target, { x: 0, y: 0, scale: 1, duration: 0.3 });
     gsap.to(pointerRef.current, {
       scale: 1,
       duration: 0.3,

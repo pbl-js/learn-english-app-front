@@ -1,19 +1,12 @@
 import { gsap } from "gsap";
-import didElementFits from "helpers/didElementFits";
 
-const onDragStart = (pointerRef) => {
-  gsap.to(pointerRef.current, { scale: 0.4, duration: 0.3 });
+const onDragStart = function () {
+  gsap.to(this.target, { scale: 0.4, duration: 0.3 });
 };
 
-const onDrag = (pointerRef, itemRefs) => {
-  const pointerRefPosition = pointerRef.current.getBoundingClientRect();
-
-  let itemRefsPosition = itemRefs.map((itemRef) =>
-    itemRef.current.getBoundingClientRect()
-  );
-
-  itemRefs.forEach((itemRef, index) => {
-    if (didElementFits(pointerRefPosition, itemRefsPosition[index])) {
+const onDrag = function (itemRefs) {
+  itemRefs.forEach((itemRef) => {
+    if (this.hitTest(itemRef.current, "50%")) {
       gsap.to(itemRef.current, { scale: 1.1, duration: 0.3 });
     } else {
       gsap.to(itemRef.current, { scale: 1, duration: 0.3 });
@@ -21,21 +14,22 @@ const onDrag = (pointerRef, itemRefs) => {
   });
 };
 
-const onDragEnd = (pointerRef, itemRefs, wordsToPlay, onComplete, onFail) => {
-  const pointerRefPosition = pointerRef.current.getBoundingClientRect();
+const onDragEnd = function (itemRefs, wordsToPlay, onComplete, onFail) {
+  gsap.to(this.target, { x: 0, y: 0, scale: 1, duration: 0.3 });
 
-  const itemRefsPosition = itemRefs.map((itemRef) =>
-    itemRef.current.getBoundingClientRect()
-  );
+  let work = true; // This variable eliminate problem with "this" undefined when component did unmount
 
-  gsap.to(pointerRef.current, { x: 0, y: 0 });
-  gsap.to(pointerRef.current, { scale: 1, duration: 0.3 });
+  for (let index = 0; index < wordsToPlay.length && work; index++) {
+    if (this.hitTest(itemRefs[index].current, "50%")) {
+      if (wordsToPlay[index].correct) {
+        onComplete();
+      } else {
+        onFail();
+      }
 
-  wordsToPlay.forEach((word, index) => {
-    if (didElementFits(pointerRefPosition, itemRefsPosition[index])) {
-      word.correct ? onComplete() : onFail();
+      work = false;
     }
-  });
+  }
 };
 
 export { onDragStart, onDrag, onDragEnd };
