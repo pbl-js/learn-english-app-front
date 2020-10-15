@@ -5,10 +5,6 @@ export function onDragStart(wordWrapper) {
     scale: 0.5,
     duration: 0.2,
   });
-  gsap.to(wordWrapper, {
-    scale: 1.1,
-    duration: 0.2,
-  });
 }
 
 export function onDrag(wordWrapper, currentRefs) {
@@ -30,12 +26,12 @@ export function onDrag(wordWrapper, currentRefs) {
 
   if (this.hitTest(wordWrapper)) {
     gsap.to(wordWrapper, {
-      scale: 1.2,
+      scale: 1.05,
       duration: 0.2,
     });
   } else {
     gsap.to(wordWrapper, {
-      scale: 1.1,
+      scale: 1,
       duration: 0.2,
     });
   }

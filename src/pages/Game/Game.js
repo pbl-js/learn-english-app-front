@@ -8,12 +8,13 @@ import uuid from "react-uuid";
 import useGameData from "./Game.data";
 import getRandomInt from "helpers/getRandomInt";
 
+import { breakPoints, layout } from "theme/theme";
 import GameFooter from "components/GameFooter/GameFooter";
 import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
 ////////////////////////////////////////////////////////////////////////////////////////
 import FirstTime from "components/gameTypes/FirstTime/FirstTime";
 import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
-// import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
+import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
 import FillWithPart from "components/gameTypes/FillWithPart/FillWithPart";
 import SwipeCorrectFour from "components/gameTypes/SwipeCorrectFour/SwipeCorrectFour";
 import SwipeCorrectTwo from "components/gameTypes/SwipeCorrectTwo/SwipeCorrectTwo";
@@ -27,7 +28,17 @@ const MainWrapper = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
+  padding: ${layout.mainPadding.tablet + "px"};
+
+  @media ${breakPoints.tablet} {
+    padding: ${layout.mainPadding.desktop + "px"};
+  }
+`;
+
+const OverflowWrapper = styled.div`
   overflow: hidden;
+  width: 100%;
+  height: 100%;
   padding: 70px 0;
 `;
 
@@ -69,7 +80,7 @@ const genGameComponent = (status) => {
       break;
   }
 
-  // return SwipeCorrectFour;
+  // return FillWithPart;
 };
 
 const genGameCourse = (wordItem) => {
@@ -117,25 +128,27 @@ const Game = (props) => {
   }, [data]);
 
   return (
-    <MainWrapper id="gameContainer">
-      {data &&
-        gameCourse.map((gameItem, index) => {
-          if (index === gameProgress) {
-            return (
-              <CompleteComposition
-                key={gameItem.id}
-                gameComponent={gameItem.gameComponent}
-                wordItem={gameItem.wordItem}
-                allWords={data.wordsByTopicId}
-                onFinish={onFinish}
-              />
-            );
-          } else {
-            return null;
-          }
-        })}
-      <GameFooter topicId={handle} />
-    </MainWrapper>
+    <OverflowWrapper>
+      <MainWrapper id="gameContainer">
+        {data &&
+          gameCourse.map((gameItem, index) => {
+            if (index === gameProgress) {
+              return (
+                <CompleteComposition
+                  key={gameItem.id}
+                  gameComponent={gameItem.gameComponent}
+                  wordItem={gameItem.wordItem}
+                  allWords={data.wordsByTopicId}
+                  onFinish={onFinish}
+                />
+              );
+            } else {
+              return null;
+            }
+          })}
+        <GameFooter topicId={handle} />
+      </MainWrapper>
+    </OverflowWrapper>
   );
 };
 

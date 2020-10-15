@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { fontSize, fontWeight } from "theme/theme";
-import { flexRowCenter } from "theme/mixins";
+import { breakPoints, fontSize, fontWeight } from "theme/theme";
+import { flexRowCenter, whiteFilter } from "theme/mixins";
 
 export const MainWrapper = styled.div`
   display: grid;
@@ -21,16 +21,29 @@ export const PartsWrapper = styled.div`
 
 export const WordToFillWrapper = styled.div`
   max-width: 400px;
-  height: 60px;
+  height: 50px;
   border: 2px solid white;
   border-radius: 1000px;
   width: 100%;
   ${flexRowCenter};
-  font-size: ${fontSize.m};
+  font-size: ${fontSize.x};
   font-weight: ${fontWeight.semiBold};
+
+  @media ${breakPoints.tablet} {
+    height: 60px;
+    font-size: ${fontSize.m};
+  }
 `;
 
 export const BlankLetters = styled.div`
   margin-left: 5px;
   letter-spacing: 5px;
+`;
+
+export const StyledWordImage = styled.img`
+  width: 100%;
+  height: 100%;
+  max-width: 250px;
+  max-height: 250px;
+  ${whiteFilter};
 `;

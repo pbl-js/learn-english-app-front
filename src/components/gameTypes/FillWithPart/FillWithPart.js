@@ -14,9 +14,9 @@ import {
   PartsWrapper,
   WordToFillWrapper,
   BlankLetters,
+  StyledWordImage,
 } from "./FillWithPart.style";
 import WordPart from "./WordPart";
-import WordImage from "components/WordImage/WordImage";
 import getRandomInt from "helpers/getRandomInt";
 
 const genWordParts = (wordItem) => {
@@ -104,6 +104,7 @@ const FillWithPart = ({ wordItem, onComplete }) => {
   };
 
   // Refs
+  const imageRef = useRef(null);
   const partsWrapperRef = useRef(null);
   const wordToFillWrapper = useRef(null);
   const partRefs = useCallback(
@@ -117,12 +118,33 @@ const FillWithPart = ({ wordItem, onComplete }) => {
     }
   }, [correctLetters]);
 
+  // In animation
+  useLayoutEffect(() => {
+    const currentRefs = partRefs.map((item) => item.current);
+    gsap.set([...currentRefs, imageRef.current], {
+      scale: 0,
+      autoAlpha: 0,
+    });
+
+    gsap.set(wordToFillWrapper.current, {
+      autoAlpha: 0,
+    });
+
+    gsap.to([...currentRefs, imageRef.current], {
+      scale: 1,
+      autoAlpha: 1,
+      duration: 0.5,
+    });
+
+    gsap.to(wordToFillWrapper.current, {
+      autoAlpha: 1,
+      duration: 0.5,
+    });
+  }, []);
+
   return (
     <MainWrapper>
-      <WordImage>
-        <img src={wordItem.img} />
-        <p>{wordItem.eng}</p>
-      </WordImage>
+      <StyledWordImage ref={imageRef} src={wordItem.img} />
 
       <PartsWrapper ref={partsWrapperRef} partsCount={parts.length}>
         {parts.map((wordPart, index) => (

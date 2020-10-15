@@ -10,8 +10,6 @@ export default styled.div`
   align-items: center;
   justify-items: center;
   ${bigNormalText}
-  max-width: 250px;
-  /* max-height: 250px; */
   width: 100%;
 
   img {
