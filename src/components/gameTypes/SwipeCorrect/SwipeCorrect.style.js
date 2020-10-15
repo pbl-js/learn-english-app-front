@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
-import WordImage from "components/WordImage/WordImage";
-import { icon } from "theme/mixins";
+import { bigNormalText } from "theme/mixins";
 import { breakPoints } from "theme/theme";
 
 export const MainWrapper = styled.div`
@@ -43,7 +42,7 @@ export const MainWrapper = styled.div`
     `}
 `;
 
-export const CenterItem = styled(WordImage)`
+export const CenterItem = styled.div`
   grid-area: center;
-  ${icon}
+  ${bigNormalText};
 `;

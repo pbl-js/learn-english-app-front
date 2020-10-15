@@ -56,20 +56,20 @@ const genGameComponent = (status) => {
     return learningGameVariants[index];
   };
 
-  switch (status) {
-    case "unseen":
-      return FirstTime;
-    case "learning":
-      return learningRandomComponent();
-    case "mastering":
-      return masteringRandomComponent();
-    case "complete":
-      return null;
-    default:
-      break;
-  }
+  // switch (status) {
+  //   case "unseen":
+  //     return FirstTime;
+  //   case "learning":
+  //     return learningRandomComponent();
+  //   case "mastering":
+  //     return masteringRandomComponent();
+  //   case "complete":
+  //     return null;
+  //   default:
+  //     break;
+  // }
 
-  return FillWithPart;
+  return SwipeCorrectFour;
 };
 
 const genGameCourse = (wordItem) => {

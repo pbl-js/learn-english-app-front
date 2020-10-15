@@ -1,11 +1,16 @@
-import React, { useEffect, useRef, useMemo, useCallback } from "react";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { useSpeakDispatch } from "context/SpeakContext";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
 
 import { MainWrapper, CenterItem } from "./SwipeCorrect.style";
 
-import { ReactComponent as LearnIcon } from "assets/learn.svg";
 import getRandomInt from "helpers/getRandomInt";
 import getUniqueRandomInts from "helpers/getUniqueRandomInts";
 import WordItem from "./WordItem";
@@ -69,13 +74,29 @@ const SwipeCorrect4 = ({
       onDragEnd,
       onDragEndParams: [pointerRef, itemRefs, wordsToPlay, onComplete, onFail],
     });
-  }, [itemRefs]);
+  }, []);
+
+  // In animation
+  useLayoutEffect(() => {
+    const currentRefs = itemRefs.map((item) => item.current);
+
+    gsap.set([pointerRef.current, currentRefs], {
+      scale: 0,
+      autoAlpha: 0,
+    });
+
+    gsap.to([pointerRef.current, currentRefs], {
+      scale: 1,
+      autoAlpha: 1,
+      stagger: 0.1,
+      duration: 1,
+      ease: "bounce.out",
+    });
+  }, []);
 
   return (
     <MainWrapper wordsCount={wordsCount}>
-      <CenterItem ref={pointerRef}>
-        <LearnIcon />
-      </CenterItem>
+      <CenterItem ref={pointerRef}>{wordItem.eng}</CenterItem>
 
       {wordsToPlay.map((word, index) => (
         <WordItem
