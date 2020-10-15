@@ -1,13 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useCallback, useRef } from "react";
 import { gsap } from "gsap";
-import { Draggable } from "gsap/Draggable";
 import getRandomInt from "helpers/getRandomInt";
+import { useSpeakDispatch } from "context/SpeakContext";
 
 import { MainWrapper, WordCard, ButtonsWrapper } from "./TrueFalse.style";
 import { ReactComponent as CompleteIcon } from "assets/correct.svg";
 import { ReactComponent as FailIcon } from "assets/close.svg";
-
-gsap.registerPlugin(Draggable);
 
 let didMatch = null;
 
@@ -25,9 +23,11 @@ const genWordImage = (wordItem, allWords) => {
 };
 
 const TrueFalse = ({ wordItem, allWords, onComplete, onFail }) => {
-  const itemToDisplay = genWordImage(wordItem, allWords);
+  const { speakText } = useSpeakDispatch();
+
+  const itemToDisplay = useCallback(genWordImage(wordItem, allWords), []);
   let wordRef = useRef(null);
-  let wordCardPositionStart;
+  let buttonsWrapperRef = useRef(null);
 
   const checkGoodAnswer = (answer) => {
     if (didMatch === answer) {
@@ -37,35 +37,32 @@ const TrueFalse = ({ wordItem, allWords, onComplete, onFail }) => {
     }
   };
 
-  const onDragEnd = (value) => {
-    const wordCardPositionEnd = wordRef.getBoundingClientRect();
-
-    if (wordCardPositionStart.x > wordCardPositionEnd.x + 150) {
-      checkGoodAnswer(true);
-    } else if (wordCardPositionStart.x < wordCardPositionEnd.x - 150) {
-      checkGoodAnswer(false);
-    } else {
-      gsap.to(wordRef, { x: 0, y: 0, rotateZ: 0 });
-    }
-  };
-
   useEffect(() => {
-    Draggable.create(wordRef, {
-      onDragEnd: (value) => onDragEnd(value),
-      type: "x",
-    });
+    speakText(wordItem.eng);
+  }, []);
 
-    wordCardPositionStart = wordRef.getBoundingClientRect();
+  useLayoutEffect(() => {
+    gsap.set([wordRef.current, buttonsWrapperRef.current], {
+      autoAlpha: 0,
+    });
+    gsap.set(wordRef.current, {
+      scale: 0.6,
+    });
+    gsap.to([wordRef.current, buttonsWrapperRef.current], {
+      autoAlpha: 1,
+      scale: 1,
+      duration: 0.4,
+    });
   }, []);
 
   return (
     <MainWrapper>
-      <WordCard ref={(el) => (wordRef = el)}>
+      <WordCard ref={wordRef}>
         <img src={itemToDisplay} />
         <p>{wordItem.eng}</p>
       </WordCard>
 
-      <ButtonsWrapper>
+      <ButtonsWrapper ref={buttonsWrapperRef}>
         <button onClick={() => checkGoodAnswer(true)}>
           <CompleteIcon />
         </button>

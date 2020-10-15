@@ -80,7 +80,7 @@ const genGameComponent = (status) => {
       break;
   }
 
-  // return FillWithPart;
+  // return TrueFalse;
 };
 
 const genGameCourse = (wordItem) => {
