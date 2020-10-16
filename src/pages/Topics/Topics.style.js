@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { bigNormalText, mediumUppercaseText, bigButton } from "theme/mixins";
 import { layout, breakPoints, colors } from "theme/theme";
 
 export const MainWrapper = styled.div`

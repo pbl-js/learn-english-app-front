@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakPoints } from "theme/theme";
+import { breakPoints, layout } from "theme/theme";
 import { ReactComponent as CloseIcon } from "assets/closeLight.svg";
 import { primaryScrollbar } from "theme/mixins";
 
@@ -13,9 +13,16 @@ export const MainWrapper = styled.div`
   background-image: ${({ darkColor, color }) =>
     "linear-gradient(135deg," + darkColor + "," + color + ")"};
 
-  padding-top: 90px;
   overflow: auto;
   ${primaryScrollbar}
+
+  padding: ${layout.mainPadding.tablet + "px"};
+  padding-top: 90px;
+
+  @media ${breakPoints.tablet} {
+    padding: ${layout.mainPadding.desktop + "px"};
+    padding-top: 90px;
+  }
 `;
 
 export const InnerWrapper = styled.div`
@@ -45,7 +52,7 @@ export const CloseButton = styled(CloseIcon)`
 
   @media ${breakPoints.tablet} {
     top: 30px;
-    left: 30px;
+    left: 50px;
     width: 30px;
     height: 30px;
   }
