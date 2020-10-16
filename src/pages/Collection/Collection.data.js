@@ -1,8 +1,8 @@
 import { useQuery, gql } from "@apollo/client";
 
 export const TOPICS = gql`
-  query GetTopics {
-    topics {
+  query GetTopicsOnlyWithProgress {
+    topicsOnlyWithProgress {
       _id
       title
     }
@@ -51,7 +51,7 @@ export default function () {
   const data =
     topicsData &&
     wordsData &&
-    topicsData.topics.map((topic) => {
+    topicsData.topicsOnlyWithProgress.map((topic) => {
       const words = wordsData.words.filter(
         (word) => word.topic._id === topic._id
       );
