@@ -67,6 +67,7 @@ export const bigButton = css`
   border-radius: 1000px;
   color: white;
   text-transform: uppercase;
+  text-decoration: none;
   font-weight: ${fontWeight.semiBold};
   font-size: ${fontSize.xs};
   cursor: pointer;
