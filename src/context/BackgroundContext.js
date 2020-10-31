@@ -33,9 +33,14 @@ const themeTypes = {
     color: colors.purpleTheme.color,
     gradient: colors.purpleTheme.gradient,
   },
+  yellow: {
+    theme: "yellow",
+    color: colors.yellowTheme.color,
+    gradient: colors.yellowTheme.gradient,
+  },
 };
 
-function timeReducer(state, action) {
+function backgroundReducer(state, action) {
   switch (action.type) {
     case "SET_THEME": {
       return { ...state, ...action.payload };
@@ -47,7 +52,7 @@ function timeReducer(state, action) {
 }
 
 const BackgroundProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(timeReducer, {
+  const [state, dispatch] = useReducer(backgroundReducer, {
     theme: "orange",
     color: colors.orangeTheme.color,
     gradient: colors.orangeTheme.gradient,
@@ -125,4 +130,9 @@ function useBackgroundDispatch() {
   return context;
 }
 
-export { BackgroundProvider, useBackgroundState, useBackgroundDispatch };
+export {
+  BackgroundProvider,
+  useBackgroundState,
+  useBackgroundDispatch,
+  themeTypes,
+};

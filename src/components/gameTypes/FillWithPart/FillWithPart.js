@@ -42,6 +42,7 @@ const genWordParts = (wordItem) => {
 
 const FillWithPart = ({ wordItem, onComplete }) => {
   const background = useBackgroundState();
+
   const { speakText } = useSpeakDispatch();
 
   const [parts, setParts] = useState(genWordParts(wordItem));

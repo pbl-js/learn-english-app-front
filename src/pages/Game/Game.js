@@ -1,100 +1,20 @@
 import React, { memo, useCallback, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import { useTimerDispatch } from "context/TimerContext";
 import { useBackgroundDispatch } from "context/BackgroundContext";
-import uuid from "react-uuid";
 
 import useGameData from "./Game.data";
 import getRandomInt from "helpers/getRandomInt";
+import genGameType from "./genGameType";
 
-import { breakPoints, layout } from "theme/theme";
+import { MainWrapper, OverflowWrapper } from "./Game.style";
 import GameFooter from "components/GameFooter/GameFooter";
 import CompleteComposition from "components/gameTypes/CompleteComposition/CompleteComposition";
-////////////////////////////////////////////////////////////////////////////////////////
-import FirstTime from "components/gameTypes/FirstTime/FirstTime";
-import LetterByLetter from "components/gameTypes/LetterByLetter/LetterByLetter";
-import LettersSnake from "components/gameTypes/LettersSnake/LettersSnake";
-import FillWithPart from "components/gameTypes/FillWithPart/FillWithPart";
-import SwipeCorrectFour from "components/gameTypes/SwipeCorrectFour/SwipeCorrectFour";
-import SwipeCorrectTwo from "components/gameTypes/SwipeCorrectTwo/SwipeCorrectTwo";
-import TrueFalse from "components/gameTypes/TrueFalse/TrueFalse";
 
-const MainWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: ${layout.mainPadding.tablet + "px"};
-
-  @media ${breakPoints.tablet} {
-    padding: ${layout.mainPadding.desktop + "px"};
-  }
-`;
-
-const OverflowWrapper = styled.div`
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  padding: 70px 0;
-`;
-
-const genGameComponent = (status) => {
-  const learningRandomComponent = () => {
-    const learningGameVariants = [
-      SwipeCorrectTwo,
-      SwipeCorrectFour,
-      FillWithPart,
-      TrueFalse,
-    ];
-    const index = getRandomInt(0, learningGameVariants.length);
-
-    return learningGameVariants[index];
-  };
-
-  const masteringRandomComponent = () => {
-    const learningGameVariants = [
-      SwipeCorrectTwo,
-      SwipeCorrectFour,
-      LetterByLetter,
-      FillWithPart,
-    ];
-    const index = getRandomInt(0, learningGameVariants.length);
-
-    return learningGameVariants[index];
-  };
-
-  switch (status) {
-    case "unseen":
-      return FirstTime;
-    case "learning":
-      return learningRandomComponent();
-    case "mastering":
-      return masteringRandomComponent();
-    case "complete":
-      return null;
-    default:
-      break;
-  }
-
-  // return TrueFalse;
-};
-
-const genGameCourse = (wordItem) => {
-  return {
-    id: uuid(),
-    gameComponent: genGameComponent(wordItem.progress.status),
-    wordItem: wordItem,
-  };
-};
-
-const Game = (props) => {
+const Game = () => {
   const dispatch = useTimerDispatch();
+  const { dispatch: backgroundDispatch } = useBackgroundDispatch();
   const { handle } = useParams();
-  const { setRandomTheme } = useBackgroundDispatch();
 
   const { data, error, loading } = useGameData(handle);
   const [gameProgress, setGameProgress] = useState(0);
@@ -104,7 +24,7 @@ const Game = (props) => {
     setGameCourse((prevState) => {
       const newState = prevState.map((item) => item);
       const index = getRandomInt(0, data.wordsByTopicId.length);
-      newState.push(genGameCourse(data.wordsByTopicId[index]));
+      newState.push(genGameType(data.wordsByTopicId[index]));
       return newState;
     });
   }, [data]);
@@ -115,13 +35,17 @@ const Game = (props) => {
   };
 
   useEffect(() => {
+    gameCourse[gameProgress] &&
+      backgroundDispatch({
+        type: "SET_THEME",
+        payload: gameCourse[gameProgress].theme,
+      });
+  }, [gameCourse, gameProgress]);
+
+  useEffect(() => {
     dispatch({ type: "START_CLOCK" });
     return () => dispatch({ type: "STOP_CLOCK" });
   }, [dispatch]);
-
-  useEffect(() => {
-    setRandomTheme();
-  }, [gameProgress]);
 
   useEffect(() => {
     data && addGameItem();

@@ -53,6 +53,10 @@ export const colors = {
     gradient: "linear-gradient(135deg, #803a9e, #4d1360)",
     color: "#66267F",
   },
+  yellowTheme: {
+    gradient: "linear-gradient(135deg, #E2C63D, #A55937)",
+    color: "#D4AC3C",
+  },
   colorfulTheme: {
     gradient:
       "linear-gradient(180deg,#b54798,#e67625,#4353b3,#38207f,#45a77e,#02929b,#803a9e,#4d1360)",
