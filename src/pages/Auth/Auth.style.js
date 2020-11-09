@@ -2,17 +2,17 @@ import styled from "styled-components";
 import { darkModalBackground, flexColumnCenter } from "theme/mixins";
 import { colors, fontSize, fontWeight } from "theme/theme";
 
-import GradientBackground from "components/GradientBackground/GradientBackground";
-
 export const GradientWrapper = styled.div`
   ${flexColumnCenter};
   background-image: ${colors.purpleTheme.gradient};
-  height: 100vh;
+  min-height: 100vh;
+  padding: 30px 0;
 `;
 
 export const ModalWrapper = styled.div`
   position: relative;
-  width: 400px;
+  max-width: 400px;
+  width: 90%;
   padding: 90px 30px 30px 30px;
   ${darkModalBackground}
   transition: 0.2s;
