@@ -59,6 +59,10 @@ const Login = () => {
     },
   });
 
+  const setTestUser = () => {
+    loginUser({ variables: { email: "test@test.com", password: "test" } });
+  };
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
@@ -92,6 +96,7 @@ const Login = () => {
       </div>
 
       <button type="submit">{loading ? "Logowanie..." : "Zaloguj"}</button>
+      <button onClick={setTestUser}>Konto testowe</button>
     </form>
   );
 };
