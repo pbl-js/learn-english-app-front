@@ -68,7 +68,7 @@ const Dojo = (props) => {
           prezentuje ci odpowiednie słówko w odpowiednim czasie!
         </p>
 
-        <Link to="/app/game">Zaczynamy</Link>
+        <Link to="/app/game/5f5a9f7197a0365c7f928c9c">Zaczynamy</Link>
       </InnerWrapper>
     </MainWrapper>
   );
